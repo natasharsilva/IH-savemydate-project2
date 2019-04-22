@@ -52,12 +52,12 @@ User.deleteMany()
 let cinemas = [
   {  name: String,
     "location": {
-      "address": "D.N.R College Road, Bhimavaram Locality, Bhimavaram",
-      "locality": "Bhimavaram Locality",
-      "city": "Bhimavaram",
+      "address": "Av. Eng. Duarte Pacheco 103, 1070-103 Lisboa",
+      "locality": "Lisbon",
+      "city": "Lisbon",
       "city_id": 82,
-      "latitude": "16.5437590000",
-      "longitude": "81.5165070000",
+      "latitude": "38.7158131",
+      "longitude": "-9.2155907",
       "zipcode": "",
       "country_id": 164,
       "country_name": "Portugal",
@@ -69,7 +69,6 @@ let cinemas = [
     }
   }
 ]
-
 
 Cinema.deleteMany()
 .then(() => {
