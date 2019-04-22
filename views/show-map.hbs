@@ -1,3 +1,13 @@
 <h1>Show User location</h1>
 
-  <div id="map"></div>
+  <div id="map" style="width:400px;height:300px"></div>
+
+<script>
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ3RjYXJtb25hIiwiYSI6ImNqdWwxYzZwOTAzeWE0NGxsbjJ0ZnJ0aDYifQ.GIzsIahO6WNQFMg486tFkA';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11'
+});
+
+</script>
