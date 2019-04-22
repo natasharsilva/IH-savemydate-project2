@@ -1,8 +1,8 @@
 // const API_KEY = require('dotenv')
-
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const result = [];
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 
 axios.defaults.headers.common["user_key"] = process.env.API_KEY;
@@ -40,12 +40,10 @@ router.get('/restaurant-user-form', (req, res, next) => {
 router.get('/date-type', (req, res, next) => {
 //   res.render('date-type');
 // router.get("/date-type", (req, res, next) => {
-  let result = [];
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   axios
     .get(
-      "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=1"
-    )
+      "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=1")
     .then(resp => {
       let restaurants = resp.data.restaurants
       for (let i = 0; i < restaurants.length; i++) {
