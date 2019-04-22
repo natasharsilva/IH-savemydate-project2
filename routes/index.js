@@ -36,8 +36,7 @@ router.get("/current-location", (req, res, next) => {
 router.get("/date-type", (req, res, next) => {
   let result = [];
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  axios
-    .get(
+  axios.get(
       "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=1"
     )
     .then(resp => {
