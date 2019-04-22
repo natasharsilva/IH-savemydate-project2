@@ -45,8 +45,9 @@ router.get('/date-options', (req, res, next) => {
 });
 
 router.get('/show-map', (req, res, next) => {
-  res.render('show-map');
-});
+    res.render('show-map');
+  });
+
 
 router.get('/confirm-date', (req, res, next) => {
   res.render('confirm-date');
