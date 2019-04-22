@@ -5,7 +5,7 @@ const router  = express.Router();
 const axios = require("axios")
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 
-axios.defaults.headers.common['user_key'] = "6bd3ba9f727a9f9495d4cb659f838417";
+axios.defaults.headers.common['user_key'] = process.env.API_KEY;
 axios.get('https://developers.zomato.com/api/v2.1/cuisines?city_id=82')
 .then((resp) => {
     console.log(resp.data.cuisines[0].cuisine.cuisine_name);
@@ -24,7 +24,37 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+router.get('/location', (req, res, next) => {
+  res.render('location');
+});
 
+router.get('/current-location', (req, res, next) => {
+  res.render('current-location');
+});
+
+router.get('/date-type', (req, res, next) => {
+  res.render('date-type');
+});
+
+router.get('/average-cost', (req, res, next) => {
+  res.render('average-cost');
+});
+
+router.get('/date-options', (req, res, next) => {
+  res.render('date-options');
+});
+
+router.get('/show-map', (req, res, next) => {
+  res.render('show-map');
+});
+
+router.get('/confirm-date', (req, res, next) => {
+  res.render('confirm-date');
+});
+
+router.get('/profile-page', (req, res, next) => {
+  res.render('profile-page');
+});
 
 // router.get('/searchPlace', (req, res, next) => {
   //   // const theId = req.body.name;
