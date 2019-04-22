@@ -13,6 +13,7 @@ module.exports = router;
 router.get('/', (req, res, next) => {
   res.render('index');
 });
+
 router.post('/searchPlace', (req, res, next) => {
   const theId = req.body.value;
   axios.post("https://developers.zomato.com/api/v2.1/search?", theId )
