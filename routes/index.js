@@ -5,18 +5,8 @@ const router = express.Router();
 const axios = require("axios");
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 
-<<<<<<< HEAD
-axios.defaults.headers.common['user_key'] = process.env.API_KEY;
-axios.get('https://developers.zomato.com/api/v2.1/cuisines?city_id=82')
-.then((resp) => {
-    console.log(resp.data.price_range[0]);
-})
-.catch(err => console.log("EEEEERRRRRRRORRRRRR", err))
-
-=======
 axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-axios
-  .get(
+axios.get(
     "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=272"
   )
   .then(resp => {
@@ -29,7 +19,6 @@ axios
 // .then((resp) => {
 //     console.log(resp);
 // });
->>>>>>> a2a45ae4103391b3c6c08ee7eb2e420636f85bde
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -63,15 +52,8 @@ router.get("/date-type", (req, res, next) => {
   res.render("date-type");
 });
 
-<<<<<<< HEAD
-router.get('/average-cost', (req, res, next) => {
-
-
-    res.render('average-cost', {});
-=======
 router.get("/average-cost", (req, res, next) => {
   res.render("average-cost");
->>>>>>> a2a45ae4103391b3c6c08ee7eb2e420636f85bde
 });
 
 router.get("/date-options", (req, res, next) => {
