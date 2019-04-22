@@ -8,15 +8,9 @@ const axios = require("axios")
 axios.defaults.headers.common['user_key'] = process.env.API_KEY;
 axios.get('https://developers.zomato.com/api/v2.1/cuisines?city_id=82')
 .then((resp) => {
-    console.log(resp.data.cuisines[0].cuisine.cuisine_name);
+    console.log(resp.data.price_range[0]);
 })
 .catch(err => console.log("EEEEERRRRRRRORRRRRR", err))
-
-// let config = {'Authorization': process.env.API_KEY};
-// axios.get('https://developers.zomato.com/api/v2.1/search?', {headers: config})
-// .then((resp) => {
-//     console.log(resp);
-// });
 
 
 /* GET home page */
@@ -37,7 +31,9 @@ router.get('/date-type', (req, res, next) => {
 });
 
 router.get('/average-cost', (req, res, next) => {
-  res.render('average-cost');
+
+
+    res.render('average-cost', {});
 });
 
 router.get('/date-options', (req, res, next) => {
