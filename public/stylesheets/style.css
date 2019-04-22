@@ -6,9 +6,14 @@ a {
   color: #00B7FF; }
 
 i {
-  border-radius: 30px;
+  color: #AF2A1B;
+  border: 3px solid #AF2A1B;
+  border-radius: 50px;
+  padding: 5%;
+  margin: 5%; }
+
+i:hover {
   background-color: #AF2A1B;
-  color: white;
-  width: 20px; }
+  color: white; }
 
 /*# sourceMappingURL=style.css.map */
