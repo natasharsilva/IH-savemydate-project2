@@ -23,22 +23,17 @@ var map = new mapboxgl.Map({
 })
 
 // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.GeolocateControl({
-  positionOptions: {
-      enableHighAccuracy: true
-  },
-  trackUserLocation: true
-}));
 var geolocate = new mapboxgl.GeolocateControl();
 
 map.addControl(geolocate);
-
 geolocate.on('geolocate', function(e) {
       var lon = e.coords.longitude;
       var lat = e.coords.latitude
       var position = [lon, lat];
       console.log(position);
 });
+
+
 //Change the marker's color, make it draggable...
 // var marker = new mapboxgl.Marker({
 //     draggable: true,

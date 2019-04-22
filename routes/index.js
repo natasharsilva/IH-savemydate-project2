@@ -33,7 +33,13 @@ router.get("/current-location", (req, res, next) => {
   res.render("current-location");
 });
 
-router.get("/date-type", (req, res, next) => {
+router.get('/restaurant-user-form', (req, res, next) => {
+  res.render('restaurant-user-form');
+});
+
+router.get('/date-type', (req, res, next) => {
+//   res.render('date-type');
+// router.get("/date-type", (req, res, next) => {
   let result = [];
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   axios.get(

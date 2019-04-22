@@ -1,8 +1,21 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
+//choose primary here
+
+$primary: #AF2A1B;
 
 a {
   color: #00B7FF;
 }
+
+
+i{
+  border-radius:30px;
+  background-color: $primary;
+  color:white;
+  width: 20px;
+}
+
