@@ -32,6 +32,10 @@ router.get('/current-location', (req, res, next) => {
   res.render('current-location');
 });
 
+router.get('/restaurant-user-form', (req, res, next) => {
+  res.render('restaurant-user-form');
+});
+
 router.get('/date-type', (req, res, next) => {
   res.render('date-type');
 });
