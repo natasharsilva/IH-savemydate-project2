@@ -11,6 +11,7 @@ module.exports = router;
 router.get('/', (req, res, next) => {
   res.render('index');
 });
+
 router.post('/searchPlace', (req, res, next) => {
   res.render('place-details');
 });
