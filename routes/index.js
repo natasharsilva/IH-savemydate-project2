@@ -6,9 +6,9 @@ const axios = require("axios")
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 
 axios.defaults.headers.common['user_key'] = process.env.API_KEY;
-axios.get('https://developers.zomato.com/api/v2.1/cuisines?city_id=82')
+axios.get('https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=272')
 .then((resp) => {
-    console.log(resp.data.cuisines[0].cuisine.cuisine_name);
+    console.log(resp.data.restaurants[0].restaurant.name);
 })
 .catch(err => console.log("EEEEERRRRRRRORRRRRR", err))
 
