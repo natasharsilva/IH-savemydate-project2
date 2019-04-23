@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 const result = [];
 const userLocation = [38.7114690418, -9.14146889];
-const {checkRole}   = require("../middlewares")
+const { checkRole } = require("../middlewares");
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 // const map = require('../public/javascripts/script')
 
@@ -31,110 +31,34 @@ router.get("/date-type", (req, res, next) => {
 
 //Route for choosing your date type: coffee, establishment types: 1- Cafe, 111- Tea Room
 router.get("/date-type-coffee", (req, res, next) => {
-  // setTimeout((
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  axios
-  .get(
-    `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-      userLocation[0]}&lon=${userLocation[1]}&establishment_type=1&sort=real_distance`
-  )//establishment type: coffee
-  .then(resp => {
-    let restaurants = resp.data.restaurants;
-    for (let i = 0; i < restaurants.length; i++) {
-      result.push({
-        id: restaurants[i].restaurant.id,
-        name: restaurants[i].restaurant.name,
-        location: restaurants[i].restaurant.location,
-        cuisines: restaurants[i].restaurant.cuisines,
-        price_range: restaurants[i].restaurant.price_range,
-        average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
-      });
-    }});
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]}&lon=${userLocation[1]}&establishment_type=111&sort=real_distance`
-    )//establishment type: 111- Tea Room, sort by real distance
-    .then(resp => {
-      let restaurants = resp.data.restaurants;
-      for (let i = 0; i < restaurants.length; i++) {
-        result.push({
-          id: restaurants[i].restaurant.id,
-          name: restaurants[i].restaurant.name,
-          location: restaurants[i].restaurant.location,
-          cuisines: restaurants[i].restaurant.cuisines,
-          price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
-        });
-      }
-  })
-  console.log("----------------COFFEE------------",result.length)
-  // .catch(err => console.log("EEEEERRRRRRROOOOORRRRRR", err));
-  // res.connection.setTimeOut(1000);
-  res.render("average-cost");
-  // ),1000)
-});
-
-///////////////Route for choosing your date type: Bar, establishment types: 278- Wine Bar; 4 Kioske, 7-bar, 272- cocktail bar, 6-Pub, 292- Beer Garden
-router.get("/date-type-bar", (req, res, next) => {
-  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  ///////////AXIOS GET 278- Wine Bar/////////////////
-
   let zomatoApi = axios.create({
     baseURL: "https://developers.zomato.com/api/v2.1/",
     headers: { user_key: process.env.API_KEY }
-  })
+  });
 
   let defaultParams = {
     entity_id: 82,
-    entity_type: 'city',
-    lat:userLocation[0],
-    lon:userLocation[1],
-    sort:'real_distance' 
-  }
+    entity_type: "city",
+    lat: userLocation[0],
+    lon: userLocation[1],
+    sort: "real_distance"
+  };
 
   Promise.all([
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type:278, // Kioske
+        establishment_type: 1
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 111
       }
     })
-      //   ?entity_id=82&entity_type=city&lat=${
-      // userLocation[0]}&lon=${userLocation[1]}&establishment_type=278&sort=real_distance`)
-    ,
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=4&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=7&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=272&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=6&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=272&sort=real_distance`
-    )
-  ])
-  .then(responses => {
+  ]).then(responses => {
     for (let iResponse = 0; iResponse < responses.length; iResponse++) {
       let restaurants = responses[iResponse].data.restaurants;
       for (let i = 0; i < restaurants.length; i++) {
@@ -148,21 +72,186 @@ router.get("/date-type-bar", (req, res, next) => {
         });
       }
     }
-    console.log("----------------BARS------------",result.length)
-    console.log(result.map(x => x.name))
-    res.render("average-cost");
-  })
-
-///////////AXIOS GET 4 Kioske/////////////////
-///////////AXIOS GET 7-bar/////////////////
-///////////AXIOS GET 272- cocktail bar/////////////////
-///////////AXIOS GET 6-pub/////////////////
-///////////AXIOS GET 272- Beer Garden/////////////////
-  // console.log(result.length)
-  //     .catch(err => console.log("EEEEERRRRRRROOOOORRRRRR in filtering API", err));
-  // .catch(err => console.log("EEEEERRRRRRROOOOORRRRRR", err));
+    console.log("----------------CAFES------------", result.length);
+    // console.log(result.map(x => x.name))
+    res.redirect("average-cost");
+  });
 });
 
+///////////////Route for choosing your date type: Bar, establishment types: 278- Wine Bar; 4 Kioske, 7-bar, 272- cocktail bar, 6-Pub, 292- Beer Garden
+router.get("/date-type-bar", (req, res, next) => {
+  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
+  let zomatoApi = axios.create({
+    baseURL: "https://developers.zomato.com/api/v2.1/",
+    headers: { user_key: process.env.API_KEY }
+  });
+
+  let defaultParams = {
+    entity_id: 82,
+    entity_type: "city",
+    lat: userLocation[0],
+    lon: userLocation[1],
+    sort: "real_distance"
+  };
+
+  Promise.all([
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 278
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 4
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 7
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 272
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 6
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 292
+      }
+    })
+  ]).then(responses => {
+    for (let iResponse = 0; iResponse < responses.length; iResponse++) {
+      let restaurants = responses[iResponse].data.restaurants;
+      for (let i = 0; i < restaurants.length; i++) {
+        result.push({
+          id: restaurants[i].restaurant.id,
+          name: restaurants[i].restaurant.name,
+          location: restaurants[i].restaurant.location,
+          cuisines: restaurants[i].restaurant.cuisines,
+          price_range: restaurants[i].restaurant.price_range,
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+        });
+      }
+    }
+    console.log("----------------BARS------------", result.length);
+    // console.log(result.map(x => x.name))
+    res.redirect("average-cost");
+  });
+});
+
+router.get("/date-type-dancing", (req, res, next) => {
+  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
+  let zomatoApi = axios.create({
+    baseURL: "https://developers.zomato.com/api/v2.1/",
+    headers: { user_key: process.env.API_KEY }
+  });
+
+  let defaultParams = {
+    entity_id: 82,
+    entity_type: "city",
+    lat: userLocation[0],
+    lon: userLocation[1],
+    sort: "real_distance"
+  };
+
+  Promise.all([
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 8
+      }
+    })
+  ]).then(responses => {
+    for (let iResponse = 0; iResponse < responses.length; iResponse++) {
+      let restaurants = responses[iResponse].data.restaurants;
+      for (let i = 0; i < restaurants.length; i++) {
+        result.push({
+          id: restaurants[i].restaurant.id,
+          name: restaurants[i].restaurant.name,
+          location: restaurants[i].restaurant.location,
+          cuisines: restaurants[i].restaurant.cuisines,
+          price_range: restaurants[i].restaurant.price_range,
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+        });
+      }
+    }
+    console.log("----------------CLUBS------------", result.length);
+    // console.log(result.map(x => x.name))
+    res.redirect("average-cost");
+  });
+});
+
+router.get("/date-type-food", (req, res, next) => {
+  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
+  let zomatoApi = axios.create({
+    baseURL: "https://developers.zomato.com/api/v2.1/",
+    headers: { user_key: process.env.API_KEY }
+  });
+
+  let defaultParams = {
+    entity_id: 82,
+    entity_type: "city",
+    lat: userLocation[0],
+    lon: userLocation[1],
+    sort: "real_distance"
+  };
+
+  Promise.all([
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 241
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 21
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 20
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 81
+      }
+    })
+  ]).then(responses => {
+    for (let iResponse = 0; iResponse < responses.length; iResponse++) {
+      let restaurants = responses[iResponse].data.restaurants;
+      for (let i = 0; i < restaurants.length; i++) {
+        result.push({
+          id: restaurants[i].restaurant.id,
+          name: restaurants[i].restaurant.name,
+          location: restaurants[i].restaurant.location,
+          cuisines: restaurants[i].restaurant.cuisines,
+          price_range: restaurants[i].restaurant.price_range,
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+        });
+      }
+    }
+    console.log("----------------FOOD------------", result.length);
+    // console.log(result.map(x => x.name))
+    res.redirect("average-cost");
+  });
+});
 
 router.get("/average-cost", (req, res, next) => {
   res.render("average-cost");
@@ -195,24 +284,5 @@ router.get("/confirm-date", (req, res, next) => {
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   res.render("profile-page");
 });
-
-// router.get('/searchPlace', (req, res, next) => {
-//   // const theId = req.body.name;
-//   axios.get("https://developers.zomato.com/api/v2.1/search?", theId )
-//     .then(response => {
-//       console.log("FFFFUUUUUUUUCCCCCKKKKKKKKKK", response.data)
-//     //    Date.create({
-//     //     establishment_name: response.categories.name,
-//     //    })
-//     // })
-//     // .then(
-//     //   dateDetails => {
-//     //     res.render("index", {
-//     //       dateDetails
-//     //     });
-//     res.render('place-details');
-//   })
-//   .catch(err => console.log("HEEELLLOOOOO", err))
-// })
 
 module.exports = router;
