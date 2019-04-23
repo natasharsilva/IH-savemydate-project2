@@ -276,6 +276,9 @@ router.get("/price-range-3", (req, res, next) => {
 });
 
 router.get("/date-options", (req, res, next) => {
+
+  
+
   res.render("date-options");
 });
 
@@ -284,10 +287,28 @@ router.get("/show-map", (req, res, next) => {
 });
 
 router.get("/confirm-date", (req, res, next) => {
-  res.render("confirm-date");
+//check with POST//
+  Date.create({
+    date_location_name: result.name,
+    location: result.location,
+    // rating: req.body.description,
+    cuisines: result.cuisines,
+    price_range: result.price_range,
+    AvgCostforTwo: result.average_cost_for_two,
+  })
+  .then(createdDate => {
+    console.log("Your date is ready, you are going to be redirected")
+    res.redirect("profile-page")
+  })
+  // res.render("confirm-date");
 });
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
+  
+  
+
+
+  
   res.render("profile-page");
 });
 

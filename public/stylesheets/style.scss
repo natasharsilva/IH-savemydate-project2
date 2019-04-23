@@ -3,14 +3,7 @@
 $primary: rgb(194, 101, 101);
 
 
-
-
-
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-
-
-
-
 
 
 body {
@@ -20,7 +13,7 @@ body {
 
 //choose primary here
 
-$primary: #AF2A1B;
+// $primary: #AF2A1B;
 
 a {
   color: #00B7FF;
@@ -30,23 +23,23 @@ i{
   color:$primary;
   border:3px solid $primary;
   border-radius:50px;
-  padding:5%;
+  padding:10%;
   margin:5%;
 }
 
 i:hover{
   background-color:$primary;
   color:white;
+  cursor: pointer;
 }
 
 .general-container{
-  margin:0 auto;
+  margin:10% auto;
   width:70%;
   display:flex;
   justify-content: center;
   flex-flow:column;
   align-content:center;
-  justify-content: center;
   align-items: center;
   padding:5%;
 }
@@ -61,3 +54,22 @@ i:hover{
 }
 
 
+@media (max-width: 750px) {
+
+  .general-container {
+    // background-color: yellow;
+    margin:0 auto;
+    width:95vw;
+    margin:0 auto;
+    padding:0;
+    height:160vw;
+    // background-color:yellow;
+  }
+
+  i{
+    padding:15%;
+    margin:15%;
+  }
+
+
+}

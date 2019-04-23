@@ -7028,24 +7028,24 @@ a {
   color: #00B7FF; }
 
 i {
-  color: #AF2A1B;
-  border: 3px solid #AF2A1B;
+  color: #c26565;
+  border: 3px solid #c26565;
   border-radius: 50px;
-  padding: 5%;
+  padding: 10%;
   margin: 5%; }
 
 i:hover {
-  background-color: #AF2A1B;
-  color: white; }
+  background-color: #c26565;
+  color: white;
+  cursor: pointer; }
 
 .general-container {
-  margin: 0 auto;
+  margin: 10% auto;
   width: 70%;
   display: flex;
   justify-content: center;
   flex-flow: column;
   align-content: center;
-  justify-content: center;
   align-items: center;
   padding: 5%; }
 
@@ -7056,5 +7056,16 @@ i:hover {
   height: 50px;
   border-radius: 50%;
   cursor: pointer; }
+
+@media (max-width: 750px) {
+  .general-container {
+    margin: 0 auto;
+    width: 95vw;
+    margin: 0 auto;
+    padding: 0;
+    height: 160vw; }
+  i {
+    padding: 15%;
+    margin: 15%; } }
 
 /*# sourceMappingURL=style.css.map */
