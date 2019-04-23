@@ -120,7 +120,6 @@ router.get("/date-type-bar", (req, res, next) => {
         ...defaultParams,
 
         establishment_type:6, // 6-pub
-
       }
     }),
     zomatoApi.get(`search`, {
