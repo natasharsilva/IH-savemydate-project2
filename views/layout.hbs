@@ -28,9 +28,14 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+    {{#if isNotConnected}}
     <li class="nav-item"><a class="nav-link" href="/auth/login">Login</a></li>
     <li class="nav-item"><a class="nav-link" href="/auth/signup">Signup</a></li>
+     {{/if}}
+    {{#if isConnected}}
+    <li class="nav-item"><a class="nav-link" href="/profile-page">Profile</a></li>
     <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout</a></li>
+    {{/if}}
     <li class="nav-item"><a class="nav-link" href="/date-type">Date Type</a></li>
     <li class="nav-item"><a class="nav-link" href="/date-options">Date Options</a></li>
     <li class="nav-item"><a class="nav-link" href="/current-location">Current Location</a></li>
@@ -39,7 +44,6 @@
     <li class="nav-item"><a class="nav-link" href="/location">Location</a></li>
     <li class="nav-item"><a class="nav-link" href="/show-map">Show Map</a></li>
     <li class="nav-item"><a class="nav-link" href="/restaurant-user-form">Restaurant User Form</a></li>
-    <li class="nav-item"><a class="nav-link" href="/profile-page">Profile</a></li>
       </div>
 </ul>
   </nav>
