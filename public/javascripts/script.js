@@ -36,18 +36,6 @@ trackUserLocation: true
 
 // mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM3lvOGp5aWZ6cnJtIn0.xv9rm--YRNKdTJGHFYzi0g';
 
-// var map2 = new mapboxgl.Map({
-// container: 'map',
-// style: 'mapbox://styles/mapbox/streets-v11',
-// center: [-79.4512, -9],
-// zoom: 13
-// });
- 
-// map2.addControl(new MapboxGeocoder({
-// accessToken: mapboxgl.accessToken,
-// mapboxgl: mapboxgl
-// }));
-
 
 
 //Change the marker's color, make it draggable...
