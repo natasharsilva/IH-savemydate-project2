@@ -281,6 +281,7 @@ router.get("/show-map", (req, res, next) => {
 });
 
 router.get("/confirm-date", (req, res, next) => {
+  
   res.render("confirm-date");
 });
 
