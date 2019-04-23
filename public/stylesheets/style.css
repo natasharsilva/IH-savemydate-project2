@@ -24,6 +24,7 @@ i:hover {
   flex-flow: column;
   align-content: center;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  padding: 5%; }
 
 /*# sourceMappingURL=style.css.map */
