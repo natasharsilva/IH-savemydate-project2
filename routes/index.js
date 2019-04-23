@@ -4,6 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 const result = [];
 const userLocation = [38.7114690418, -9.14146889];
+const {checkRole}   = require("../middlewares")
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 // const map = require('../public/javascripts/script')
 
