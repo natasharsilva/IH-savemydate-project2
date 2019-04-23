@@ -32,7 +32,6 @@ var map = new mapboxgl.Map({
   zoom: 8 // starting zoom
 })
 
-<<<<<<< HEAD
 
 // Add zoom and rotation controls to the map.
 var geolocate = new mapboxgl.GeolocateControl();
@@ -56,7 +55,6 @@ var marker = new mapboxgl.Marker({
 // module.exports.lon = lon;
 // module.exports.lat = lat;
 
-=======
 var marker = new mapboxgl.Marker({
   draggable: true,
   color:"yellow"
@@ -81,7 +79,6 @@ geolocate.on('geolocate', function(e) {
       return
 });
 
->>>>>>> 9c4004414f2009cc66167ee7417e33c3b7b6b590
 // var x = document.getElementById("demo");
 // var userLocation = []
 

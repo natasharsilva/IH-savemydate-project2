@@ -15,20 +15,23 @@
         </button>
       </h5>
     </div>
-
+ {{#each finalOptions }}
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      {{#each result }}
+     
       <div class="card-body">
+
         <ul>
+          
           <li>Your Date Location:{{this.name}}</li>
           <li>Average Cost for Two:{{this.average_cost_for_two}}</li>
           <li>Cuisine:{{this.cuisines}}</li>
           <li>Your Date Location:{{this.average_cost_for_two}}</li>
+           
         </ul>
+       
       </div>
-      {{/each }}
-    </div>
   </div>
+
   <div class="card">
     <div class="card-header" id="headingTwo">
       <h5 class="mb-0">
@@ -37,6 +40,7 @@
         </button>
       </h5>
     </div>
+       {{/each }}
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
       <div class="card-body">
         Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
