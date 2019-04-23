@@ -33,6 +33,7 @@ var map = new mapboxgl.Map({
 })
 
 
+
 // Add zoom and rotation controls to the map.
 var geolocate = new mapboxgl.GeolocateControl();
 map.addControl(geolocate);
@@ -49,8 +50,6 @@ var marker = new mapboxgl.Marker({
 })
   .setLngLat([position])
   .addTo(map);
-
-
 
 // module.exports.lon = lon;
 // module.exports.lat = lat;
