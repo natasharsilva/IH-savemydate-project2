@@ -54,31 +54,29 @@ router.get("/date-type-coffee", (req, res, next) => {
         userLocation[0]
       }&lon=${userLocation[1]}&establishment_type=111&sort=real_distance`
     )
-    .then(resp => {
-      let restaurants = resp.data.restaurants;
-      for (let i = 0; i < restaurants.length; i++) {
-        result.push({
-          id: restaurants[i].restaurant.id,
-          name: restaurants[i].restaurant.name,
-          location: restaurants[i].restaurant.location,
-          cuisines: restaurants[i].restaurant.cuisines,
-          price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
-        });
-      }
+  .then(resp => {
+    let restaurants = resp.data.restaurants;
+    for (let i = 0; i < restaurants.length; i++) {
+      result.push({
+        id: restaurants[i].restaurant.id,
+        name: restaurants[i].restaurant.name,
+        location: restaurants[i].restaurant.location,
+        cuisines: restaurants[i].restaurant.cuisines,
+        price_range: restaurants[i].restaurant.price_range,
+        average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+      });
+    }
   })
-  console.log(result.length)
-  // .catch(err => console.log("EEEEERRRRRRROOOOORRRRRR", err));
-  res.redirect("average-cost");
+    console.log("COFFEE:", result.length)
+    res.redirect("average-cost");
 });
 
-router.get("/date-type-coffee", (req, res, next) => {
+router.get("/date-type-food", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  axios
-  .get(
+  axios.get(
     `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
       userLocation[0]
-    }&lon=${userLocation[1]}&establishment_type=1&sort=real_distance`
+    }&lon=${userLocation[1]}&establishment_type=241&sort=real_distance`
   )
   .then(resp => {
     let restaurants = resp.data.restaurants;
@@ -92,11 +90,10 @@ router.get("/date-type-coffee", (req, res, next) => {
         average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
       });
     }});
-    axios
-    .get(
+    axios.get(
       `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
         userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=111&sort=real_distance`
+      }&lon=${userLocation[1]}&establishment_type=21&sort=real_distance`
     )
     .then(resp => {
       let restaurants = resp.data.restaurants;
@@ -109,10 +106,66 @@ router.get("/date-type-coffee", (req, res, next) => {
           price_range: restaurants[i].restaurant.price_range,
           average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
         });
-      }
-  })
-    .catch(err => console.log("EEEEERRRRRRROOOOORRRRRR", err));
+      }})
+      axios.get(
+        `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
+          userLocation[0]
+        }&lon=${userLocation[1]}&establishment_type=20&sort=real_distance`
+      )
+      .then(resp => {
+        let restaurants = resp.data.restaurants;
+        for (let i = 0; i < restaurants.length; i++) {
+          result.push({
+            id: restaurants[i].restaurant.id,
+            name: restaurants[i].restaurant.name,
+            location: restaurants[i].restaurant.location,
+            cuisines: restaurants[i].restaurant.cuisines,
+            price_range: restaurants[i].restaurant.price_range,
+            average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+          });
+        }});
+        axios.get(
+    `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
+      userLocation[0]
+    }&lon=${userLocation[1]}&establishment_type=81&sort=real_distance`
+  )
+  .then(resp => {
+    let restaurants = resp.data.restaurants;
+    for (let i = 0; i < restaurants.length; i++) {
+      result.push({
+        id: restaurants[i].restaurant.id,
+        name: restaurants[i].restaurant.name,
+        location: restaurants[i].restaurant.location,
+        cuisines: restaurants[i].restaurant.cuisines,
+        price_range: restaurants[i].restaurant.price_range,
+        average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+      });
+    }});
   res.redirect("average-cost");
+});
+
+router.get("/date-type-dancing", (req, res, next) => {
+    axios.defaults.headers.common["user_key"] = process.env.API_KEY;
+    axios
+    .get(
+      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
+        userLocation[0]
+      }&lon=${userLocation[1]}&establishment_type=8&sort=real_distance`
+    )
+    .then(resp => {
+      let restaurants = resp.data.restaurants;
+      for (let i = 0; i < restaurants.length; i++) {
+        result.push({
+          id: restaurants[i].restaurant.id,
+          name: restaurants[i].restaurant.name,
+          location: restaurants[i].restaurant.location,
+          cuisines: restaurants[i].restaurant.cuisines,
+          price_range: restaurants[i].restaurant.price_range,
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+        });
+      }});
+    console.log("DANCING: ", result.length)
+    res.redirect("average-cost");
 });
 
 router.get("/average-cost", (req, res, next) => {
@@ -146,24 +199,5 @@ router.get("/confirm-date", (req, res, next) => {
 router.get("/profile-page", (req, res, next) => {
   res.render("profile-page");
 });
-
-// router.get('/searchPlace', (req, res, next) => {
-//   // const theId = req.body.name;
-//   axios.get("https://developers.zomato.com/api/v2.1/search?", theId )
-//     .then(response => {
-//       console.log("FFFFUUUUUUUUCCCCCKKKKKKKKKK", response.data)
-//     //    Date.create({
-//     //     establishment_name: response.categories.name,
-//     //    })
-//     // })
-//     // .then(
-//     //   dateDetails => {
-//     //     res.render("index", {
-//     //       dateDetails
-//     //     });
-//     res.render('place-details');
-//   })
-//   .catch(err => console.log("HEEELLLOOOOO", err))
-// })
 
 module.exports = router;
