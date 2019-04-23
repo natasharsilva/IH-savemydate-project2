@@ -4,12 +4,12 @@ const router = express.Router();
 const axios = require("axios");
 const result = [];
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
-const userLocation = {lat: 38.7114690418, lon: -9.1414688900}
+const map = require('../public/javascripts/script')
 
 axios.defaults.headers.common["user_key"] = process.env.API_KEY;
 axios
   .get(
-    `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${userLocation.lat}&lon=${userLocation.lon}&sort=real_distance`
+    `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${lat}&lon=${lon}&sort=real_distance`
   )
   .then(resp => {
     let restaurants = resp.data.restaurants;
