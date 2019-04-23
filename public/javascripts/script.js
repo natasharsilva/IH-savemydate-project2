@@ -15,26 +15,43 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM
 //process.env.MAPBOX_ACCESSTOKEN
 
 // Embed a map in a tag with the id `map`
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ3RjYXJtb25hIiwiYSI6ImNqdWwxYzZwOTAzeWE0NGxsbjJ0ZnJ0aDYifQ.GIzsIahO6WNQFMg486tFkA';
-
 var map = new mapboxgl.Map({
-container: 'map', // container id
-style: 'mapbox://styles/mapbox/streets-v11',
-center: [-96, 37.8], // starting position
-zoom: 3 // starting zoom
+  container: 'map', 
+  style: 'mapbox://styles/carlarsmendes/cjul34qql1ow11fnwqn9puirj', //choose style
+  center: [-1.1527307, 38.7109469], // starting position
+  zoom: 8 // starting zoom
+})
+
+// Add zoom and rotation controls to the map.
+var geolocate = new mapboxgl.GeolocateControl();
+
+
+map.addControl(geolocate);
+geolocate.on('geolocate', function(e) {
+      var lon = e.coords.longitude;
+      var lat = e.coords.latitude
+      var position = [lon, lat];
+      console.log(lon);
 });
- 
-// Add geolocate control to the map.
-map.addControl(new mapboxgl.GeolocateControl({
-positionOptions: {
-enableHighAccuracy: true
-},
-trackUserLocation: true
-}));
 
 
+// var x = document.getElementById("demo");
+// var userLocation = []
 
-// mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM3lvOGp5aWZ6cnJtIn0.xv9rm--YRNKdTJGHFYzi0g';
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else { 
+//     console.log("Geolocation is not supported by this browser.")
+//   }
+// }
+
+// function showPosition(position) {
+//   userLocation.push(position.coords.latitude, position.coords.longitude)
+//   console.log(userLocation)
+//   return userLocation
+// }
+
 
 
 

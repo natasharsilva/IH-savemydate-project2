@@ -3,6 +3,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const result = [];
+
+
+
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 const map = require('../public/javascripts/script')
 
@@ -23,7 +26,8 @@ axios
         average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
       });
     }
-    console.log(result);
+    // console.log(result);
+   
   })
   .catch(err => console.log("EEEEERRRRRRRORRRRRR", err));
 
@@ -52,6 +56,18 @@ router.get("/location", (req, res, next) => {
 });
 
 router.get("/current-location", (req, res, next) => {
+  var lat,lon;
+var promise1 = new Promise(function(resolve, reject) {
+   navigator.geolocation.getCurrentPosition(function(pos){
+       lat = pos.coords.latitude
+       lon = pos.coords.longitude
+       resolve({lat,lon});
+   })
+})
+
+promise1.then(function(value) {
+     console.log(value.lat,value.lon)
+});
   res.render("current-location");
 });
 
