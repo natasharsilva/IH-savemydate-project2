@@ -145,8 +145,8 @@ router.get("/date-type-bar", (req, res, next) => {
       }
     }
     console.log("----------------BARS------------",result.length)
-    console.log(result.map(x => x.name)) //this turns an array into a string
-    res.render("average-cost");
+    // console.log(result.map(x => x.name)) //this turns an array into a string
+    res.render("price-range");
   })
 
 
