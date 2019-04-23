@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const result = [];
+let result = [];
 const userLocation = [38.7114690418, -9.14146889];
 const { checkRole } = require("../middlewares");
 
@@ -69,7 +69,7 @@ router.get("/date-type-coffee", (req, res, next) => {
         });
       }
     }
-    console.log("----------------CAFES------------", result.length);
+    console.log("----------------CAFES------------", result);
     // console.log(result.map(x => x.name))
     res.redirect("price-range");
   });
@@ -153,7 +153,7 @@ router.get("/date-type-bar", (req, res, next) => {
     console.log("----------------BARS------------", result.length);
     // console.log(result.map(x => x.name))
     res.redirect("price-range");
-  });
+});
 
 
 router.get("/date-type-club", (req, res, next) => {
@@ -264,18 +264,22 @@ router.get("/price-range", (req, res, next) => {
 });
 
 router.get("/price-range-1", (req, res, next) => {
-  res.redirect("/date-options");
+  result = result.filter(element => element.price_range < 2)
+  res.redirect("/date-options")
 });
 
 router.get("/price-range-2", (req, res, next) => {
-  res.redirect("/date-options");
+  result = result.filter(element => element.price_range === 2)
+  res.redirect("/date-options")
 });
 
 router.get("/price-range-3", (req, res, next) => {
-  res.redirect("/date-options");
+    result = result.filter(element => element.price_range > 2)
+    res.redirect("/date-options")
 });
 
 router.get("/date-options", (req, res, next) => {
+  console.log(result)
   res.render("date-options");
 });
 
