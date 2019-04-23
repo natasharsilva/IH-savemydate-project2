@@ -2,10 +2,11 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const {checkRole}   = require("../middlewares")
 // const lon = require("../public/javascripts/script")
 // const lon = require("../public/javascripts/script")
 
-
+const result = []
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 const userLocation = {lat: 38.7114690418, lon: -9.1414688900}
 
@@ -31,20 +32,6 @@ axios
   })
   .catch(err => console.log("EEEEERRRRRRRORRRRRR", err));
 
-// axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-// axios.get(
-//     "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=272"
-//   )
-//   .then(resp => {
-//     console.log(resp.data.restaurants[0].restaurant.name);
-//   })
-//   .catch(err => console.log("EEEEERRRRRRRORRRRRR", err));
-
-// let config = {'Authorization': process.env.API_KEY};
-// axios.get('https://developers.zomato.com/api/v2.1/search?', {headers: config})
-// .then((resp) => {
-//     console.log(resp);
-// });
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -83,7 +70,7 @@ router.get("/confirm-date", (req, res, next) => {
   res.render("confirm-date");
 });
 
-router.get("/profile-page", (req, res, next) => {
+router.get("/profile-page", checkRole("User"), (req, res, next) => {
   res.render("profile-page");
 });
 
