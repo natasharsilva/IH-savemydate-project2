@@ -9,19 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // container: 'map',
 // style: 'mapbox://styles/mapbox/streets-v11'
 // });
-
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM3lvOGp5aWZ6cnJtIn0.xv9rm--YRNKdTJGHFYzi0g';
-//process.env.MAPBOX_ACCESSTOKEN
-
-// Embed a map in a tag with the id `map`
-var map = new mapboxgl.Map({
-  container: 'map', 
-  style: 'mapbox://styles/carlarsmendes/cjul34qql1ow11fnwqn9puirj', //choose style
-  center: [-1.1527307, 38.7109469], // starting position
-  zoom: 8 // starting zoom
-})
-
 // Add zoom and rotation controls to the map.
 var geolocate = new mapboxgl.GeolocateControl();
 
@@ -31,8 +18,37 @@ geolocate.on('geolocate', function(e) {
       var lon = e.coords.longitude;
       var lat = e.coords.latitude
       var position = [lon, lat];
-      console.log(lon);
+      console.log(lon, lat);
 });
+
+
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM3lvOGp5aWZ6cnJtIn0.xv9rm--YRNKdTJGHFYzi0g';
+//process.env.MAPBOX_ACCESSTOKEN
+
+// Embed a map in a tag with the id `map`
+var map = new mapboxgl.Map({
+  container: 'map', 
+  style: 'mapbox://styles/mapbox/light-v9', //choose style
+  center: [-9, 38.7109469], // starting position
+  zoom: 8 // starting zoom
+})
+
+var marker = new mapboxgl.Marker({
+  draggable: true,
+  color:"yellow"
+  })
+  .setLngLat([e.coords.latitude])
+  .addTo(map);
+   
+  function onDragEnd() {
+  var lngLat = marker.getLngLat();
+  coordinates.style.display = 'block';
+  coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+  }
+   
+  marker.on('dragend', onDragEnd);
+
 
 
 // var x = document.getElementById("demo");
