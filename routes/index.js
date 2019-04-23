@@ -98,40 +98,60 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type: 278
+// <<<<<<< HEAD
+        establishment_type:278, // 278- Wine Bar
+// =======
+//         establishment_type: 278
+// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type: 4
+// <<<<<<< HEAD
+        establishment_type:4, // 4- Kioske
+// =======
+//         establishment_type: 4
+// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type: 7
+// <<<<<<< HEAD
+        establishment_type:7, // 7- Bar
+// =======
+//         establishment_type: 7
+// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type: 272
+// <<<<<<< HEAD
+        establishment_type:272, // 272- cocktail bar
+// =======
+//         establishment_type: 272
+// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type: 6
+
+        establishment_type:6, // 6-pub
+
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type: 292
+// <<<<<<< HEAD
+        establishment_type:272, // 272- Beer Garden
       }
     })
-  ]).then(responses => {
+  ])
+  .then(responses => {
     for (let iResponse = 0; iResponse < responses.length; iResponse++) {
       let restaurants = responses[iResponse].data.restaurants;
       for (let i = 0; i < restaurants.length; i++) {
@@ -145,11 +165,17 @@ router.get("/date-type-bar", (req, res, next) => {
         });
       }
     }
+    console.log("----------------BARS------------",result.length)
+    console.log(result.map(x => x.name)) //this turns an array into a string
+    res.render("average-cost");
+  })
+
+
     console.log("----------------BARS------------", result.length);
     // console.log(result.map(x => x.name))
     res.redirect("price-range");
   });
-});
+
 
 router.get("/date-type-dancing", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
@@ -191,6 +217,7 @@ router.get("/date-type-dancing", (req, res, next) => {
     // console.log(result.map(x => x.name))
     res.redirect("price-range");
   });
+
 });
 
 router.get("/date-type-food", (req, res, next) => {
