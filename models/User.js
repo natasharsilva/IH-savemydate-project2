@@ -8,7 +8,7 @@ const userSchema = new Schema({
     unique: true,
     match: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   },
-  password: String
+    password: String
 }, {
   timestamps: {
     createdAt: 'created_at',
