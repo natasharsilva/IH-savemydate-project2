@@ -71,7 +71,7 @@ router.get("/date-type-coffee", (req, res, next) => {
     }
     console.log("----------------CAFES------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 });
 
@@ -94,41 +94,25 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:278, // 278- Wine Bar
-// =======
-//         establishment_type: 278
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:4, // 4- Kioske
-// =======
-//         establishment_type: 4
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:7, // 7- Bar
-// =======
-//         establishment_type: 7
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:272, // 272- cocktail bar
-// =======
-//         establishment_type: 272
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
@@ -142,7 +126,6 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:272, // 272- Beer Garden
       }
     })
@@ -169,11 +152,11 @@ router.get("/date-type-bar", (req, res, next) => {
 
     console.log("----------------BARS------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 
 
-router.get("/date-type-dancing", (req, res, next) => {
+router.get("/date-type-club", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
     baseURL: "https://developers.zomato.com/api/v2.1/",
@@ -211,12 +194,12 @@ router.get("/date-type-dancing", (req, res, next) => {
     }
     console.log("----------------CLUBS------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 
 });
 
-router.get("/date-type-food", (req, res, next) => {
+router.get("/date-type-dinner", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
     baseURL: "https://developers.zomato.com/api/v2.1/",
@@ -272,12 +255,12 @@ router.get("/date-type-food", (req, res, next) => {
     }
     console.log("----------------FOOD------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 });
 
-router.get("/average-cost", (req, res, next) => {
-  res.render("average-cost");
+router.get("/price-range", (req, res, next) => {
+  res.render("price-range");
 });
 
 router.get("/price-range-1", (req, res, next) => {
