@@ -49,7 +49,14 @@ var marker = new mapboxgl.Marker({
    
   marker.on('dragend', onDragEnd);
 
-
+var userLocation = []
+map.addControl(geolocate);
+geolocate.on('geolocate', function(e) {
+      var lon = e.coords.longitude;
+      var lat = e.coords.latitude
+      userLocation.push(lat,lon);
+      return
+});
 
 // var x = document.getElementById("demo");
 // var userLocation = []
