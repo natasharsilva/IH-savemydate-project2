@@ -98,41 +98,26 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:278, // 278- Wine Bar
-// =======
-//         establishment_type: 278
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:4, // 4- Kioske
-// =======
-//         establishment_type: 4
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:7, // 7- Bar
-// =======
-//         establishment_type: 7
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
+
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:272, // 272- cocktail bar
-// =======
-//         establishment_type: 272
-// >>>>>>> effb7dce4a721b075c61474569fa5fea297abf8b
       }
     }),
     zomatoApi.get(`search`, {
@@ -140,13 +125,11 @@ router.get("/date-type-bar", (req, res, next) => {
         ...defaultParams,
 
         establishment_type:6, // 6-pub
-
       }
     }),
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-// <<<<<<< HEAD
         establishment_type:272, // 272- Beer Garden
       }
     })
