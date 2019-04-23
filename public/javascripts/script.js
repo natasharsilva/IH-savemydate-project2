@@ -25,13 +25,34 @@ var map = new mapboxgl.Map({
 // Add zoom and rotation controls to the map.
 var geolocate = new mapboxgl.GeolocateControl();
 
+
 map.addControl(geolocate);
 geolocate.on('geolocate', function(e) {
       var lon = e.coords.longitude;
       var lat = e.coords.latitude
       var position = [lon, lat];
-      console.log(position);
+      console.log(lon,lat);
 });
+
+
+// var x = document.getElementById("demo");
+// var userLocation = []
+
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else { 
+//     console.log("Geolocation is not supported by this browser.")
+//   }
+// }
+
+// function showPosition(position) {
+//   userLocation.push(position.coords.latitude, position.coords.longitude)
+//   console.log(userLocation)
+//   return userLocation
+// }
+
+
 
 
 //Change the marker's color, make it draggable...
