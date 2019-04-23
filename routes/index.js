@@ -154,7 +154,6 @@ router.get("/date-type-bar", (req, res, next) => {
     res.redirect("price-range");
 });
 
-
 router.get("/date-type-club", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
@@ -263,18 +262,13 @@ router.get("/price-range", (req, res, next) => {
 });
 
 router.get("/price-range-1", (req, res, next) => {
-  result = result.filter(element => element.price_range < 2)
+  result = result.filter(element => element.price_range <= 2)
   res.redirect("/date-options")
 });
 
 router.get("/price-range-2", (req, res, next) => {
-  result = result.filter(element => element.price_range === 2)
+  result = result.filter(element => element.price_range > 2)
   res.redirect("/date-options")
-});
-
-router.get("/price-range-3", (req, res, next) => {
-    result = result.filter(element => element.price_range > 2)
-    res.redirect("/date-options")
 });
 
 router.get("/date-options", (req, res, next) => {
