@@ -31,7 +31,7 @@ geolocate.on('geolocate', function(e) {
       var lon = e.coords.longitude;
       var lat = e.coords.latitude
       var position = [lon, lat];
-      console.log(lon,lat);
+      console.log(lon);
 });
 
 

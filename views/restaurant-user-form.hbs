@@ -1,9 +1,30 @@
+<div class="general-container">
 <br>
 <form action="POST">
     <br>
-    Where are you having dinner?<input type="search" name="location" id="location">
+    Where are you having dinner?
+      <div id="map" style="width:400px;height:300px"></div>
+
     <br><br>
     Tell us your date details!<input type="datetime" name="datetime" id="datetime">
     <br><br>
     <a class="btn btn-outline-dark" href="/date-type">Continue planning my date!</a>
 </form>
+
+</div>
+
+ 
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM3lvOGp5aWZ6cnJtIn0.xv9rm--YRNKdTJGHFYzi0g';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [-79.4512, 43.6568],
+zoom: 13
+});
+ 
+map.addControl(new MapboxGeocoder({
+accessToken: mapboxgl.accessToken,
+mapboxgl: mapboxgl
+}));
+</script>

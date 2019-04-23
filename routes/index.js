@@ -7,11 +7,12 @@ const result = [];
 
 
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
+const userLocation = {lat: 38.7114690418, lon: -9.1414688900}
 
 axios.defaults.headers.common["user_key"] = process.env.API_KEY;
 axios
   .get(
-    "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=1"
+    `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${userLocation.lat}&lon=${userLocation.lon}&sort=real_distance`
   )
   .then(resp => {
     let restaurants = resp.data.restaurants;
@@ -20,6 +21,7 @@ axios
         id: restaurants[i].restaurant.id,
         name: restaurants[i].restaurant.name,
         location: restaurants[i].restaurant.location,
+        cuisines: restaurants[i].restaurant.cuisines,
         price_range: restaurants[i].restaurant.price_range,
         average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
       });
