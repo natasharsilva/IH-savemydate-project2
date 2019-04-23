@@ -5,8 +5,6 @@ const axios = require("axios");
 const result = [];
 const userLocation = [38.7114690418, -9.14146889];
 const { checkRole } = require("../middlewares");
-// const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
-// const map = require('../public/javascripts/script')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -29,7 +27,6 @@ router.get("/date-type", (req, res, next) => {
   res.render("date-type");
 });
 
-//Route for choosing your date type: coffee, establishment types: 1- Cafe, 111- Tea Room
 router.get("/date-type-coffee", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
@@ -78,7 +75,6 @@ router.get("/date-type-coffee", (req, res, next) => {
   });
 });
 
-///////////////Route for choosing your date type: Bar, establishment types: 278- Wine Bar; 4 Kioske, 7-bar, 272- cocktail bar, 6-Pub, 292- Beer Garden
 router.get("/date-type-bar", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
