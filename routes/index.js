@@ -6,13 +6,33 @@ const result = [];
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
 
 axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-axios.get(
-    "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=272"
+axios
+  .get(
+    "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=1"
   )
   .then(resp => {
-    console.log(resp.data.restaurants[0].restaurant.name);
+    let restaurants = resp.data.restaurants;
+    for (let i = 0; i < restaurants.length; i++) {
+      result.push({
+        id: restaurants[i].restaurant.id,
+        name: restaurants[i].restaurant.name,
+        location: restaurants[i].restaurant.location,
+        price_range: restaurants[i].restaurant.price_range,
+        average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
+      });
+    }
+    console.log(result);
   })
   .catch(err => console.log("EEEEERRRRRRRORRRRRR", err));
+
+// axios.defaults.headers.common["user_key"] = process.env.API_KEY;
+// axios.get(
+//     "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=272"
+//   )
+//   .then(resp => {
+//     console.log(resp.data.restaurants[0].restaurant.name);
+//   })
+//   .catch(err => console.log("EEEEERRRRRRRORRRRRR", err));
 
 // let config = {'Authorization': process.env.API_KEY};
 // axios.get('https://developers.zomato.com/api/v2.1/search?', {headers: config})
@@ -33,26 +53,11 @@ router.get("/current-location", (req, res, next) => {
   res.render("current-location");
 });
 
-router.get('/restaurant-user-form', (req, res, next) => {
-  res.render('restaurant-user-form');
+router.get("/restaurant-user-form", (req, res, next) => {
+  res.render("restaurant-user-form");
 });
 
-router.get('/date-type', (req, res, next) => {
-//   res.render('date-type');
-// router.get("/date-type", (req, res, next) => {
-  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  axios
-    .get(
-      "https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&establishment_type=1")
-    .then(resp => {
-      let restaurants = resp.data.restaurants
-      for (let i = 0; i < restaurants.length; i++) {
-        result.push(restaurants[i].restaurant.name +", " +restaurants[i].restaurant.price_range)
-      }
-      console.log(result);
-    })
-    .catch(err => console.log("EEEEERRRRRRRORRRRRR", err));
-    
+router.get("/date-type", (req, res, next) => {
   res.render("date-type");
 });
 
