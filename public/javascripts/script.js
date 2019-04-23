@@ -34,8 +34,6 @@ geolocate.on('geolocate', function(e) {
       return
 });
 
-console.log(userLocation)
-
 // var x = document.getElementById("demo");
 // var userLocation = []
 
