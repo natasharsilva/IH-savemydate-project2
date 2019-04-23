@@ -150,7 +150,7 @@ router.get("/date-type-bar", (req, res, next) => {
     }
     console.log("----------------BARS------------",result.length)
     console.log(result.map(x => x.name)) //this turns an array into a string
-    res.render("average-cost");
+    res.render("price-range");
   })
 
 
@@ -268,6 +268,7 @@ router.get("/price-range", (req, res, next) => {
 });
 
 router.get("/price-range-1", (req, res, next) => {
+  console.log(result.length)
   res.redirect("/date-options");
 });
 

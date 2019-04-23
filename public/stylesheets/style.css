@@ -7041,7 +7041,6 @@ i:hover {
 .general-container {
   margin: 0 auto;
   width: 70%;
-  height: 100%;
   display: flex;
   justify-content: center;
   flex-flow: column;
