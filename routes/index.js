@@ -74,7 +74,7 @@ router.get("/date-type-coffee", (req, res, next) => {
     }
     console.log("----------------CAFES------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 });
 
@@ -147,7 +147,7 @@ router.get("/date-type-bar", (req, res, next) => {
     }
     console.log("----------------BARS------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 });
 
@@ -189,7 +189,7 @@ router.get("/date-type-dancing", (req, res, next) => {
     }
     console.log("----------------CLUBS------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 });
 
@@ -249,12 +249,12 @@ router.get("/date-type-food", (req, res, next) => {
     }
     console.log("----------------FOOD------------", result.length);
     // console.log(result.map(x => x.name))
-    res.redirect("average-cost");
+    res.redirect("price-range");
   });
 });
 
-router.get("/average-cost", (req, res, next) => {
-  res.render("average-cost");
+router.get("/price-range", (req, res, next) => {
+  res.render("price-range");
 });
 
 router.get("/price-range-1", (req, res, next) => {
