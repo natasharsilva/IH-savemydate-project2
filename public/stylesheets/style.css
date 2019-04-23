@@ -21,9 +21,9 @@ i:hover {
   width: 70%;
   display: flex;
   justify-content: center;
+  flex-flow: column;
   align-content: center;
-  align-items: center;
-  flex-flow: column; 
-  padding: 5%;}
+  justify-content: center;
+  align-items: center; }
 
 /*# sourceMappingURL=style.css.map */
