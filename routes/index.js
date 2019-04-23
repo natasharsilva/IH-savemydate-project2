@@ -97,42 +97,39 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type:278, // Kioske
+        establishment_type:278, // 278- Wine Bar
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type:4, // 4- Kioske
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type:7, // 7- Bar
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type:272, // 272- cocktail bar
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type:6, // 6-pub
+      }
+    }),
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type:272, // 272- Beer Garden
       }
     })
-      //   ?entity_id=82&entity_type=city&lat=${
-      // userLocation[0]}&lon=${userLocation[1]}&establishment_type=278&sort=real_distance`)
-    ,
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=4&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=7&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=272&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=6&sort=real_distance`
-    ),
-    axios
-    .get(
-      `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${
-        userLocation[0]
-      }&lon=${userLocation[1]}&establishment_type=272&sort=real_distance`
-    )
   ])
   .then(responses => {
     for (let iResponse = 0; iResponse < responses.length; iResponse++) {
@@ -149,15 +146,10 @@ router.get("/date-type-bar", (req, res, next) => {
       }
     }
     console.log("----------------BARS------------",result.length)
-    console.log(result.map(x => x.name))
+    console.log(result.map(x => x.name)) //this turns an array into a string
     res.render("average-cost");
   })
 
-///////////AXIOS GET 4 Kioske/////////////////
-///////////AXIOS GET 7-bar/////////////////
-///////////AXIOS GET 272- cocktail bar/////////////////
-///////////AXIOS GET 6-pub/////////////////
-///////////AXIOS GET 272- Beer Garden/////////////////
   // console.log(result.length)
   //     .catch(err => console.log("EEEEERRRRRRROOOOORRRRRR in filtering API", err));
   // .catch(err => console.log("EEEEERRRRRRROOOOORRRRRR", err));
