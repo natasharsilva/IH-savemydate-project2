@@ -3,16 +3,14 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const result = [];
-
-
-
+const userLocation = [38.7114690418, -9.1414688900]
 // const zomatoApi = axios.create({baseUrl: "https://developers.zomato.com/api/v2.1/search?"})
-const map = require('../public/javascripts/script')
+// const map = require('../public/javascripts/script')
 
 axios.defaults.headers.common["user_key"] = process.env.API_KEY;
 axios
   .get(
-    `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${lat}&lon=${lon}&sort=real_distance`
+    `https://developers.zomato.com/api/v2.1/search?entity_id=82&entity_type=city&lat=${userLocation[0]}&lon=${userLocation[1]}&sort=real_distance`
   )
   .then(resp => {
     let restaurants = resp.data.restaurants;
@@ -26,7 +24,7 @@ axios
         average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
       });
     }
-    // console.log(result);
+    console.log(result);
    
   })
   .catch(err => console.log("EEEEERRRRRRRORRRRRR", err));
@@ -56,18 +54,6 @@ router.get("/location", (req, res, next) => {
 });
 
 router.get("/current-location", (req, res, next) => {
-  var lat,lon;
-var promise1 = new Promise(function(resolve, reject) {
-   navigator.geolocation.getCurrentPosition(function(pos){
-       lat = pos.coords.latitude
-       lon = pos.coords.longitude
-       resolve({lat,lon});
-   })
-})
-
-promise1.then(function(value) {
-     console.log(value.lat,value.lon)
-});
   res.render("current-location");
 });
 

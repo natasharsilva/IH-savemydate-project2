@@ -25,15 +25,16 @@ var map = new mapboxgl.Map({
 // Add zoom and rotation controls to the map.
 var geolocate = new mapboxgl.GeolocateControl();
 
-
+var userLocation = []
 map.addControl(geolocate);
 geolocate.on('geolocate', function(e) {
       var lon = e.coords.longitude;
       var lat = e.coords.latitude
-      var position = [lon, lat];
-      console.log(lon);
+      userLocation.push(lat,lon);
+      return
 });
 
+console.log(userLocation)
 
 // var x = document.getElementById("demo");
 // var userLocation = []
