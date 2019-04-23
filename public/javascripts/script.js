@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   console.log('IronGenerator JS imported successfully!');
 
 }, false);
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // container: 'map',
 // style: 'mapbox://styles/mapbox/streets-v11'
 // });
-
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM3lvOGp5aWZ6cnJtIn0.xv9rm--YRNKdTJGHFYzi0g';
 //process.env.MAPBOX_ACCESSTOKEN
@@ -25,7 +23,6 @@ var map = new mapboxgl.Map({
 // Add zoom and rotation controls to the map.
 var geolocate = new mapboxgl.GeolocateControl();
 
-
 map.addControl(geolocate);
 geolocate.on('geolocate', function(e) {
       var lon = e.coords.longitude;
@@ -34,6 +31,8 @@ geolocate.on('geolocate', function(e) {
       console.log(lon);
 });
 
+module.exports.lon = lon;
+module.exports.lat = lat;
 
 // var x = document.getElementById("demo");
 // var userLocation = []
