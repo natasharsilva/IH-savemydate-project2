@@ -17,6 +17,13 @@ i:hover {
   color: white; }
 
 .general-container {
-  margin: 0 auto; }
+  margin: 0 auto;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-flow: column; 
+  padding: 5%;}
 
 /*# sourceMappingURL=style.css.map */
