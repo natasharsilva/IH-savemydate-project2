@@ -1,3 +1,18 @@
+
+
+$primary: rgb(194, 101, 101);
+
+
+
+
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+
+
+
+
 body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -44,4 +59,5 @@ i:hover{
   border-radius: 50%;
   cursor: pointer;
 }
+
 
