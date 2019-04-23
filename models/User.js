@@ -8,8 +8,13 @@ const userSchema = new Schema({
     unique: true,
     match: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   },
-    password: String
-}, {
+    password: String,
+    role: {
+      type:String,
+      default: "User"
+    }
+},
+ {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
