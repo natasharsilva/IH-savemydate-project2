@@ -5,6 +5,8 @@ const axios = require("axios");
 let result = [];
 const userLocation = [38.7114690418, -9.14146889];
 const { checkRole } = require("../middlewares");
+const Date = require('../models/Date')
+
 
 /* GET home page */
 router.get("/", (req, res, next) => {
