@@ -47,7 +47,14 @@ router.get("/date-type-movie",(req, res, next) => {
     .then(finalOptions =>{
       res.render("date-type-movie", {finalOptions});
     })
+});
+router.get('/confirm-movie/:placeId', (req,res,next) => {
+Cinema.findById(req.params.placeId)
+console.log(req.params.placeId)
+.then(finalOption =>{
+  res.render("confirm-movie", {finalOption});
   
+})
 });
 router.get("/date-type-coffee", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
