@@ -389,4 +389,11 @@ router.get("/profile-page", checkRole("User"), (req, res, next) => {
   })
 });
 
+router.get("/:dateId/delete", (req, res, next) => {
+  Date.findByIdAndDelete(req.params.dateId)
+    .then(() => {
+      res.redirect("/profile-page")
+    })
+});
+
 module.exports = router;
