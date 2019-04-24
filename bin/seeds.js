@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Date = require("../models/Date");
 const Cinema = require("../models/Cinema");
-const Netflix = require("../models/Netflix")
+const Netflix = require("../models/Netflix");
 
 const bcryptSalt = 10;
 
