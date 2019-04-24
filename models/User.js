@@ -12,7 +12,8 @@ const userSchema = new Schema({
     role: {
       type:String,
       default: "User"
-    }
+    },
+    _date:{type: Schema.Types.ObjectId, ref: 'Date'}
 },
  {
   timestamps: {
