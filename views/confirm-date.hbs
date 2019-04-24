@@ -7,18 +7,13 @@
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="/images/cool_dog.jpeg" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{createdDate.date_location_name}}</h5>
-    <p class="card-text"><strong>Rating: </strong>{{createdDate.rating}}</p>
-    <p class="card-text"><strong>Cuisines: </strong>{{createdDate.cuisines}}</p>
-    <p class="card-text"><strong>Average cost for 2: </strong>{{createdDate.AvgCostforTwo}}€</p>
-    <p class="card-text"><strong>Adress: </strong>{{createdDate.address}}</p>
-    <a class="btn btn-danger" href="/profile-page">  SAVE MY DATE!  </a>
+    <h5 class="card-title">{{finalOption.[0].name}}</h5>
+    <p class="card-text"><strong>Rating: </strong>{{finalOption.[0].rating}}</p>
+    <p class="card-text"><strong>Cuisines: </strong>{{finalOption.[0].cuisines}}</p>
+    <p class="card-text"><strong>Average cost for 2: </strong>{{finalOption.[0].average_cost_for_two}}€</p>
+    <p class="card-text"><strong>Address: </strong>{{finalOption.[0].location.address}}</p>
+    <a class="btn btn-danger" href="/confirm-date">  SAVE MY DATE!  </a>
   </div>
 </div>
-
-
 <br>
-
-
-
 </div>
