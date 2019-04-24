@@ -377,25 +377,6 @@ router.get('/date-options/:placeId', (req,res,next) => {
 //   res.render("show-map");
 // });
 
-router.get("/confirm-date", (req, res, next) => {
-//check with POST//
-  Date.create({
-    date_location_name: result.name,
-    rating: result.rating,
-    address: result.location.address,
-    latitude: result.location.latitude,
-    longitude: result.location.longitude,
-    // rating: req.body.description,
-    cuisines: result.cuisines,
-    price_range: result.price_range,
-    AvgCostforTwo: result.average_cost_for_two,
-  })
-  .then(createdDate => {
-    console.log("Your date is ready, you are going to be redirected")
-    res.render("profile-page" ,{createdDate})
-  })
-  // res.render("confirm-date");
-});
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
