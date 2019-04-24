@@ -7,6 +7,7 @@ var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
 const Cinema = require('../models/Cinema')
+const Netflix = require('../models/Netflix')
 const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
