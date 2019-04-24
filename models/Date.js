@@ -12,6 +12,7 @@ const dateSchema = new Schema({
   address: String,
   price_range: String,
   AvgCostforTwo: Number,
+  _user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, {
   timestamps: {
     createdAt: 'created_at',

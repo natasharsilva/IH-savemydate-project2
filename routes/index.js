@@ -157,7 +157,7 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type:272, // 272- Beer Garden
+        establishment_type:292, // 292- Beer Garden
       }
     })
   ])
@@ -326,14 +326,19 @@ router.get('/date-options/:placeId', (req,res,next) => {
       address: finalOption[0].location.address,
       price_range: finalOption[0].price_range,
       AvgCostforTwo: finalOption[0].average_cost_for_two,
-      rating: finalOption[0].rating
+      rating: finalOption[0].rating,
+      _user: req.user
     })
     .then(createdDate => {
       console.log("Your date is ready ----> ",createdDate)
 
-      User.findByIdAndUpdate()
-
-      res.render('confirm-date' ,{createdDate})
+      User.findByIdAndUpdate(req.user._id, {
+        _date: createdDate
+      })
+        .then(() => {
+          // Redirect to the detail page of the date
+          res.render('confirm-date' ,{createdDate})
+      })
     })
   })
 
@@ -393,12 +398,11 @@ router.get("/confirm-date", (req, res, next) => {
 });
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
-  Date.find()
-  
-
-
-  
-  res.render("profile-page");
+  Date.find({ _user: req.user._id })
+  .then(userDates => {
+    console.log("The user dates are", userDates)
+    res.render("profile-page" ,{userDates})
+  })
 });
 
 module.exports = router;
