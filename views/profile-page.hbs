@@ -5,10 +5,17 @@
 
 <hr>
 
-<h2>My future Dates</h2>
+<h2>My Dates</h2>
+<br>
+<ul>
+{{#each userDates}}
+<b>Restaurant:</b> {{this.date_location_name}} <br>
+<b>Cuisines:</b> {{this.cuisines}} <br>
+<b>Average cost for two:</b> {{this.AvgCostforTwo}}€ <br>
+<b>Address:</b> {{this.address}} <br>
+<br><br>
+{{/each}}
+</ul>
 
 <a class="btn btn-info"  href="">Send details to my Date!</a>
 <br>
-<br>
-<h2>My Past Dates</h2>
-</div>
