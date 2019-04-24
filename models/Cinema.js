@@ -7,7 +7,6 @@ const cinemaSchema = new Schema({
   latitude: String,
   longitude: String,
   website: String,
-       
   },
  {
   timestamps: {
