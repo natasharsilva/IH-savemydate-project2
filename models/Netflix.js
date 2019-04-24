@@ -6,7 +6,7 @@ const netflixSchema = new Schema({
   year: String,
   director: String,
   duration: String,
-  genre: String,
+  genre: Array,
   rate: String    
   },
  {
@@ -16,5 +16,5 @@ const netflixSchema = new Schema({
   }
 });
 
-const Netflix = mongoose.model('Netlix', netflixSchema);
+const Netflix = mongoose.model('Netflix', netflixSchema);
 module.exports = Netflix;
