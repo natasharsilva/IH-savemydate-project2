@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const nodemailer = require("nodemailer")
 var result = [];
 var userLocation = [];
 const { checkRole } = require("../middlewares");
@@ -322,40 +323,6 @@ router.get('/date-options/:placeId', (req,res,next) => {
       })
 
 
-  
-
-//Trying to get variables from restaurant ID
-
-  //   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  // let zomatoApi = axios.create({
-  //   baseURL: "https://developers.zomato.com/api/v2.1/",
-  //   headers: { user_key: process.env.API_KEY }
-  // });
-
-  //   zomatoApi.get(`restaurant`, {
-  //     params: {
-  //       res_id: 8203558
-  //     }})
-  //   .then(
-  //     result => {
-  //     console.log("HEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYY",result.data.location)
-  //       const restPosition = [result.data.location.latitude,result.data.location.longitude]
-  //       console.log("Position-------------------->",restPosition)
-  //       new mapboxgl.Marker({
-  //         color: 'red'  
-  //       })
-  //         .setLngLat([restPosition[0],restPosition[1]])
-  //         .addTo(map)  
-  //     }
-      
-  //   ).catch(err => console.log("My Error ------>",err));
-    // res.render('show-map', result)  
-
-    //Commented out the 'showmap" for MVP purposes
-
-// router.get("/show-map", (req, res, next) => {
-//   res.render("show-map");
-// });
 
 router.get("/confirm-date", (req, res, next) => {
   Date.create({
@@ -396,5 +363,30 @@ router.get("/:dateId/delete", (req, res, next) => {
       res.redirect("/profile-page")
     })
 });
+
+//----------------------- NODEMAILER ----------------------
+
+router.post('/send-email', (req, res, next) => {
+  let { email, subject, message } = req.body;
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: GMAIL_USER,
+      pass: GMAIL_PASS
+    }
+  });
+  transporter.sendMail({
+    from: '"Date Saver 👻"',
+    to: email, 
+    subject: subject, 
+    text: message,
+    html: templates.templateExample(message),
+  })
+  .then(info => res.render('message', {email, subject, message, info}))
+  .catch(error => console.log(error));
+});
+
+
+
 
 module.exports = router;
