@@ -6,6 +6,9 @@ var result = [];
 var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
+const User = require('../models/User')
+var filteredOptions = [];
+var finalOption = [];
 
 
 /* GET home page */
@@ -66,7 +69,8 @@ router.get("/date-type-coffee", (req, res, next) => {
           location: restaurants[i].restaurant.location,
           cuisines: restaurants[i].restaurant.cuisines,
           price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
+          rating: restaurants[i].restaurant.user_rating.aggregate_rating
         });
       }
     }
@@ -140,7 +144,8 @@ router.get("/date-type-bar", (req, res, next) => {
           location: restaurants[i].restaurant.location,
           cuisines: restaurants[i].restaurant.cuisines,
           price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
+          rating: restaurants[i].restaurant.user_rating.aggregate_rating
         });
       }
     }
@@ -182,7 +187,8 @@ router.get("/date-type-club", (req, res, next) => {
           location: restaurants[i].restaurant.location,
           cuisines: restaurants[i].restaurant.cuisines,
           price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
+          rating: restaurants[i].restaurant.user_rating.aggregate_rating
         });
       }
     }
@@ -243,7 +249,8 @@ router.get("/date-type-dinner", (req, res, next) => {
           location: restaurants[i].restaurant.location,
           cuisines: restaurants[i].restaurant.cuisines,
           price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
+          rating: restaurants[i].restaurant.user_rating.aggregate_rating
         });
       }
     }
@@ -268,20 +275,42 @@ router.get("/price-range-2", (req, res, next) => {
 });
 
 router.get("/date-options", (req, res, next) => {
-      let finalOptions = result.slice(0,5);
-      console.log(finalOptions);
-  res.render("date-options", {finalOptions});
+      filteredOptions = result.slice(0,5);
+      console.log("These are my final options to the user -------->",filteredOptions);
+  res.render("date-options", {filteredOptions});
 });
 
 // // Date map detail page 
-router.get('/date-options/:dateId', (req,res,next) => {
-//   console.log("The date is", result.dateId, result.name)
-    // let mapShowResults = {
-    //   dateId: result.id,
-    //   position: result.location
-    // } 
-    // res.render('confirm-date', mapShowResults)})
-     res.render('confirm-date')})
+router.get('/date-options/:placeId', (req,res,next) => {
+  //  console.log("first checked - is it's not undefined OK", filteredOptions)
+
+   finalOption = filteredOptions.filter(element => element.id === req.params.placeId)
+   console.log("finalOption-------------------->", finalOption)
+   console.log("finalOption.rating-------------------->", finalOption[0].rating)
+  
+
+    Date.create({
+      date_location_name: finalOption[0].name,
+      rating: finalOption[0].rating,
+      address: finalOption[0].location.address,
+      cuisines: finalOption[0].cuisines,
+      latitude: finalOption[0].location.latitude,
+      longitude: finalOption[0].location.longitude,
+      address: finalOption[0].location.address,
+      price_range: finalOption[0].price_range,
+      AvgCostforTwo: finalOption[0].average_cost_for_two,
+      rating: finalOption[0].rating
+    })
+    .then(createdDate => {
+      console.log("Your date is ready ----> ",createdDate)
+
+      User.findByIdAndUpdate()
+
+      res.render('confirm-date' ,{createdDate})
+    })
+  })
+
+  
 
 //Trying to get variables from restaurant ID
 
@@ -318,22 +347,7 @@ router.get('/date-options/:dateId', (req,res,next) => {
 
 router.get("/confirm-date", (req, res, next) => {
 //check with POST//
-  Date.create({
-    
-    date_location_name: result.name,
-    rating: result.rating,
-    address: result.location.address,
-    latitude: result.location.latitude,
-    longitude: result.location.longitude,
-    // rating: req.body.description,
-    cuisines: result.cuisines,
-    price_range: result.price_range,
-    AvgCostforTwo: result.average_cost_for_two,
-  })
-  .then(createdDate => {
-    console.log("Your date is ready, you are going to be redirected")
-    res.render("profile-page" ,{createdDate})
-  })
+  
   // res.render("confirm-date");
 });
 
