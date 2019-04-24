@@ -5,4 +5,8 @@ module.exports = {
       else res.redirect("/auth/login")
     }
   }
-  }
+}
+
+// checkMovie: (dateType) => {
+//   if(req.user.dateType === dateType) next()
+// }

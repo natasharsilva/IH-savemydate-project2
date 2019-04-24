@@ -6,6 +6,7 @@ var result = [];
 var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
+const Cinema = require('../models/Cinema')
 const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
@@ -31,6 +32,30 @@ router.get("/date-type", (req, res, next) => {
   res.render("date-type");
 });
 
+// router.get('/', (req, res, next) => {
+//   Book.find()
+//     .then(books => {
+//       // Render "views/index.hbs" and give a variable "books" that is "books" (from then) 
+//       res.render('index', { 
+//         books: books, 
+//         message: req.query.msg
+//       })
+//     })
+// });
+router.get("/date-type-movie",(req, res, next) => {
+  Cinema.find()
+    .then(finalOptions =>{
+      res.render("date-type-movie", {finalOptions});
+    })
+});
+router.get('/confirm-movie/:placeId', (req,res,next) => {
+Cinema.findById(req.params.placeId)
+console.log(req.params.placeId)
+.then(finalOption =>{
+  res.render("confirm-movie", {finalOption});
+  
+})
+});
 router.get("/date-type-coffee", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
