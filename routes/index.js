@@ -279,9 +279,48 @@ router.get("/date-options", (req, res, next) => {
   res.render("date-options", {finalOptions});
 });
 
-router.get("/show-map", (req, res, next) => {
-  res.render("show-map");
-});
+// // Date map detail page 
+router.get('/date-options/:dateId', (req,res,next) => {
+//   console.log("The date is", result.dateId, result.name)
+    // let mapShowResults = {
+    //   dateId: result.id,
+    //   position: result.location
+    // } 
+    // res.render('confirm-date', mapShowResults)})
+     res.render('confirm-date')})
+
+//Trying to get variables from restaurant ID
+
+  //   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
+  // let zomatoApi = axios.create({
+  //   baseURL: "https://developers.zomato.com/api/v2.1/",
+  //   headers: { user_key: process.env.API_KEY }
+  // });
+
+  //   zomatoApi.get(`restaurant`, {
+  //     params: {
+  //       res_id: 8203558
+  //     }})
+  //   .then(
+  //     result => {
+  //     console.log("HEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYY",result.data.location)
+  //       const restPosition = [result.data.location.latitude,result.data.location.longitude]
+  //       console.log("Position-------------------->",restPosition)
+  //       new mapboxgl.Marker({
+  //         color: 'red'  
+  //       })
+  //         .setLngLat([restPosition[0],restPosition[1]])
+  //         .addTo(map)  
+  //     }
+      
+  //   ).catch(err => console.log("My Error ------>",err));
+    // res.render('show-map', result)  
+
+    //Commented out the 'showmap" for MVP purposes
+
+// router.get("/show-map", (req, res, next) => {
+//   res.render("show-map");
+// });
 
 router.get("/confirm-date", (req, res, next) => {
 //check with POST//
