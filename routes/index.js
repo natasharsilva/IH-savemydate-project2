@@ -32,16 +32,7 @@ router.get("/date-type", (req, res, next) => {
   res.render("date-type");
 });
 
-// router.get('/', (req, res, next) => {
-//   Book.find()
-//     .then(books => {
-//       // Render "views/index.hbs" and give a variable "books" that is "books" (from then) 
-//       res.render('index', { 
-//         books: books, 
-//         message: req.query.msg
-//       })
-//     })
-// });
+// -------------- START OF  MOVIE ROUTES ------------------------------------
 router.get("/date-type-movie",(req, res, next) => {
   Cinema.find()
     .then(finalOptions =>{
@@ -49,15 +40,20 @@ router.get("/date-type-movie",(req, res, next) => {
     })
 });
 
-router.get('/confirm-movie/:placeId', (req,res,next) => {
-Cinema.findById(req.params.placeId)
-.then (finalOption =>{
-  res.render("confirm-movie", {
-    finalOption
-  });
-  
-})
-});
+router.get("/confirm-movie/:placeId", (req, res, next) => {
+  Cinema.findByIdAndUpdate(req.params.placeId, {
+        _cinema: finalOption._id
+      })
+      .then(() => {
+        res.render("confirm-movie", {
+          finalOption
+        });
+      });
+    });
+
+// -------------- END MOVIE ROUTES ------------------------------------
+
+
 router.get("/date-type-coffee", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
@@ -379,11 +375,31 @@ router.get('/date-options/:placeId', (req,res,next) => {
 
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
-  Date.find({ _user: req.user._id })
-  .then(userDates => {
-    console.log("The user dates are", userDates)
-    res.render("profile-page" ,{userDates})
+  Promise.all([Date.find({ _user: req.user._id }),User.findById(req.user._id)])
+  .then(arrayOfResults => {
+    let userDates = arrayOfResults[0]
+    let cinemaDates = arrayOfResults[1]
+    console.log("WHAT IS HERE", cinemaDates)
+    // console.log("The user dates are", userDates)
+    res.render("profile-page" ,{
+      userDates,
+      cinemaDates
+    })
   })
 });
+// Promise.all([Book.find(), Editor.find()])
+// .then(arrayOfResults => {
+//   let books = arrayOfResults[0]
+//   let editors = arrayOfResults[1]
+//   // Render "views/index.hbs" and give a variable "books" that is "books" (from then) 
+//   res.render('index', { 
+//     books: books,
+//     editors: editors,
+//     message: req.query.msg
+//   })
+// })
+// })
+
+
 
 module.exports = router;

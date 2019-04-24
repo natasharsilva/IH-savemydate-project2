@@ -7,6 +7,7 @@ const cinemaSchema = new Schema({
   latitude: String,
   longitude: String,
   website: String,
+  _user: { type: Schema.Types.ObjectId, ref: 'User' }
        
   },
  {
