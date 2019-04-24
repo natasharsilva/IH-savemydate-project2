@@ -48,11 +48,13 @@ router.get("/date-type-movie",(req, res, next) => {
       res.render("date-type-movie", {finalOptions});
     })
 });
+
 router.get('/confirm-movie/:placeId', (req,res,next) => {
 Cinema.findById(req.params.placeId)
-console.log(req.params.placeId)
-.then(finalOption =>{
-  res.render("confirm-movie", {finalOption});
+.then (finalOption =>{
+  res.render("confirm-movie", {
+    finalOption
+  });
   
 })
 });
@@ -375,11 +377,6 @@ router.get('/date-options/:placeId', (req,res,next) => {
 //   res.render("show-map");
 // });
 
-router.get("/confirm-date", (req, res, next) => {
-//check with POST//
-
-  // res.render("confirm-date");
-});
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
