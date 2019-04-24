@@ -48,10 +48,13 @@ router.get("/date-type-movie",(req, res, next) => {
       res.render("date-type-movie", {finalOptions});
     })
 });
+
 router.get('/confirm-movie/:placeId', (req,res,next) => {
 Cinema.findById(req.params.placeId)
-  .then(finalOption =>{
-  res.render("confirm-movie", {finalOption});
+.then (finalOption =>{
+  res.render("confirm-movie", {
+    finalOption
+  });
   
 })
 });

@@ -1,15 +1,19 @@
 <div class="general-container">
-<ul class="h2"> Confirm the details of your date:</ul>
 
-<b>Restaurant:</b> {{finalOption.[0].name}}<br>
-<b>Rating:</b> {{finalOption.[0].rating}}<br>
-<b>Cuisines:</b> {{finalOption.[0].cuisines}}<br>
-<b>Average cost for two:</b> {{finalOption.[0].average_cost_for_two}}€<br>
-<b>Address:</b> {{finalOption.[0].location.address}}<br>
-</ul>
 
+<ul class="h2"> Confirm the details of your date</ul>
+
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="/images/cool_dog.jpeg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{finalOption.[0].name}}</h5>
+    <p class="card-text"><strong>Rating: </strong>{{finalOption.[0].rating}}</p>
+    <p class="card-text"><strong>Cuisines: </strong>{{finalOption.[0].cuisines}}</p>
+    <p class="card-text"><strong>Average cost for 2: </strong>{{finalOption.[0].average_cost_for_two}}€</p>
+    <p class="card-text"><strong>Address: </strong>{{finalOption.[0].location.address}}</p>
+    <a class="btn btn-danger" href="/confirm-date">  SAVE MY DATE!  </a>
+  </div>
+</div>
 <br>
-
-<a class="btn btn-danger" href="/confirm-date">  SAVE MY DATE!  </a>
-
 </div>
