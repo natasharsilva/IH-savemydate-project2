@@ -16,5 +16,5 @@ const netflixSchema = new Schema({
   }
 });
 
-const Netflix = mongoose.model('Cinema', netflixSchema);
+const Netflix = mongoose.model('Netlix', netflixSchema);
 module.exports = Netflix;

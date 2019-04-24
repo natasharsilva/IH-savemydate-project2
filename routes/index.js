@@ -7,7 +7,6 @@ var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
 const Cinema = require('../models/Cinema')
-const Netflix = require('../models/Netflix')
 const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
@@ -41,16 +40,22 @@ router.get("/date-type-movie",(req, res, next) => {
     })
 });
 
-router.get("/confirm-movie/:placeId", (req, res, next) => {
-  Cinema.findByIdAndUpdate(req.params.placeId, {
-        _cinema: finalOption._id
-      })
-      .then(() => {
-        res.render("confirm-movie", {
-          finalOption
-        });
-      });
-    });
+router.get('/confirm-movie/:placeId', (req,res,next) => {
+Cinema.findById(req.params.placeId)
+.then (finalOption =>{
+  Date.create({
+    date_location_name: finalOption.name,
+    address: finalOption.address,
+    _user: req.user,
+
+
+  })
+  res.render("confirm-movie", {
+    finalOption
+  });
+})
+});
+
 
 // -------------- END MOVIE ROUTES ------------------------------------
 
@@ -312,8 +317,33 @@ router.get('/date-options/:placeId', (req,res,next) => {
    console.log("finalOption-------------------->", finalOption)
    console.log("finalOption.rating-------------------->", finalOption[0].rating)
   
-   res.render("confirm-date" ,{finalOption})
+
+    Date.create({
+      date_location_name: finalOption[0].name,
+      rating: finalOption[0].rating,
+      address: finalOption[0].location.address,
+      cuisines: finalOption[0].cuisines,
+      latitude: finalOption[0].location.latitude,
+      longitude: finalOption[0].location.longitude,
+      address: finalOption[0].location.address,
+      price_range: finalOption[0].price_range,
+      AvgCostforTwo: finalOption[0].average_cost_for_two,
+      rating: finalOption[0].rating,
+      _user: req.user,
+  
     })
+    .then(createdDate => {
+      console.log("Your date is ready ----> ",createdDate)
+
+      User.findByIdAndUpdate(req.user._id, {
+        _date: createdDate
+      })
+        .then(() => {
+          // Redirect to the detail page of the date
+          res.render('confirm-date' ,{createdDate})
+      })
+    })
+  })
 
   
 
@@ -350,60 +380,12 @@ router.get('/date-options/:placeId', (req,res,next) => {
 //   res.render("show-map");
 // });
 
-router.get("/confirm-date", (req, res, next) => {
-  Date.create({
-    date_location_name: finalOption[0].name,
-    rating: finalOption[0].rating,
-    address: finalOption[0].location.address,
-    cuisines: finalOption[0].cuisines,
-    latitude: finalOption[0].location.latitude,
-    longitude: finalOption[0].location.longitude,
-    address: finalOption[0].location.address,
-    price_range: finalOption[0].price_range,
-    AvgCostforTwo: finalOption[0].average_cost_for_two,
-    rating: finalOption[0].rating,
-    _user: req.user
-  })
-  .then(createdDate => {
-    console.log("Your date is ready ----> ",createdDate)
-
-    User.findByIdAndUpdate(req.user._id, {
-      _date: createdDate
-    })
-      .then(() => {
-        // Redirect to the detail page of the date
-        res.redirect("profile-page")
-    })
-  })
-  })
-  // res.render("confirm-date")
-
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
-  Promise.all([Date.find({ _user: req.user._id }),User.findById(req.user._id)])
-  .then(arrayOfResults => {
-    let userDates = arrayOfResults[0]
-    let cinemaDates = arrayOfResults[1]
-    console.log("WHAT IS HERE", cinemaDates)
-    // console.log("The user dates are", userDates)
-    res.render("profile-page" ,{
-      userDates,
-      cinemaDates
-    })
+  Date.find({ _user: req.user._id })
+  .then(userDates => {
+    console.log("The user dates are", userDates)
+    res.render("profile-page" ,{userDates})
   })
 });
-// Promise.all([Book.find(), Editor.find()])
-// .then(arrayOfResults => {
-//   let books = arrayOfResults[0]
-//   let editors = arrayOfResults[1]
-//   // Render "views/index.hbs" and give a variable "books" that is "books" (from then) 
-//   res.render('index', { 
-//     books: books,
-//     editors: editors,
-//     message: req.query.msg
-//   })
-// })
-// })
-
-
 
 module.exports = router;
