@@ -13,7 +13,11 @@ const userSchema = new Schema({
       type:String,
       default: "User"
     },
-    _date:{type: Schema.Types.ObjectId, ref: 'Date'}
+    _date:{type: Schema.Types.ObjectId, ref: 'Date'},
+    // dateType: {
+    //   type: String,
+    //   default: "Movie",
+    // }
 },
  {
   timestamps: {

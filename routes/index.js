@@ -6,6 +6,7 @@ var result = [];
 var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
+const Cinema = require('../models/Cinema')
 const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
@@ -31,6 +32,30 @@ router.get("/date-type", (req, res, next) => {
   res.render("date-type");
 });
 
+// router.get('/', (req, res, next) => {
+//   Book.find()
+//     .then(books => {
+//       // Render "views/index.hbs" and give a variable "books" that is "books" (from then) 
+//       res.render('index', { 
+//         books: books, 
+//         message: req.query.msg
+//       })
+//     })
+// });
+router.get("/date-type-movie",(req, res, next) => {
+  Cinema.find()
+    .then(finalOptions =>{
+      res.render("date-type-movie", {finalOptions});
+    })
+});
+router.get('/confirm-movie/:placeId', (req,res,next) => {
+Cinema.findById(req.params.placeId)
+console.log(req.params.placeId)
+.then(finalOption =>{
+  res.render("confirm-movie", {finalOption});
+  
+})
+});
 router.get("/date-type-coffee", (req, res, next) => {
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
@@ -130,7 +155,7 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type:272, // 272- Beer Garden
+        establishment_type:292, // 292- Beer Garden
       }
     })
   ])
@@ -299,14 +324,19 @@ router.get('/date-options/:placeId', (req,res,next) => {
       address: finalOption[0].location.address,
       price_range: finalOption[0].price_range,
       AvgCostforTwo: finalOption[0].average_cost_for_two,
-      rating: finalOption[0].rating
+      rating: finalOption[0].rating,
+      _user: req.user
     })
     .then(createdDate => {
       console.log("Your date is ready ----> ",createdDate)
-      console.log("req.user ----> ",req.user)
 
-      res.render('confirm-date' ,{createdDate})
-      
+      User.findByIdAndUpdate(req.user._id, {
+        _date: createdDate
+      })
+        .then(() => {
+          // Redirect to the detail page of the date
+          res.render('confirm-date' ,{createdDate})
+      })
     })
   })
 
@@ -347,16 +377,16 @@ router.get('/date-options/:placeId', (req,res,next) => {
 
 router.get("/confirm-date", (req, res, next) => {
 //check with POST//
-// res.render("confirm-date");
+
+  // res.render("confirm-date");
 });
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
-  Date.find()
-  
-
-
-  
-  res.render("profile-page");
+  Date.find({ _user: req.user._id })
+  .then(userDates => {
+    console.log("The user dates are", userDates)
+    res.render("profile-page" ,{userDates})
+  })
 });
 
 module.exports = router;
