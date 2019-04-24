@@ -1,5 +1,55 @@
-<div class="general-container">
-    <h3><a href="/current-location">Are you already on your date?</a></h3>
+ <div class="general-container">
+  <h1 class="text-center">Where are you right now?</h1><br>
+  <h5 class="text-center">Don't worry about the traffic: we'll only find places near you!</h5>
+  <br>
+   <form action="/search" method="get">
+    {{!-- <input type="text" class="form-control" name="address" placeholder="Type your address"> --}}
+    <input type="hidden" name="lat">
+    <input type="hidden" name="lng">
+    <button id="get-user-location" class="btn btn-outline-primary">Get your location</button>
+    <button type="submit" class="btn btn-primary">Search</button>
+   </form>
+    <br>
+      <div id="map" style="width:100%;height:300px"></div>
+
+    {{!-- <br><br>
+    Tell us your date details!<input type="datetime" name="datetime" id="datetime">
     <br><br>
-    <h3><a href="/restaurant-user-form">Are you planning your date?</a></h3>
+    <a class="btn btn-outline-dark" href="/date-type">Continue planning my date!</a> --}}
+
 </div>
+
+ 
+<script>
+
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybGFyc21lbmRlcyIsImEiOiJjanVsMWZtdjMwYTRvM3lvOGp5aWZ6cnJtIn0.xv9rm--YRNKdTJGHFYzi0g';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-79.4512, 43.6568],
+    zoom: 13
+  });
+
+  map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl
+  }));
+
+  document.getElementById("get-user-location").onclick = function (event) {
+    event.preventDefault() // To don´t submit the form
+    console.log("Button clicked")
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position.coords.latitude, position.coords.longitude)
+        let lat = position.coords.latitude
+        let lng = position.coords.longitude
+        document.querySelector("input[name=lat]").value = lat
+        document.querySelector("input[name=lng]").value = lng
+        map.setCenter([lng, lat])
+        map.setZoom(15)
+        // TODO: add a marker 
+      });
+    }
+  }
+</script>

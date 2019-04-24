@@ -10,19 +10,12 @@ const Date = require('../models/Date')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
+  userLocation = []
   res.render("index");
 });
 
 router.get("/location", (req, res, next) => {
   res.render("location");
-});
-
-router.get("/current-location", (req, res, next) => {
-  res.render("current-location");
-});
-
-router.get("/restaurant-user-form", (req, res, next) => {
-  res.render("restaurant-user-form");
 });
 
 router.get("/search/", (req, res, next) => {
@@ -77,7 +70,7 @@ router.get("/date-type-coffee", (req, res, next) => {
         });
       }
     }
-    console.log("----------------CAFES------------", result);
+    console.log("----------------CAFES------------", result.length);
     // console.log(result.map(x => x.name))
     res.redirect("price-range");
   });
@@ -155,11 +148,6 @@ router.get("/date-type-bar", (req, res, next) => {
     // console.log(result.map(x => x.name)) //this turns an array into a string
     res.render("price-range");
   })
-
-
-    console.log("----------------BARS------------", result.length);
-    // console.log(result.map(x => x.name))
-    res.redirect("price-range");
 });
 
 router.get("/date-type-club", (req, res, next) => {
