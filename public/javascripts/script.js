@@ -32,31 +32,6 @@ var map = new mapboxgl.Map({
   zoom: 8 // starting zoom
 })
 
-<<<<<<< HEAD
-
-// Add zoom and rotation controls to the map.
-var geolocate = new mapboxgl.GeolocateControl();
-map.addControl(geolocate);
-geolocate.on('geolocate', function(e) {
-  var lon = e.coords.longitude;
-  var lat = e.coords.latitude
-  var position = [lon, lat];
-  console.log(position);
-});
-
-var marker = new mapboxgl.Marker({
-  draggable: true,
-  color: 'red'
-})
-  .setLngLat([position])
-  .addTo(map);
-
-
-
-// module.exports.lon = lon;
-// module.exports.lat = lat;
-
-=======
 var marker = new mapboxgl.Marker({
   draggable: true,
   color:"yellow"
@@ -81,7 +56,6 @@ geolocate.on('geolocate', function(e) {
       return
 });
 
->>>>>>> 9c4004414f2009cc66167ee7417e33c3b7b6b590
 // var x = document.getElementById("demo");
 // var userLocation = []
 

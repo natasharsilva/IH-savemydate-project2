@@ -272,8 +272,7 @@ router.get("/price-range-2", (req, res, next) => {
 });
 
 router.get("/date-options", (req, res, next) => {
-  console.log(result)
-  res.render("date-options");
+  res.render("date-options", { result });
 });
 
 router.get("/show-map", (req, res, next) => {
