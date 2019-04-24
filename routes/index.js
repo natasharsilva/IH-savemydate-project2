@@ -7,6 +7,7 @@ var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
 const Cinema = require('../models/Cinema')
+const Netflix = require('../models/Netflix')
 const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
@@ -48,7 +49,6 @@ Cinema.findById(req.params.placeId)
     address: finalOption.address,
     _user: req.user,
 
-
   })
   res.render("confirm-movie", {
     finalOption
@@ -56,8 +56,44 @@ Cinema.findById(req.params.placeId)
 })
 });
 
-
 // -------------- END MOVIE ROUTES ------------------------------------
+
+
+// -------------- BEGIN OF NETFLIX ROUTES ------------------------------------
+
+router.get("/date-type-netflix",(req, res, next) => {
+  Netflix.find()
+    .then(allOptions =>{
+      let random_index = Math.floor(Math.random() * allOptions.length);
+      let finalOptions = allOptions[random_index];
+      console.log(finalOptions)
+      res.render("date-type-netflix", {finalOptions});
+    })
+});
+
+router.get('/confirm-netflix/:placeId', (req,res,next) => {
+  Netflix.findById(req.params.placeId)
+
+.then (finalOption =>{
+  console.log(finalOption)
+  Netflix.create({
+    date_location_name: 'The coziness of home',
+    address: finalOption.address,
+    title: finalOption.title,
+    year: finalOption.year,
+    director: finalOption.director,
+    duration: finalOption.duration,
+    genre: finalOption.genre,
+    rate: finalOption.rate,
+    _user: req.user
+  })
+  res.render("confirm-netflix", {
+    finalOption
+  });
+})
+});
+
+// -------------- END NETFLIX ROUTES ------------------------------------
 
 
 router.get("/date-type-coffee", (req, res, next) => {
