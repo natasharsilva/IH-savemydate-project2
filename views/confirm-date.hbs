@@ -1,15 +1,24 @@
 <div class="general-container">
-<ul class="h2"> Confirm the details of your date:</ul>
 
-<li>Restaurant Name: {{createdDate.date_location_name}}</li>
-<li>Rating: {{createdDate.rating}}</li>
-<li>Cuisines:{{createdDate.cuisines}} </li>
-<li>Average cost for 2: {{createdDate.AvgCostforTwo}}€</li>
-<li>Adress: {{createdDate.address}}</li>
-</ul>
+<ul class="h2"> Confirm the details of your date</ul>
+
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="/images/cool_dog.jpeg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{createdDate.date_location_name}}</h5>
+    <p class="card-text"><strong>Rating: </strong>{{createdDate.rating}}</p>
+    <p class="card-text"><strong>Cuisines: </strong>{{createdDate.cuisines}}</p>
+    <p class="card-text"><strong>Average cost for 2: </strong>{{createdDate.AvgCostforTwo}}€</p>
+    <p class="card-text"><strong>Adress: </strong>{{createdDate.address}}</p>
+    <a class="btn btn-danger" href="/profile-page">  SAVE MY DATE!  </a>
+  </div>
+</div>
+
+
 
 <br>
 
-<a class="btn btn-danger" href="/profile-page">  SAVE MY DATE!  </a>
+
 
 </div>
