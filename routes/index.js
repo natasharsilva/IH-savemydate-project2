@@ -2,8 +2,8 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-let result = [];
-const userLocation = [38.7114690418, -9.14146889];
+var result = [];
+var userLocation = [];
 const { checkRole } = require("../middlewares");
 
 /* GET home page */
@@ -22,6 +22,12 @@ router.get("/current-location", (req, res, next) => {
 router.get("/restaurant-user-form", (req, res, next) => {
   res.render("restaurant-user-form");
 });
+
+router.get("/search/", (req, res, next) => {
+  userLocation.push(req.query.lat, req.query.lng)
+  console.log(userLocation);
+  res.redirect("date-type")
+})
 
 router.get("/date-type", (req, res, next) => {
   res.render("date-type");
