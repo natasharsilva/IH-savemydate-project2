@@ -28,7 +28,6 @@ accessToken: mapboxgl.accessToken
 }), 'top-left');
 
 
-
 var x = document.getElementById("demo");
 var userLocation = []
 
@@ -46,7 +45,20 @@ function showPosition(position) {
   return userLocation
 }
 
-
+var marker = new mapboxgl.Marker({
+    draggable: false,
+     color:"red"
+     })
+     .setLngLat(userLocation)
+     .addTo(map);
+     
+     function onDragEnd() {
+     var lngLat = marker.getLngLat();
+     coordinates.style.display = 'block';
+     coordinates.innerHTML = 'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+     }
+     
+     marker.on('dragend', onDragEnd);
 
 </script>
 
