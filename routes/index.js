@@ -352,7 +352,7 @@ router.get("/confirm-date", (req, res, next) => {
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
   .then(userDates => {
-    console.log("The user dates are", userDates)
+    // console.log("The user dates are", userDates)
     res.render("profile-page" ,{userDates: userDates, user: req.user})
   })
 });
@@ -367,25 +367,24 @@ router.get("/:dateId/delete", (req, res, next) => {
 //----------------------- NODEMAILER ----------------------
 
 router.post('/send-email', (req, res, next) => {
-  let { email, subject, message } = req.body;
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: GMAIL_USER,
-      pass: GMAIL_PASS
+      user: "savemydate1@gmail.com",
+      pass: "savemydate123"
     }
   });
   transporter.sendMail({
     from: '"Date Saver 👻"',
-    to: email, 
-    subject: subject, 
-    text: message,
-    html: templates.templateExample(message),
+    to: req.body.email, 
+    subject: "You got a date!", 
+    text: "TESTE",
+    // html: templates.templateExample(message),
   })
-  .then(info => res.render('message', {email, subject, message, info}))
-  .catch(error => console.log(error));
-});
-
+  .then(() => {
+    res.redirect("/profile-page")
+  })
+})
 
 
 
