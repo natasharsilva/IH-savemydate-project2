@@ -15,11 +15,19 @@
 <b>Address:</b> {{this.address}} <br>
 <br>
 <a href="/{{this._id}}/delete" class="btn btn-outline-danger">Delete</a>
+
+
+<form action="/send-email" method="post">
+  <label for="">Email</label>
+  <input type="email" name="email" id="">
+<button class="btn btn-info" type="submit">Send details to my Date!</button>
+</form>
+
+
 <br><br>
 {{/each}}
 
 
 </ul>
 
-<a class="btn btn-info"  href="">Send details to my Date!</a>
 <br>
