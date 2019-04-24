@@ -1,15 +1,15 @@
 <div class="general-container">
 <ul class="h2"> Confirm the details of your date:</ul>
 
-<li>Restaurant: {{createdDate.date_location_name}}</li>
-<li>Rating: {{createdDate.rating}}</li>
-<li>Cuisines:{{createdDate.cuisines}} </li>
-<li>Average cost for two: {{createdDate.AvgCostforTwo}}€</li>
-<li>Address: {{createdDate.address}}</li>
+<b>Restaurant:</b> {{finalOption.[0].name}}<br>
+<b>Rating:</b> {{finalOption.[0].rating}}<br>
+<b>Cuisines:</b> {{finalOption.[0].cuisines}}<br>
+<b>Average cost for two:</b> {{finalOption.[0].average_cost_for_two}}€<br>
+<b>Address:</b> {{finalOption.[0].location.address}}<br>
 </ul>
 
 <br>
 
-<a class="btn btn-danger" href="/profile-page">  SAVE MY DATE!  </a>
+<a class="btn btn-danger" href="/confirm-date">  SAVE MY DATE!  </a>
 
 </div>

@@ -50,8 +50,7 @@ router.get("/date-type-movie",(req, res, next) => {
 });
 router.get('/confirm-movie/:placeId', (req,res,next) => {
 Cinema.findById(req.params.placeId)
-console.log(req.params.placeId)
-.then(finalOption =>{
+  .then(finalOption =>{
   res.render("confirm-movie", {finalOption});
   
 })
@@ -313,32 +312,8 @@ router.get('/date-options/:placeId', (req,res,next) => {
    console.log("finalOption-------------------->", finalOption)
    console.log("finalOption.rating-------------------->", finalOption[0].rating)
   
-
-    Date.create({
-      date_location_name: finalOption[0].name,
-      rating: finalOption[0].rating,
-      address: finalOption[0].location.address,
-      cuisines: finalOption[0].cuisines,
-      latitude: finalOption[0].location.latitude,
-      longitude: finalOption[0].location.longitude,
-      address: finalOption[0].location.address,
-      price_range: finalOption[0].price_range,
-      AvgCostforTwo: finalOption[0].average_cost_for_two,
-      rating: finalOption[0].rating,
-      _user: req.user
+   res.render("confirm-date" ,{finalOption})
     })
-    .then(createdDate => {
-      console.log("Your date is ready ----> ",createdDate)
-
-      User.findByIdAndUpdate(req.user._id, {
-        _date: createdDate
-      })
-        .then(() => {
-          // Redirect to the detail page of the date
-          res.render('confirm-date' ,{createdDate})
-      })
-    })
-  })
 
   
 
@@ -376,24 +351,32 @@ router.get('/date-options/:placeId', (req,res,next) => {
 // });
 
 router.get("/confirm-date", (req, res, next) => {
-//check with POST//
   Date.create({
-    date_location_name: result.name,
-    rating: result.rating,
-    address: result.location.address,
-    latitude: result.location.latitude,
-    longitude: result.location.longitude,
-    // rating: req.body.description,
-    cuisines: result.cuisines,
-    price_range: result.price_range,
-    AvgCostforTwo: result.average_cost_for_two,
+    date_location_name: finalOption[0].name,
+    rating: finalOption[0].rating,
+    address: finalOption[0].location.address,
+    cuisines: finalOption[0].cuisines,
+    latitude: finalOption[0].location.latitude,
+    longitude: finalOption[0].location.longitude,
+    address: finalOption[0].location.address,
+    price_range: finalOption[0].price_range,
+    AvgCostforTwo: finalOption[0].average_cost_for_two,
+    rating: finalOption[0].rating,
+    _user: req.user
   })
   .then(createdDate => {
-    console.log("Your date is ready, you are going to be redirected")
-    res.render("profile-page" ,{createdDate})
+    console.log("Your date is ready ----> ",createdDate)
+
+    User.findByIdAndUpdate(req.user._id, {
+      _date: createdDate
+    })
+      .then(() => {
+        // Redirect to the detail page of the date
+        res.redirect("profile-page")
+    })
   })
-  // res.render("confirm-date");
-});
+  })
+  // res.render("confirm-date")
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
