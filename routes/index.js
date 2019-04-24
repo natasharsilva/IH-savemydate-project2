@@ -45,7 +45,7 @@ router.get("/date-type", (req, res, next) => {
 router.get("/date-type-movie",(req, res, next) => {
   Cinema.find()
     .then(finalOptions =>{
-      res.render("date-options", {finalOptions});
+      res.render("date-type-movie", {finalOptions});
     })
   
 });
