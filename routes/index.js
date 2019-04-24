@@ -292,7 +292,6 @@ router.get("/show-map", (req, res, next) => {
 router.get("/confirm-date", (req, res, next) => {
 //check with POST//
   Date.create({
-    
     date_location_name: result.name,
     rating: result.rating,
     address: result.location.address,
