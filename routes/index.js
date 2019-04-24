@@ -6,7 +6,7 @@ var result = [];
 var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
-
+let finalOptions = []
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -126,7 +126,7 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-        establishment_type:272, // 272- Beer Garden
+        establishment_type:292, // 292- Beer Garden
       }
     })
   ])
@@ -268,9 +268,15 @@ router.get("/price-range-2", (req, res, next) => {
 });
 
 router.get("/date-options", (req, res, next) => {
-      let finalOptions = result.slice(0,5);
-      console.log(finalOptions);
+      finalOptions = result.slice(0,5);
+      console.log("THESE ARE THE OPTIONS", finalOptions);
   res.render("date-options", {finalOptions});
+});
+
+router.get("/date-options/:placeId", (req, res, next) => {
+  finalOption = finalOptions.filter(element => element.id === req.params.placeId)
+  console.log("THIS IS THE FINAL OPTION", finalOption);
+res.render("date-options", {finalOption});
 });
 
 router.get("/show-map", (req, res, next) => {
@@ -298,7 +304,7 @@ router.get("/confirm-date", (req, res, next) => {
 });
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
-  Date.find()
+  //User.find()
   
 
 
