@@ -2,14 +2,15 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-let result = [];
-const userLocation = [38.7114690418, -9.14146889];
+var result = [];
+var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
 
 
 /* GET home page */
 router.get("/", (req, res, next) => {
+  userLocation = []
   res.render("index");
 });
 
@@ -17,13 +18,11 @@ router.get("/location", (req, res, next) => {
   res.render("location");
 });
 
-router.get("/current-location", (req, res, next) => {
-  res.render("current-location");
-});
-
-router.get("/restaurant-user-form", (req, res, next) => {
-  res.render("restaurant-user-form");
-});
+router.get("/search/", (req, res, next) => {
+  userLocation.push(req.query.lat, req.query.lng)
+  console.log(userLocation);
+  res.redirect("date-type")
+})
 
 router.get("/date-type", (req, res, next) => {
   res.render("date-type");
@@ -71,7 +70,7 @@ router.get("/date-type-coffee", (req, res, next) => {
         });
       }
     }
-    console.log("----------------CAFES------------", result);
+    console.log("----------------CAFES------------", result.length);
     // console.log(result.map(x => x.name))
     res.redirect("price-range");
   });
@@ -149,11 +148,6 @@ router.get("/date-type-bar", (req, res, next) => {
     // console.log(result.map(x => x.name)) //this turns an array into a string
     res.render("price-range");
   })
-
-
-    console.log("----------------BARS------------", result.length);
-    // console.log(result.map(x => x.name))
-    res.redirect("price-range");
 });
 
 router.get("/date-type-club", (req, res, next) => {
@@ -325,8 +319,12 @@ router.get('/date-options/:dateId', (req,res,next) => {
 router.get("/confirm-date", (req, res, next) => {
 //check with POST//
   Date.create({
+    
     date_location_name: result.name,
-    location: result.location,
+    rating: result.rating,
+    address: result.location.address,
+    latitude: result.location.latitude,
+    longitude: result.location.longitude,
     // rating: req.body.description,
     cuisines: result.cuisines,
     price_range: result.price_range,
@@ -334,13 +332,13 @@ router.get("/confirm-date", (req, res, next) => {
   })
   .then(createdDate => {
     console.log("Your date is ready, you are going to be redirected")
-    res.redirect("profile-page")
+    res.render("profile-page" ,{createdDate})
   })
   // res.render("confirm-date");
 });
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
-  
+  Date.find()
   
 
 

@@ -7,8 +7,11 @@ const dateSchema = new Schema({
   date_location_name: String,
   rating: Number,
   cuisines: String,
+  latitude: Number,
+  longitude: Number,
+  address: String,
   price_range: String,
-  AvgCostforTwo: Number
+  AvgCostforTwo: Number,
 }, {
   timestamps: {
     createdAt: 'created_at',
