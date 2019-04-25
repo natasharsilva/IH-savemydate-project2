@@ -7022,7 +7022,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 body {
   padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
@@ -7061,6 +7061,15 @@ i:hover {
 .btn-call-to-action {
   font-size: 20px; }
 
+#nav-logo {
+  height: 40px; }
+
+nav {
+  font-size: 20px; }
+
+.navbar-toggler {
+  color: white; }
+
 @media (max-width: 750px) {
   .general-container {
     margin: 0 auto;
@@ -7069,6 +7078,8 @@ i:hover {
     padding: 0; }
   i {
     padding: 15%;
-    margin: 15%; } }
+    margin: 15%; }
+  body {
+    font: 24px "Lucida Grande", Helvetica, Arial, sans-serif; } }
 
 /*# sourceMappingURL=style.css.map */

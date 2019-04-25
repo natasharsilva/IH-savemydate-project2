@@ -49,7 +49,9 @@ router.post("/signup", (req, res, next) => {
 
     newUser.save()
     .then(() => {
-      res.redirect("/");
+      req.login(newUser, () => {
+        res.redirect("/");
+      });
     })
     .catch(err => {
       res.render("auth/signup", { message: "Something went wrong" });
