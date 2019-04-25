@@ -398,17 +398,17 @@ router.post('/send-email', (req, res, next) => {
   
 });
   transporter.sendMail({
-    from: '"Date Saver 👻"',
+    from: '"Date Saver 👻" ',
     to: req.body.email, 
     subject: "You got a date!", 
     text: 
     ` Check your date details below!
     Location:  ${dateDetails.date_location_name}
     Address:  ${dateDetails.address}
+    Time: ${req.body.dateTime}
     
     Have fun !
     `,
-  
   })
 })
 .then(() => {

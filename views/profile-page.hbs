@@ -22,12 +22,13 @@
 <b>Director:</b> {{this.director}} <br>
 {{/if}}
 <br>
+<a href="/location" class="btn btn-outline-success">Save another Date!</a>
 <a href="/{{this._id}}/delete" class="btn btn-outline-danger">Delete</a>
 
-
 <form action="/send-email" method="post">
-  <label for="">Email</label>
-  <input type="email" name="email" id="">
+  <label for=""><b>Email:</b></label>
+  <input type="email" name="email" id="" placeholder="Your date e-mail here">
+  <input type="time" name="dateTime" value="">
   <input type="hidden" value="{{this._id}}" name="dateId">
 <button class="btn btn-info" type="submit">Send details to my Date!</button>
 </form>

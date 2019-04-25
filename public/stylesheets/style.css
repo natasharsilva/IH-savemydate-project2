@@ -7036,21 +7036,6 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-a {
-  color: #00B7FF; }
-
-i {
-  color: #C11F43;
-  border: 3px solid #C11F43;
-  border-radius: 50px;
-  padding: 10%;
-  margin: 5%; }
-
-i:hover {
-  background-color: #C11F43;
-  color: white;
-  cursor: pointer; }
-
 .general-container {
   margin: 0 auto;
   width: 100%;
@@ -7093,11 +7078,13 @@ nav {
     margin: 0 auto;
     width: 100%;
     padding: 0; }
-  i {
-    padding: 15%;
-    margin: 15%; }
   body {
     padding: 0;
-    font-size: 24px; } }
+    font-size: 22px; }
+  .icons-type-date {
+    width: 100px; }
+  .material-icons.md-48 {
+    font-size: 48px;
+    width: 200px; } }
 
 /*# sourceMappingURL=style.css.map */
