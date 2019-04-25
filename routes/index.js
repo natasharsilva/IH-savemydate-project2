@@ -2,11 +2,13 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const nodemailer = require("nodemailer")
 var result = [];
 var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
 const Cinema = require('../models/Cinema')
+const Netflix = require('../models/Netflix')
 const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
@@ -48,7 +50,6 @@ Cinema.findById(req.params.placeId)
     address: finalOption.address,
     _user: req.user,
 
-
   })
   res.render("confirm-movie", {
     finalOption
@@ -56,8 +57,44 @@ Cinema.findById(req.params.placeId)
 })
 });
 
-
 // -------------- END MOVIE ROUTES ------------------------------------
+
+
+// -------------- BEGIN OF NETFLIX ROUTES ------------------------------------
+
+router.get("/date-type-netflix",(req, res, next) => {
+  Netflix.find()
+    .then(allOptions =>{
+      let random_index = Math.floor(Math.random() * allOptions.length);
+      let finalOptions = allOptions[random_index];
+      console.log(finalOptions)
+      res.render("date-type-netflix", {finalOptions});
+    })
+});
+
+router.get('/confirm-netflix/:placeId', (req,res,next) => {
+  Netflix.findById(req.params.placeId)
+
+.then (finalOption =>{
+  console.log(finalOption)
+  Netflix.create({
+    date_location_name: 'The coziness of home',
+    address: finalOption.address,
+    title: finalOption.title,
+    year: finalOption.year,
+    director: finalOption.director,
+    duration: finalOption.duration,
+    genre: finalOption.genre,
+    rate: finalOption.rate,
+    _user: req.user
+  })
+  res.render("confirm-netflix", {
+    finalOption
+  });
+})
+});
+
+// -------------- END NETFLIX ROUTES ------------------------------------
 
 
 router.get("/date-type-coffee", (req, res, next) => {
@@ -322,40 +359,6 @@ router.get('/date-options/:placeId', (req,res,next) => {
       })
 
 
-  
-
-//Trying to get variables from restaurant ID
-
-  //   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  // let zomatoApi = axios.create({
-  //   baseURL: "https://developers.zomato.com/api/v2.1/",
-  //   headers: { user_key: process.env.API_KEY }
-  // });
-
-  //   zomatoApi.get(`restaurant`, {
-  //     params: {
-  //       res_id: 8203558
-  //     }})
-  //   .then(
-  //     result => {
-  //     console.log("HEEEEEEEEEEEEEEEEEEEEEYYYYYYYYYYYY",result.data.location)
-  //       const restPosition = [result.data.location.latitude,result.data.location.longitude]
-  //       console.log("Position-------------------->",restPosition)
-  //       new mapboxgl.Marker({
-  //         color: 'red'  
-  //       })
-  //         .setLngLat([restPosition[0],restPosition[1]])
-  //         .addTo(map)  
-  //     }
-      
-  //   ).catch(err => console.log("My Error ------>",err));
-    // res.render('show-map', result)  
-
-    //Commented out the 'showmap" for MVP purposes
-
-// router.get("/show-map", (req, res, next) => {
-//   res.render("show-map");
-// });
 
 router.get("/confirm-date", (req, res, next) => {
   Date.create({
@@ -385,7 +388,7 @@ router.get("/confirm-date", (req, res, next) => {
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
   .then(userDates => {
-    console.log("The user dates are", userDates)
+    // console.log("The user dates are", userDates)
     res.render("profile-page" ,{userDates: userDates, user: req.user})
   })
 });
@@ -396,5 +399,29 @@ router.get("/:dateId/delete", (req, res, next) => {
       res.redirect("/profile-page")
     })
 });
+
+//----------------------- NODEMAILER ----------------------
+
+router.post('/send-email', (req, res, next) => {
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: "savemydate1@gmail.com",
+      pass: "savemydate123"
+    }
+  });
+  transporter.sendMail({
+    from: '"Date Saver 👻"',
+    to: req.body.email, 
+    subject: "You got a date!", 
+    text: "TESTE",
+    // html: templates.templateExample(message),
+  })
+  .then(() => {
+    res.redirect("/profile-page")
+  })
+})
+
+
 
 module.exports = router;
