@@ -59,9 +59,7 @@ Cinema.findById(req.params.placeId)
 
 // -------------- END MOVIE ROUTES ------------------------------------
 
-
 // -------------- BEGIN OF NETFLIX ROUTES ------------------------------------
-
 router.get("/date-type-netflix",(req, res, next) => {
   Netflix.find()
     .then(allOptions =>{
@@ -401,11 +399,20 @@ router.post('/send-email', (req, res, next) => {
     to: req.body.email, 
     subject: "You got a date!", 
     text: "how you doin'?",
+  
   })
 
   .then(() => {
     res.redirect("/profile-page")
   })
 })
+
+// router.get("/message", checkRole("User"), (req, res, next) => {
+//   Date.find({ _user: req.user._id })
+//   .then(userDates => {
+//     // console.log("The user dates are", userDates)
+//     res.render("profile-page" ,{userDates: userDates, user: req.user})
+//   })
+// });
 
 module.exports = router;

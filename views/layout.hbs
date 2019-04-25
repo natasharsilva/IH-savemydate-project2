@@ -6,10 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
-  {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> --}}
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
   <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.0.0/mapbox-gl-geocoder.min.js'></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script src="https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js"></script>
@@ -29,25 +28,31 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
     {{#if isNotConnected}}
-    <li class="nav-item"><a class="nav-link" href="/auth/login">Login</a></li>
-    <li class="nav-item"><a class="nav-link" href="/auth/signup">Signup</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/auth/login">Login</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/auth/signup">Signup</a></li>
      {{/if}}
     {{#if isConnected}}
-    <li class="nav-item"><a class="nav-link" href="/profile-page">Profile</a></li>
-    <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/profile-page">Profile</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/auth/logout">Logout</a></li>
     {{/if}}
-    <li class="nav-item"><a class="nav-link" href="/date-type">Date Type</a></li>
-    <li class="nav-item"><a class="nav-link" href="/date-options">Date Options</a></li>
-    <li class="nav-item"><a class="nav-link" href="/price-range">Average Cost</a></li>
-    <li class="nav-item"><a class="nav-link" href="/location">Location</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/date-type">Date Type</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/date-options">Date Options</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/price-range">Average Cost</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/location">Location</a></li>
       </div>
 </ul>
   </nav>
 
-<div class="container">
+
+  <main>
   {{{body}}}
-</classdiv>
-  
+  </main>
+
+  <footer>
+   <small> <p class="text-center text-white text-bold">Developed With Love by SaveMyDate @ IronHack</p> </small>
+  </footer>
+
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

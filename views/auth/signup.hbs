@@ -1,44 +1,43 @@
-<div class="general-container">
-
-      <h1 class="text-center">Welcome to Save my Date!</h1>
-<p>Signup so you we costumize your dating experience!</p>
-<br><br>
-
+<div class="main-container-primary h-100 w-100 align-middle bg-primary">
+<div class="general-container bg-primary">
 
 <br>
-<div class="card text-center">
 
-  <div class="card-body">
+  <div class="card-body bg-primary">
+ 
+<div class="card text-center">
+  <h5 class="card-header text-white text-bold bg-primary ">sign up form</h5>
+  <div class="card-body bg-primary">
 
 <form action="/auth/signup" method="POST" id="form-container">
-<div class="form-group">
+<div class="form-group text-white text-bold">
   <label for="email">E-mail</label>
   <input id="email" type="text" name="email" placeholder="Your e-mail here">
-  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  <small id="emailHelp" class="form-text text-white form-text">We'll never share your email with anyone else.</small>
 </div>
  
-<div class="form-group">
+<div class="form-group text-white text-bold">
   <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
-  <small id="emailHelp" class="form-text text-muted">Choose your password wisely.</small>
-<div class="form-group"></div>
+  <small id="emailHelp" class="form-text text-white form-text">Choose your password wisely.</small>
+ </div>
 
   <br>
   {{#if message }}
     <div class="error-message">{{ message }}</div>
   {{/if}}
-
   <br>
 
   <button class="btn btn-primary">Create account</button>
 
+</div>
 </form>
 
 </div>
-  <div class="card-footer text-muted">
-   <p class="account-message">
-    Do you already have an account?
-    <a href="/auth/login">Login</a>
+  <div class="card-footer text-muted bg-primary">
+   <p class="account-message text-white">
+    <small>Do you already have an account?
+    <a href="/auth/login">Login</a></small>
   </p>
   </div>
 </div>
@@ -47,48 +46,4 @@
 </div>
 
 
-
-{{!-- 
-
-<div class="general-container align-middle">
- 
-<br>
-<div class="card text-center">
-
-  <div class="card-body">
-    
-<form action="/auth/login" method="POST" id="form-container">
-  <div class="form-group">
-  <label for="email">E-mail</label>
-  <input id="email" type="text" name="email" placeholder="Your e-mail here"  class="form-control" >
-  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-<div class="form-group">
-  <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
-  <small id="emailHelp" class="form-text text-muted">Your password must be greater than 8 characters, contain numbers and at least one character</small>
- </div>
-  <br>
-  
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
-  {{/if}}
-
-  <br><br>
-
-  <button class="btn btn-primary btn-block">Login</button>
-
-  </div>
-</form>
-
-
-  </div>
-  <div class="card-footer text-muted">
-   <p class="account-message">
-    Don't have an account yet?
-    <a href="/auth/signup">Signup</a>
-  </p>
-  </div>
 </div>
-
-
-</div> --}}
