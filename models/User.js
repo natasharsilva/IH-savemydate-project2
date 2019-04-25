@@ -14,6 +14,7 @@ const userSchema = new Schema({
       default: "User"
     },
     _date:{type: Schema.Types.ObjectId, ref: 'Date'},
+    _cinema:{type: Schema.Types.ObjectId, ref: 'Date'},
 
 },
  {
