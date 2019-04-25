@@ -1,19 +1,4 @@
-body {
-  padding: 0;
-  font: 18px 'Work Sans', sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  justify-content: space-between; }
-
-footer {
-  background-color: #C11F43;
-  padding: 10px; }
-
-main {
-  flex-grow: 1;
-  padding: 10px; }
-
+@import url("https://fonts.googleapis.com/css?family=Work+Sans");
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -7036,6 +7021,29 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+body {
+  padding: 0;
+  font: 18px 'Work Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between; }
+
+main {
+  flex-grow: 1;
+  padding: 0px; }
+
+footer {
+  background-color: #C11F43;
+  padding: 1vh;
+  min-height: 1.5vh; }
+
+.navbarNav {
+  width: 100%; }
+
+.around-icons {
+  width: 100%; }
+
 .general-container {
   margin: 0 auto;
   width: 100%;
@@ -7045,7 +7053,7 @@ a.text-dark:hover, a.text-dark:focus {
   align-content: center;
   align-items: center;
   padding: 5%;
-  min-height: 90vh; }
+  min-height: 75vh; }
 
 .marker {
   background-image: url("mapbox-icon.png");
@@ -7064,27 +7072,43 @@ a.text-dark:hover, a.text-dark:focus {
 nav {
   font-size: 20px; }
 
+nav ul {
+  width: 100%; }
+
 .navbar-toggler {
   color: white; }
 
 @media (max-width: 750px) {
   .main-container-primary {
-    background-color: #C11F43;
+    background-color: #C11F43; }
+  .main-container-grey {
+    background-color: #414042;
+    min-height: 90vh;
+    padding: 0; }
+  .main-container-primary, main-container-grey {
     padding: 15%;
     margin: 0; }
-  .main-container-grey {
-    background-color: #414042; }
   .general-container {
     margin: 0 auto;
     width: 100%;
     padding: 0; }
   body {
     padding: 0;
-    font-size: 22px; }
-  .icons-type-date {
-    width: 100px; }
-  .material-icons.md-48 {
-    font-size: 48px;
-    width: 200px; } }
+    font-size: 22px; } }
+
+@media (min-width: 751px) {
+  .main-container-primary {
+    background-color: #C11F43;
+    padding: 30%;
+    margin: 0; }
+  .general-container {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20%; }
+  .main-container-grey {
+    background-color: #414042; }
+  body {
+    padding: 0;
+    font-size: 24px; } }
 
 /*# sourceMappingURL=style.css.map */
