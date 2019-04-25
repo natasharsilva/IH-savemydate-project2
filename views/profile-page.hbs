@@ -28,7 +28,7 @@
 <form action="/send-email" method="post">
   <label for="">Email</label>
   <input type="email" name="email" id="">
-
+  <input type="hidden" value="{{this._id}}" name="dateId">
 <button class="btn btn-info" type="submit">Send details to my Date!</button>
 </form>
 
