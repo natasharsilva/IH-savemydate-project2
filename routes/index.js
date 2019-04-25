@@ -403,7 +403,7 @@ router.post('/send-email', (req, res, next) => {
     service: 'Gmail',
     auth: {
       user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS
+      pass: process.env.GMAIL_PASS,
     }
   });
   transporter.sendMail({
