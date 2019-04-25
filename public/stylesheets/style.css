@@ -7040,14 +7040,15 @@ i:hover {
   cursor: pointer; }
 
 .general-container {
-  margin: 10% auto;
-  width: 70%;
+  margin: 0 auto;
+  width: 90%;
   display: flex;
   justify-content: center;
   flex-flow: column;
   align-content: center;
   align-items: center;
-  padding: 5%; }
+  padding: 5%;
+  min-height: 90vh; }
 
 .marker {
   background-image: url("mapbox-icon.png");
@@ -7057,13 +7058,15 @@ i:hover {
   border-radius: 50%;
   cursor: pointer; }
 
+.btn-call-to-action {
+  font-size: 20px; }
+
 @media (max-width: 750px) {
   .general-container {
     margin: 0 auto;
-    width: 95vw;
+    width: 100%;
     margin: 0 auto;
-    padding: 0;
-    height: 160vw; }
+    padding: 0; }
   i {
     padding: 15%;
     margin: 15%; } }
