@@ -2,15 +2,13 @@
   <h1 class="text-center">Where are you right now?</h1><br>
   <h5 class="text-center">Don't worry about the traffic: we'll only find places near you!</h5>
   <br>
-   <form action="/search" method="get">
+   <form action="/date-type" method="get">
     {{!-- <input type="text" class="form-control" name="address" placeholder="Type your address"> --}}
     <input type="hidden" name="lat">
     <input type="hidden" name="lng">
-    <button id="get-user-location" class="btn  btn-primary" data-toggle="collapse" href="#collapseExample">Get your location</button>
+    <button id="get-user-location" class="btn btn-primary">Get your location</button>
     <br> <br>
-    <div class="collapse" id="collapseExample">
-       <button type="submit" class="btn btn-outline-primary btn-block">Next</button>
-       </div>
+    <button type="submit" id="next-button" class="btn btn-outline-primary btn-block d-none">Next</button>
    </form>
     <br>
       <div id="map" style="width:100%;height:300px"></div>
@@ -42,6 +40,9 @@
 
   document.getElementById("get-user-location").onclick = function (event) {
     event.preventDefault() // To don´t submit the form
+
+    document.getElementById('get-user-location').innerText = "Loading..."
+
     console.log("Button clicked")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -52,6 +53,9 @@
         document.querySelector("input[name=lng]").value = lng
         map.setCenter([lng, lat])
         map.setZoom(15)
+
+        document.getElementById('get-user-location').innerText = "Get your location"
+        document.getElementById('next-button').classList.remove('d-none')
         // TODO: add a marker 
       });
     }
