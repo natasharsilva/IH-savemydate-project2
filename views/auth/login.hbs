@@ -1,48 +1,45 @@
+<div class="main-container-primary h-100 w-100 align-middle">
 <div class="general-container align-middle">
   
-    <h1 class="text-center">Welcome to Save my Date!</h1>
-<p>Login so you can costumize your date experience</p>
-<br><br>
-
-{{!-- <a href="/location" class="btn btn-primary btn-block ">Start</a> --}}
 <br>
-<div class="card text-center">
 
-  <div class="card-body">
+ <div class="card-body bg-primary">
+
+<div class="card text-center">
+  <h5 class="card-header text-white text-bold bg-primary ">login form</h5>
+  <div class="card-body bg-primary">
     
 <form action="/auth/login" method="POST" id="form-container">
-  <div class="form-group">
-  <label for="email">E-mail</label>
+  <div class="form-group text-white text-bold">
+  <label for="email">e-mail</label>
   <input id="email" type="text" name="email" placeholder="Your e-mail here"  class="form-control" >
-  <small id="emailHelp" class="form-text text-muted">Here goes your e-mail.</small>
-<div class="form-group">
-  <label for="password">Password</label>
+  <small id="emailHelp" class="text-white form-text">Here goes your e-mail.</small>
+</div>
+
+<div class="form-group text-white text-bold">
+  <label for="password">password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
-  <small id="emailHelp" class="form-text text-muted">Here goes your password.</small>
+  <small id="emailHelp" class="text-white form-text">Here goes your password.</small>
  </div>
+
   <br>
-  
   {{#if message }}
     <div class="error-message">{{ message }}</div>
   {{/if}}
+    <br>
 
-  <br><br>
+  <button class="btn btn-primary btn-block btn-light btn-lg font-weight-bold">Login</button>
 
-  <button class="btn btn-primary btn-block">Login</button>
-
-  </div>
+  
 </form>
-
-
   </div>
-  <div class="card-footer text-muted">
-   <p class="account-message">
-    Don't have an account yet?
-    <a href="/auth/signup">Signup</a>
+  <div class="card-footer text-muted bg-primary">
+   <p class="account-message text-white">
+    <small>Don't have an account yet?
+    <a href="/auth/signup">Signup</a></small>
   </p>
-  </div>
+
 </div>
-
-
+</div>
 </div>
 
