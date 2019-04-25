@@ -8,7 +8,7 @@ $primary: #C11F43;
 
 body {
   padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 //choose primary here
@@ -58,6 +58,16 @@ i:hover{
   // width:30vw;
   font-size:20px;
 }
+#nav-logo{
+  height:40px;
+}
+nav{
+  font-size:20px;
+}
+
+.navbar-toggler{
+  color:white;
+}
 
 @media (max-width: 750px) {
 
@@ -74,10 +84,9 @@ i:hover{
     padding:15%;
     margin:15%;
   }
-  .btn-call-to-action{
-    // width:90%;
-    // position: absolute;
-    // bottom:8%;
+
+  body {
+    font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
   }
 
 }

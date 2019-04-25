@@ -419,15 +419,15 @@ router.post('/send-email', (req, res, next) => {
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: "savemydate1@gmail.com",
-      pass: "savemydate123",
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
     }
   });
   transporter.sendMail({
     from: '"Date Saver 👻"',
     to: req.body.email, 
     subject: "You got a date!", 
-    text: req.body.message,
+    text: "how you doin'?",
   })
 
   .then(() => {

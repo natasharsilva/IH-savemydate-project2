@@ -47,7 +47,8 @@
         document.querySelector("input[name=lng]").value = lng
         map.setCenter([lng, lat])
         map.setZoom(15)
-        var marker = new mapboxgl.Marker() // initialize a new marker
+        var marker = new mapboxgl.Marker({color: 'red'}) // initialize a new marker
+        
         .setLngLat([lng, lat]) // Marker [lng, lat] coordinates
         .addTo(map);
 
