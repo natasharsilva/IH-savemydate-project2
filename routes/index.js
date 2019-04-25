@@ -76,20 +76,15 @@ router.get("/date-type-netflix",(req, res, next) => {
     })
 });
 
-router.get('/confirm-netflix/:placeId', (req,res,next) => {
-  Netflix.findById(req.params.placeId)
-
-.then (finalOption =>{
+router.get('/confirm-netflix/:movieId', (req,res,next) => {
+  Netflix.findById(req.params.movieId)
+  .then (finalOption =>{
   console.log(finalOption)
-  Netflix.create({
+    Date.create({
     date_location_name: 'The coziness of home',
-    address: finalOption.address,
     title: finalOption.title,
-    year: finalOption.year,
     director: finalOption.director,
-    duration: finalOption.duration,
-    genre: finalOption.genre,
-    rate: finalOption.rate,
+    rating: finalOption.rate,
     _user: req.user
   })
   res.render("confirm-netflix", {

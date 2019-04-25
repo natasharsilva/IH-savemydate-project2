@@ -5,13 +5,15 @@ const dateSchema = new Schema({
   entity_id: {type: Number, default: 82},
   entity_type: {type: String, default: "city"},
   date_location_name: String,
-  rating: {type: Number, default: 3},
+  rating: Number,
   cuisines: String,
   latitude: Number,
   longitude: Number,
   address: String,
   price_range: String,
   AvgCostforTwo: Number,
+  title: String,
+  director: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
 
   

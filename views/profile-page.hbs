@@ -10,9 +10,17 @@
 <ul>
 {{#each userDates}}
 <b>Location:</b> {{this.date_location_name}} <br>
+{{#if this.cuisines}}
 <b>Cuisines:</b> {{this.cuisines}} <br>
 <b>Average cost for two:</b> {{this.AvgCostforTwo}}€ <br>
+{{/if}}
+{{#if this.address}}
 <b>Address:</b> {{this.address}} <br>
+{{/if}}
+{{#if this.title}}
+<b>Title:</b> {{this.title}} <br>
+<b>Director:</b> {{this.director}} <br>
+{{/if}}
 <br>
 <a href="/{{this._id}}/delete" class="btn btn-outline-danger">Delete</a>
 
