@@ -14,9 +14,27 @@ const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
 
+router.use((req,res,next)=> {
+  console.log("----------------")
+  console.log("TCL: result", result)
+  console.log("TCL: userLocation", userLocation)
+  console.log("TCL: filteredOptions", filteredOptions)
+  console.log("TCL: finalOption", finalOption)
+  console.log("----------------")
+  next()
+})
+
 
 /* GET home page */
 router.get("/", (req, res, next) => {
+  let lastConfirmUrl = req.flash.lastConfirmUrl
+  if (req.user && lastConfirmUrl) {
+    req.flash.lastConfirmUrl = undefined
+    res.redirect(lastConfirmUrl)
+    return
+  }
+
+  
   userLocation = [];
   filteredOptions = [];
   finalOption = [];
@@ -28,14 +46,13 @@ router.get("/location", (req, res, next) => {
   res.render("location");
 });
 
-router.get("/search/", (req, res, next) => {
-  userLocation.push(req.query.lat, req.query.lng)
-  console.log(userLocation);
-  res.redirect("date-type")
-})
-
 router.get("/date-type", (req, res, next) => {
-  res.render("date-type");
+  userLocation.push(req.query.lat, req.query.lng)
+  const {lat,lng} = req.query
+  res.render("date-type", {
+    lat,
+    lng
+  });
 });
 
 // -------------- START OF  MOVIE ROUTES ------------------------------------
@@ -77,6 +94,7 @@ router.get("/date-type-netflix",(req, res, next) => {
 });
 
 router.get('/confirm-netflix/:movieId', (req,res,next) => {
+  req.flash.lastConfirmUrl = req.url
   Netflix.findById(req.params.movieId)
   .then (finalOption =>{
   console.log(finalOption)
