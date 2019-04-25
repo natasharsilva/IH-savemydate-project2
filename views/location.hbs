@@ -1,21 +1,21 @@
  <div class="main-container-grey h-100 w-100 align-middle">
  <div class="general-container">
 
-  <h1 class="text-center text-white ">Where are you right now?</h1><br>
-  <h5 class="text-center text-white ">Don't worry about the traffic: we'll only find places near you!</h5>
+  <h2 class="text-center text-white">Where are you right now?</h2><br>
+  <h4 class="text-center text-white">Don't worry about the traffic</h4>
+    <h5 class="text-center text-white">We'll only find places near you!</h5>
   <br>
    <form action="/date-type" method="get">
     {{!-- <input type="text" class="form-control" name="address" placeholder="Type your address"> --}}
     <input type="hidden" name="lat">
     <input type="hidden" name="lng">
-    <button id="get-user-location" class="btn btn-primary  btn-block btn-lg font-weight-bold">Get your location</button>
+    <button id="get-user-location" class="btn btn-primary  btn-block btn-lg font-weight-bold"><i class="fas fa-map-marker-alt"></i> Get your location</button>
   
     <button type="submit" id="next-button" class="btn btn-outline-primary btn-block d-none btn-block btn-lg font-weight-bold">Next</button>
    </form>
     <br>
       <div id="map" style="width:100%;height:400px"></div>
    
-
 </div>
 </div>
  
@@ -55,7 +55,7 @@
         .setLngLat([lng, lat]) // Marker [lng, lat] coordinates
         .addTo(map);
 
-        document.getElementById('get-user-location').innerText = "Get your location"
+        document.getElementById('get-user-location').innerHTML = `<i class="fas fa-map-marker-alt"></i> Get your location`
         document.getElementById('next-button').classList.remove('d-none')
         // TODO: add a marker 
       });

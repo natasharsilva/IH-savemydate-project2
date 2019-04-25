@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css" />
   <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
   <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.0.0/mapbox-gl-geocoder.min.js'></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script src="https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js"></script>
@@ -19,7 +20,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
     {{!-- <a class="navbar-brand" href="/"></a> --}}
      <a href="/" id="nav-logo"  class="navbar-brand"> <img src="/images/Brand_White_Horizontal-04.svg" alt="brand-horizontal" height="100%"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,12 +29,12 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
     {{#if isNotConnected}}
-    <li class="nav-item"><a class="nav-link text-white" href="/auth/login">Login</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/auth/login">Login <i class="fas fa-user-alt"></i></a></li>
     <li class="nav-item"><a class="nav-link text-white" href="/auth/signup">Signup</a></li>
      {{/if}}
     {{#if isConnected}}
     <li class="nav-item"><a class="nav-link text-white" href="/profile-page">Profile</a></li>
-    <li class="nav-item"><a class="nav-link text-white" href="/auth/logout">Logout</a></li>
+    <li class="nav-item"><a class="nav-link text-white" href="/auth/logout">Logout <i class="fas fa-user-alt-slash"></i></a></li>
     {{/if}}
     <li class="nav-item"><a class="nav-link text-white" href="/date-type">Date Type</a></li>
     <li class="nav-item"><a class="nav-link text-white" href="/date-options">Date Options</a></li>

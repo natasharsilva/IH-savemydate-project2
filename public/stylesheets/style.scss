@@ -2,6 +2,10 @@
 //choose primary here
 $primary: #C11F43;
 
+// Cinzento escuro: #414042
+// Cinzento claro: #E6E6E6
+// Vermelho: #C11F43
+
 body {
   padding: 0;
   font: 18px 'Work Sans', sans-serif;
@@ -24,23 +28,7 @@ main {
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 
-a {
-  color: #00B7FF;
-}
 
-i{
-  color:$primary;
-  border:3px solid $primary;
-  border-radius:50px;
-  padding:10%;
-  margin:5%;
-}
-
-i:hover{
-  background-color:$primary;
-  color:white;
-  cursor: pointer;
-}
 
 .general-container{
   margin:0 auto;
@@ -97,14 +85,16 @@ nav{
     // background-color:yellow;
   }
 
-  i{
-    padding:15%;
-    margin:15%;
-  }
 
   body {
     padding:0;
-    font-size: 24px;
+    font-size: 22px;
   }
+
+.icons-type-date{
+  width:100px;
+}
+
+.material-icons.md-48 { font-size: 48px; width:200px; }
 
 }
