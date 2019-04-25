@@ -7,16 +7,16 @@
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="/images/cool_dog.jpeg" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">{{finalOption.[0].name}}</h5>
-    <p class="card-text"><strong>Rating: </strong>{{finalOption.[0].rating}}</p>
-    <p class="card-text"><strong>Cuisines: </strong>{{finalOption.[0].cuisines}}</p>
-    <p class="card-text"><strong>Average cost for 2: </strong>{{finalOption.[0].average_cost_for_two}}€</p>
-    <p class="card-text"><strong>Address: </strong>{{finalOption.[0].location.address}}</p>
+    <h5 class="card-title">{{finalOption.name}}</h5>
+    <p class="card-text"><strong>Rating: </strong>{{finalOption.rating}}</p>
+    <p class="card-text"><strong>Cuisines: </strong>{{finalOption.cuisines}}</p>
+    <p class="card-text"><strong>Average cost for 2: </strong>{{finalOption.average_cost_for_two}}€</p>
+    <p class="card-text"><strong>Address: </strong>{{finalOption.location.address}}</p>
     
   </div>
 </div>
 <br><br>
-<a class="btn btn-danger btn-call-to-action btn-block" href="/confirm-date">  SAVE MY DATE!  </a>
+<a class="btn btn-danger btn-call-to-action btn-block" href="/confirm-date?finalOption={{value}}">  SAVE MY DATE!  </a>
 
 <br>
 </div>
