@@ -4,26 +4,11 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const nodemailer = require("nodemailer")
-var result = [];
-var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
 const Cinema = require('../models/Cinema')
 const Netflix = require('../models/Netflix')
 const User = require('../models/User')
-var filteredOptions = [];
-var finalOption = [];
-
-router.use((req,res,next)=> {
-  // console.log("----------------")
-  // console.log("TCL: result", result)
-  // console.log("TCL: userLocation", userLocation)
-  // console.log("TCL: filteredOptions", filteredOptions)
-  // console.log("TCL: finalOption", finalOption)
-  // console.log("----------------")
-  next()
-})
-
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -33,12 +18,6 @@ router.get("/", (req, res, next) => {
   //   res.redirect(lastConfirmUrl)
   //   return
   // }
-
-  
-  userLocation = [];
-  filteredOptions = [];
-  finalOption = [];
-  result = [];
   res.render("index");
 });
 
@@ -47,8 +26,8 @@ router.get("/location", (req, res, next) => {
 });
 
 router.get("/date-type", (req, res, next) => {
-  userLocation.push(req.query.lat, req.query.lng)
-  const {lat,lng} = req.query
+  // userLocation.push(req.query.lat, req.query.lng)
+  let {lat,lng} = req.query
   res.render("date-type", {
     lat,
     lng
@@ -80,9 +59,7 @@ Cinema.findById(req.params.placeId)
 
 // -------------- END MOVIE ROUTES ------------------------------------
 
-
 // -------------- BEGIN OF NETFLIX ROUTES ------------------------------------
-
 router.get("/date-type-netflix",(req, res, next) => {
   Netflix.find()
     .then(allOptions =>{
@@ -114,71 +91,38 @@ router.get('/confirm-netflix/:movieId', (req,res,next) => {
 // -------------- END NETFLIX ROUTES ------------------------------------
 
 
-router.get("/date-type-coffee", (req, res, next) => {
-  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  let zomatoApi = axios.create({
-    baseURL: "https://developers.zomato.com/api/v2.1/",
-    headers: { user_key: process.env.API_KEY }
-  });
-
-  let defaultParams = {
-    entity_id: 82,
-    entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
-    sort: "real_distance"
-  };
-
-  Promise.all([
-    zomatoApi.get(`search`, {
-      params: {
-        ...defaultParams,
-        establishment_type: 1
-      }
-    }),
-    zomatoApi.get(`search`, {
-      params: {
-        ...defaultParams,
-        establishment_type: 111
-      }
-    })
-  ]).then(responses => {
-    for (let iResponse = 0; iResponse < responses.length; iResponse++) {
-      let restaurants = responses[iResponse].data.restaurants;
-      for (let i = 0; i < restaurants.length; i++) {
-        result.push({
-          id: restaurants[i].restaurant.id,
-          name: restaurants[i].restaurant.name,
-          location: restaurants[i].restaurant.location,
-          cuisines: restaurants[i].restaurant.cuisines,
-          price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
-          rating: restaurants[i].restaurant.user_rating.aggregate_rating
-        });
-      }
-    }
-    console.log("----------------CAFES------------", result.length);
-    // console.log(result.map(x => x.name))
-    res.redirect("price-range");
+router.get("/price-range", (req, res, next) => {
+  let lat = req.query.lat
+  let lng = req.query.lng
+  let kind = req.query.kind
+  res.render("price-range", {
+    lat, lng, kind,
   });
 });
 
-router.get("/date-type-bar", (req, res, next) => {
+
+router.get("/date-options", (req, res, next) => {
+  let result = []
+  let filteredOptions
+  let lat = req.query.lat
+  let lng = req.query.lng
   axios.defaults.headers.common["user_key"] = process.env.API_KEY;
   let zomatoApi = axios.create({
     baseURL: "https://developers.zomato.com/api/v2.1/",
     headers: { user_key: process.env.API_KEY }
-  });
+    });
 
-  let defaultParams = {
+    let defaultParams = {
     entity_id: 82,
     entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
+    lat: lat,
+    lon: lng,
     sort: "real_distance"
-  };
+    };
 
-  Promise.all([
+  switch (req.query.kind) {
+    case 'drink':
+    Promise.all([
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
@@ -206,7 +150,6 @@ router.get("/date-type-bar", (req, res, next) => {
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
-
         establishment_type:6, // 6-pub
       }
     }),
@@ -214,50 +157,6 @@ router.get("/date-type-bar", (req, res, next) => {
       params: {
         ...defaultParams,
         establishment_type:292, // 292- Beer Garden
-      }
-    })
-  ])
-  .then(responses => {
-    for (let iResponse = 0; iResponse < responses.length; iResponse++) {
-      let restaurants = responses[iResponse].data.restaurants;
-      for (let i = 0; i < restaurants.length; i++) {
-        result.push({
-          id: restaurants[i].restaurant.id,
-          name: restaurants[i].restaurant.name,
-          location: restaurants[i].restaurant.location,
-          cuisines: restaurants[i].restaurant.cuisines,
-          price_range: restaurants[i].restaurant.price_range,
-          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
-          rating: restaurants[i].restaurant.user_rating.aggregate_rating
-        });
-      }
-    }
-    console.log("----------------BARS------------",result.length)
-    // console.log(result.map(x => x.name)) //this turns an array into a string
-    res.render("price-range");
-  })
-});
-
-router.get("/date-type-club", (req, res, next) => {
-  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  let zomatoApi = axios.create({
-    baseURL: "https://developers.zomato.com/api/v2.1/",
-    headers: { user_key: process.env.API_KEY }
-  });
-
-  let defaultParams = {
-    entity_id: 82,
-    entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
-    sort: "real_distance"
-  };
-
-  Promise.all([
-    zomatoApi.get(`search`, {
-      params: {
-        ...defaultParams,
-        establishment_type: 8
       }
     })
   ]).then(responses => {
@@ -273,31 +172,63 @@ router.get("/date-type-club", (req, res, next) => {
           average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
           rating: restaurants[i].restaurant.user_rating.aggregate_rating
         });
-      }
-    }
-    console.log("----------------CLUBS------------", result.length);
-    // console.log(result.map(x => x.name))
-    res.redirect("price-range");
-  });
+      }}
+      // console.log("----------------BARS------------",result.length)
+      // console.log(req.query.price)
+      if (req.query.price === '1') {
+        // console.log("THIS IS THE RIGHT RESULT", result)
+        result = result.filter(element => element.price_range <= 2)
+        filteredOptions = result.slice(0,5)
+      } else {
+        let filteredResult = result.filter(element => element.price_range > 2)
+        filteredOptions = filteredResult.slice(0,5)}
+        res.render("date-options", {filteredOptions});
+    })
+      break;
 
-});
+    case 'coffee':
+    Promise.all([
+      zomatoApi.get(`search`, {
+        params: {
+          ...defaultParams,
+          establishment_type: 1
+        }
+      }),
+      zomatoApi.get(`search`, {
+        params: {
+          ...defaultParams,
+          establishment_type: 111
+        }
+      })
+    ]).then(responses => {
+      for (let iResponse = 0; iResponse < responses.length; iResponse++) {
+        let restaurants = responses[iResponse].data.restaurants;
+        for (let i = 0; i < restaurants.length; i++) {
+          result.push({
+            id: restaurants[i].restaurant.id,
+            name: restaurants[i].restaurant.name,
+            location: restaurants[i].restaurant.location,
+            cuisines: restaurants[i].restaurant.cuisines,
+            price_range: restaurants[i].restaurant.price_range,
+            average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
+            rating: restaurants[i].restaurant.user_rating.aggregate_rating
+          });
+          }}
+      // console.log("----------------CAFES------------",result.length)
+      // console.log(req.query.price)
+      if (req.query.price === '1') {
+        // console.log("THIS IS THE RIGHT RESULT", result)
+        result = result.filter(element => element.price_range <= 2)
+        filteredOptions = result.slice(0,5)
+      } else {
+        let filteredResult = result.filter(element => element.price_range > 2)
+        filteredOptions = filteredResult.slice(0,5)}
+        res.render("date-options", {filteredOptions});
+      })
+      break;
 
-router.get("/date-type-dinner", (req, res, next) => {
-  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
-  let zomatoApi = axios.create({
-    baseURL: "https://developers.zomato.com/api/v2.1/",
-    headers: { user_key: process.env.API_KEY }
-  });
-
-  let defaultParams = {
-    entity_id: 82,
-    entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
-    sort: "real_distance"
-  };
-
-  Promise.all([
+    case 'dinner':
+    Promise.all([
     zomatoApi.get(`search`, {
       params: {
         ...defaultParams,
@@ -335,58 +266,99 @@ router.get("/date-type-dinner", (req, res, next) => {
           average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
           rating: restaurants[i].restaurant.user_rating.aggregate_rating
         });
+      }}
+      // console.log("----------------RESTAURANTS------------",result.length)
+      // console.log(req.query.price)
+      if (req.query.price === '1') {
+        // console.log("THIS IS THE RIGHT RESULT", result)
+        result = result.filter(element => element.price_range <= 2)
+        filteredOptions = result.slice(0,5)
+      } else {
+        let filteredResult = result.filter(element => element.price_range > 2)
+        filteredOptions = filteredResult.slice(0,5)}
+        res.render("date-options", {filteredOptions});
+    })
+      break;
+
+    case 'club':
+    Promise.all([
+    zomatoApi.get(`search`, {
+      params: {
+        ...defaultParams,
+        establishment_type: 8
       }
-    }
-    console.log("----------------FOOD------------", result.length);
-    // console.log(result.map(x => x.name))
-    res.redirect("price-range");
-  });
+    })
+    ]).then(responses => {
+    for (let iResponse = 0; iResponse < responses.length; iResponse++) {
+      let restaurants = responses[iResponse].data.restaurants;
+      for (let i = 0; i < restaurants.length; i++) {
+        result.push({
+          id: restaurants[i].restaurant.id,
+          name: restaurants[i].restaurant.name,
+          location: restaurants[i].restaurant.location,
+          cuisines: restaurants[i].restaurant.cuisines,
+          price_range: restaurants[i].restaurant.price_range,
+          average_cost_for_two: restaurants[i].restaurant.average_cost_for_two,
+          rating: restaurants[i].restaurant.user_rating.aggregate_rating
+        });
+      }}
+      // console.log("----------------CLUBS------------",result.length)
+      // console.log(req.query.price)
+      if (req.query.price === '1') {
+        // console.log("THIS IS THE RIGHT RESULT", result)
+        result = result.filter(element => element.price_range <= 2)
+        filteredOptions = result.slice(0,5)
+      } else {
+        let filteredResult = result.filter(element => element.price_range > 2)
+        filteredOptions = filteredResult.slice(0,5)}
+        res.render("date-options", {filteredOptions});
+    })
+      break;
+    };
+  // console.log("These are my final options to the user -------->",filteredOptions);
+  // res.render("date-options", {filteredOptions});
 });
 
-router.get("/price-range", (req, res, next) => {
-  res.render("price-range");
-});
-
-router.get("/price-range-1", (req, res, next) => {
-  result = result.filter(element => element.price_range <= 2)
-  res.redirect("/date-options")
-});
-
-router.get("/price-range-2", (req, res, next) => {
-  result = result.filter(element => element.price_range > 2)
-  res.redirect("/date-options")
-});
-
-router.get("/date-options", (req, res, next) => {
-      filteredOptions = result.slice(0,5);
-      console.log("These are my final options to the user -------->",filteredOptions);
-  res.render("date-options", {filteredOptions});
-});
-
-// // Date map detail page 
 router.get('/date-options/:placeId', (req,res,next) => {
-  //  console.log("first checked - is it's not undefined OK", filteredOptions)
-  result = []
-   finalOption = filteredOptions.filter(element => element.id === req.params.placeId)
-   console.log("finalOption-------------------->", finalOption)
-   console.log("finalOption.rating-------------------->", finalOption[0].rating)
-      res.render('confirm-date' ,{finalOption})
+  let placeId = Number(req.params.placeId)
+  axios.defaults.headers.common["user_key"] = process.env.API_KEY;
+  let zomatoApi = axios.create({
+    baseURL: "https://developers.zomato.com/api/v2.1/",
+    headers: { user_key: process.env.API_KEY }
+    });
+    zomatoApi.get(`restaurant`, {
+      params: {
+        res_id: placeId
+      }
+      }).then(response => {
+      let finalOption = {
+          id: response.data.id,
+          name: response.data.name,
+          location: response.data.location,
+          cuisines: response.data.cuisines,
+          price_range: response.data.price_range,
+          average_cost_for_two: response.data.average_cost_for_two,
+          rating: response.data.user_rating.aggregate_rating
+      };
+      var value = encodeURIComponent(JSON.stringify(finalOption));
+      res.render('confirm-date', {finalOption, value})
       })
-
+    })
 
 
 router.get("/confirm-date", (req, res, next) => {
+  let finalOption = JSON.parse(unescape(decodeURIComponent(req.query.finalOption)));
   Date.create({
-   date_location_name: finalOption[0].name,
-   rating: finalOption[0].rating,
-   address: finalOption[0].location.address,
-   cuisines: finalOption[0].cuisines,
-   latitude: finalOption[0].location.latitude,
-   longitude: finalOption[0].location.longitude,
-   address: finalOption[0].location.address,
-   price_range: finalOption[0].price_range,
-   AvgCostforTwo: finalOption[0].average_cost_for_two,
-   rating: finalOption[0].rating,
+   date_location_name: finalOption.name,
+   rating: finalOption.rating,
+   address: finalOption.location.address,
+   cuisines: finalOption.cuisines,
+   latitude: finalOption.location.latitude,
+   longitude: finalOption.location.longitude,
+   address: finalOption.location.address,
+   price_range: finalOption.price_range,
+   AvgCostforTwo: finalOption.average_cost_for_two,
+   rating: finalOption.rating,
    _user: req.user
   })
   .then(createdDate => {
@@ -402,7 +374,6 @@ router.get("/confirm-date", (req, res, next) => {
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
   .then(userDates => {
-    // console.log("The user dates are", userDates)
     res.render("profile-page" ,{userDates: userDates, user: req.user})
   })
 });
@@ -413,7 +384,6 @@ router.get("/:dateId/delete", (req, res, next) => {
       res.redirect("/profile-page")
     })
 });
-
 //----------------------- NODEMAILER ----------------------
 
 router.post('/send-email', (req, res, next) => {
@@ -428,14 +398,21 @@ router.post('/send-email', (req, res, next) => {
     from: '"Date Saver 👻"',
     to: req.body.email, 
     subject: "You got a date!", 
-    text: "How you doin'?",
-    // html: templates.templateExample(message),
+    text: "how you doin'?",
+  
   })
+
   .then(() => {
     res.redirect("/profile-page")
   })
 })
 
-
+// router.get("/message", checkRole("User"), (req, res, next) => {
+//   Date.find({ _user: req.user._id })
+//   .then(userDates => {
+//     // console.log("The user dates are", userDates)
+//     res.render("profile-page" ,{userDates: userDates, user: req.user})
+//   })
+// });
 
 module.exports = router;
