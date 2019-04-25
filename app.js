@@ -15,7 +15,7 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/savemydate', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -76,6 +76,7 @@ require('./passport')(app);
     
 app.use((req,res,next) => {
   res.locals.isConnected = req.user
+  res.locals.isNotConnected = !req.user
   next()
   })
 
