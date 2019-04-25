@@ -1,11 +1,9 @@
 // const API_KEY = require('dotenv')
-
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const nodemailer = require("nodemailer")
 var result = [];
-var userLocation = [];
 const { checkRole } = require("../middlewares");
 const Date = require('../models/Date')
 const Cinema = require('../models/Cinema')
@@ -14,31 +12,9 @@ const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
 
-router.use((req,res,next)=> {
-  console.log("----------------")
-  console.log("TCL: result", result)
-  console.log("TCL: userLocation", userLocation)
-  console.log("TCL: filteredOptions", filteredOptions)
-  console.log("TCL: finalOption", finalOption)
-  console.log("----------------")
-  next()
-})
-
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  let lastConfirmUrl = req.flash.lastConfirmUrl
-  if (req.user && lastConfirmUrl) {
-    req.flash.lastConfirmUrl = undefined
-    res.redirect(lastConfirmUrl)
-    return
-  }
-
-  
-  userLocation = [];
-  filteredOptions = [];
-  finalOption = [];
-  result = [];
   res.render("index");
 });
 
@@ -47,13 +23,13 @@ router.get("/location", (req, res, next) => {
 });
 
 router.get("/date-type", (req, res, next) => {
-  userLocation.push(req.query.lat, req.query.lng)
   const {lat,lng} = req.query
   res.render("date-type", {
     lat,
     lng
   });
 });
+
 
 // -------------- START OF  MOVIE ROUTES ------------------------------------
 router.get("/date-type-movie",(req, res, next) => {
@@ -93,16 +69,20 @@ router.get("/date-type-netflix",(req, res, next) => {
     })
 });
 
-router.get('/confirm-netflix/:movieId', (req,res,next) => {
-  req.flash.lastConfirmUrl = req.url
-  Netflix.findById(req.params.movieId)
-  .then (finalOption =>{
+router.get('/confirm-netflix/:placeId', (req,res,next) => {
+  Netflix.findById(req.params.placeId)
+
+.then (finalOption =>{
   console.log(finalOption)
-    Date.create({
+  Netflix.create({
     date_location_name: 'The coziness of home',
+    address: finalOption.address,
     title: finalOption.title,
+    year: finalOption.year,
     director: finalOption.director,
-    rating: finalOption.rate,
+    duration: finalOption.duration,
+    genre: finalOption.genre,
+    rate: finalOption.rate,
     _user: req.user
   })
   res.render("confirm-netflix", {
@@ -124,8 +104,8 @@ router.get("/date-type-coffee", (req, res, next) => {
   let defaultParams = {
     entity_id: 82,
     entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
+    lat: lat,
+    lng: lng,
     sort: "real_distance"
   };
 
@@ -173,8 +153,8 @@ router.get("/date-type-bar", (req, res, next) => {
   let defaultParams = {
     entity_id: 82,
     entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
+    lat: lat,
+    lng: lng,
     sort: "real_distance"
   };
 
@@ -248,8 +228,8 @@ router.get("/date-type-club", (req, res, next) => {
   let defaultParams = {
     entity_id: 82,
     entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
+    lat: lat,
+    lng: lng,
     sort: "real_distance"
   };
 
@@ -292,8 +272,8 @@ router.get("/date-type-dinner", (req, res, next) => {
   let defaultParams = {
     entity_id: 82,
     entity_type: "city",
-    lat: userLocation[0],
-    lon: userLocation[1],
+    lat: lat,
+    lng: lng,
     sort: "real_distance"
   };
 
@@ -366,11 +346,13 @@ router.get("/date-options", (req, res, next) => {
 // // Date map detail page 
 router.get('/date-options/:placeId', (req,res,next) => {
   //  console.log("first checked - is it's not undefined OK", filteredOptions)
-  result = []
+
    finalOption = filteredOptions.filter(element => element.id === req.params.placeId)
    console.log("finalOption-------------------->", finalOption)
    console.log("finalOption.rating-------------------->", finalOption[0].rating)
-      res.render('confirm-date' ,{finalOption})
+  
+
+          res.render('confirm-date' ,{finalOption})
       })
 
 
@@ -394,10 +376,11 @@ router.get("/confirm-date", (req, res, next) => {
     _date: createdDate
    })
     .then(() => {
+     // Redirect to the detail page of the date
      res.redirect("profile-page")
    })
   })
-})
+  })
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
@@ -420,15 +403,15 @@ router.post('/send-email', (req, res, next) => {
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
+      user: GMAIL_USER,
+      pass: GMAIL_PASS
     }
   });
   transporter.sendMail({
     from: '"Date Saver 👻"',
     to: req.body.email, 
     subject: "You got a date!", 
-    text: "How you doin'?",
+    text: message,
     // html: templates.templateExample(message),
   })
   .then(() => {
