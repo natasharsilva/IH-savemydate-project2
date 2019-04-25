@@ -12,9 +12,37 @@ const User = require('../models/User')
 var filteredOptions = [];
 var finalOption = [];
 
+<<<<<<< HEAD
 
 /* GET home page */
 router.get("/", (req, res, next) => {
+=======
+router.use((req,res,next)=> {
+  // console.log("----------------")
+  // console.log("TCL: result", result)
+  // console.log("TCL: userLocation", userLocation)
+  // console.log("TCL: filteredOptions", filteredOptions)
+  // console.log("TCL: finalOption", finalOption)
+  // console.log("----------------")
+  next()
+})
+
+
+/* GET home page */
+router.get("/", (req, res, next) => {
+  // let lastConfirmUrl = req.flash.lastConfirmUrl
+  // if (req.user && lastConfirmUrl) {
+  //   req.flash.lastConfirmUrl = undefined
+  //   res.redirect(lastConfirmUrl)
+  //   return
+  // }
+
+  
+  userLocation = [];
+  filteredOptions = [];
+  finalOption = [];
+  result = [];
+>>>>>>> 841b1ba4fa297ba9af47420a83b1c88a92d7852a
   res.render("index");
 });
 
@@ -69,10 +97,17 @@ router.get("/date-type-netflix",(req, res, next) => {
     })
 });
 
+<<<<<<< HEAD
 router.get('/confirm-netflix/:placeId', (req,res,next) => {
   Netflix.findById(req.params.placeId)
 
 .then (finalOption =>{
+=======
+router.get('/confirm-netflix/:movieId', (req,res,next) => {
+  // req.flash.lastConfirmUrl = req.url
+  Netflix.findById(req.params.movieId)
+  .then (finalOption =>{
+>>>>>>> 841b1ba4fa297ba9af47420a83b1c88a92d7852a
   console.log(finalOption)
   Netflix.create({
     date_location_name: 'The coziness of home',

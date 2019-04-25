@@ -1,7 +1,20 @@
 <div class="general-container align-middle">
-    <h1>Save my Date!</h1>
-<p>Welcome to Save my Date!</p>
+    <h1 class="text-center"></h1>
+    <img src="images/brand _big.png" alt="brand-big" width="50%">
+
+{{#if isNotConnected}}
+<p>Login/Signup so you can costumize your date experience</p>
 <br><br>
-<a href="/location" class="btn btn-primary btn-block ">Start</a>
+    <a href="/auth/login" class="btn btn-primary btn-block">Login</a>
+    <br> <br>
+<a href="/auth/login" class="btn btn-primary btn-block">Signup</a>
+     {{/if}}
+    {{#if isConnected}}
+    <a href="/auth/login" class="btn btn-primary btn-block">Start My Date!</a>
+    <br><br>
+    <a href="/auth/login" class="btn btn-primary btn-block">Check My Planned Date!</a>
+
+    {{/if}}
 
 </div>
+
