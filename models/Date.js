@@ -5,7 +5,7 @@ const dateSchema = new Schema({
   entity_id: {type: Number, default: 82},
   entity_type: {type: String, default: "city"},
   date_location_name: String,
-  rating:{type: String},
+  rating: {type: Number, default: 3},
   cuisines: String,
   latitude: Number,
   longitude: Number,

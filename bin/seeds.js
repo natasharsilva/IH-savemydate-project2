@@ -86,13 +86,7 @@ address: "Av. das Túlipas, 1495-611 Dolce Vita Miraflores",
 latitude: 38.709240, 
 longitude:  -9.227393,
 website: "http://cinemas.nos.pt/cinemas/Pages/dolce-vita-miraflores.aspx",
-},
-  {
-    timestamps: {
-      createdAt: 'created_at',
-      updatedAt: 'updated_at'
-    }
-  }
+}
 ]
 
 Cinema.deleteMany()

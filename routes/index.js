@@ -16,7 +16,10 @@ var finalOption = [];
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  userLocation = []
+  userLocation = [];
+  filteredOptions = [];
+  finalOption = [];
+  result = [];
   res.render("index");
 });
 
@@ -349,13 +352,11 @@ router.get("/date-options", (req, res, next) => {
 // // Date map detail page 
 router.get('/date-options/:placeId', (req,res,next) => {
   //  console.log("first checked - is it's not undefined OK", filteredOptions)
-
+  result = []
    finalOption = filteredOptions.filter(element => element.id === req.params.placeId)
    console.log("finalOption-------------------->", finalOption)
    console.log("finalOption.rating-------------------->", finalOption[0].rating)
-  
-
-          res.render('confirm-date' ,{finalOption})
+      res.render('confirm-date' ,{finalOption})
       })
 
 
@@ -379,7 +380,6 @@ router.get("/confirm-date", (req, res, next) => {
     _date: createdDate
    })
     .then(() => {
-     // Redirect to the detail page of the date
      res.redirect("profile-page")
    })
   })
