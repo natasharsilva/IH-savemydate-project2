@@ -380,7 +380,7 @@ router.get("/confirm-date", (req, res, next) => {
      res.redirect("profile-page")
    })
   })
-  })
+})
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id })
