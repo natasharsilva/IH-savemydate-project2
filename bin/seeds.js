@@ -2,7 +2,7 @@
 
 // To execute this seed, run from the root of the project
 // $ node bin/seeds.js
-
+require('dotenv').config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
@@ -13,12 +13,14 @@ const Netflix = require("../models/Netflix");
 const bcryptSalt = 10;
 
 mongoose
-  .connect('mongodb://localhost/savemydate', {useNewUrlParser: true})
+  .connect("mongodb://heroku_kv6w19bg:slfst4nbp2qtqrqsr1ud215ijf@ds133630.mlab.com:33630/heroku_kv6w19bg", {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
   .catch(err => {
     console.error('Error connecting to mongo', err)
+
+
   });
 
 // let users = [

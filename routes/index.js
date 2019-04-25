@@ -1,4 +1,5 @@
 // const API_KEY = require('dotenv')
+
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
@@ -406,8 +407,8 @@ router.post('/send-email', (req, res, next) => {
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: GMAIL_USER,
-      pass: GMAIL_PASS
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
     }
   });
   transporter.sendMail({
