@@ -13,7 +13,7 @@ body {
 
 //choose primary here
 
-// $primary: #AF2A1B;
+
 
 a {
   color: #00B7FF;
@@ -35,13 +35,14 @@ i:hover{
 
 .general-container{
   margin:0 auto;
-  width:70%;
+  width:90%;
   display:flex;
   justify-content: center;
   flex-flow:column;
   align-content:center;
   align-items: center;
   padding:5%;
+  min-height:90vh;
 }
 
 .marker {
@@ -54,7 +55,7 @@ i:hover{
 }
 
 .btn-call-to-action{
-  width:30vw;
+  // width:30vw;
   font-size:20px;
 }
 
@@ -74,9 +75,9 @@ i:hover{
     margin:15%;
   }
   .btn-call-to-action{
-    width:90%;
-    position: absolute;
-    bottom:8%;
+    // width:90%;
+    // position: absolute;
+    // bottom:8%;
   }
 
 }

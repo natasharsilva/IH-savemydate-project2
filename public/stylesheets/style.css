@@ -7041,13 +7041,14 @@ i:hover {
 
 .general-container {
   margin: 0 auto;
-  width: 70%;
+  width: 90%;
   display: flex;
   justify-content: center;
   flex-flow: column;
   align-content: center;
   align-items: center;
-  padding: 5%; }
+  padding: 5%;
+  min-height: 90vh; }
 
 .marker {
   background-image: url("mapbox-icon.png");
@@ -7058,7 +7059,6 @@ i:hover {
   cursor: pointer; }
 
 .btn-call-to-action {
-  width: 30vw;
   font-size: 20px; }
 
 @media (max-width: 750px) {
@@ -7069,10 +7069,6 @@ i:hover {
     padding: 0; }
   i {
     padding: 15%;
-    margin: 15%; }
-  .btn-call-to-action {
-    width: 90%;
-    position: absolute;
-    bottom: 8%; } }
+    margin: 15%; } }
 
 /*# sourceMappingURL=style.css.map */
