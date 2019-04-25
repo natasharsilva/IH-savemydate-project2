@@ -76,7 +76,6 @@ require('./passport')(app);
     
 app.use((req,res,next) => {
   res.locals.isConnected = req.user
-  res.locals.isNotConnected = !req.user
   next()
   })
 
