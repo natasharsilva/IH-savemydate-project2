@@ -34,7 +34,7 @@ i:hover{
 }
 
 .general-container{
-  margin:10% auto;
+  margin:0 auto;
   width:70%;
   display:flex;
   justify-content: center;
@@ -53,16 +53,19 @@ i:hover{
   cursor: pointer;
 }
 
+.btn-call-to-action{
+  width:30vw;
+  font-size:20px;
+}
 
 @media (max-width: 750px) {
 
   .general-container {
     // background-color: yellow;
     margin:0 auto;
-    width:95vw;
+    width:100%;
     margin:0 auto;
     padding:0;
-    height:160vw;
     // background-color:yellow;
   }
 
@@ -70,6 +73,10 @@ i:hover{
     padding:15%;
     margin:15%;
   }
-
+  .btn-call-to-action{
+    width:90%;
+    position: absolute;
+    bottom:8%;
+  }
 
 }

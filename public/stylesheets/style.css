@@ -7040,7 +7040,7 @@ i:hover {
   cursor: pointer; }
 
 .general-container {
-  margin: 10% auto;
+  margin: 0 auto;
   width: 70%;
   display: flex;
   justify-content: center;
@@ -7057,15 +7057,22 @@ i:hover {
   border-radius: 50%;
   cursor: pointer; }
 
+.btn-call-to-action {
+  width: 30vw;
+  font-size: 20px; }
+
 @media (max-width: 750px) {
   .general-container {
     margin: 0 auto;
-    width: 95vw;
+    width: 100%;
     margin: 0 auto;
-    padding: 0;
-    height: 160vw; }
+    padding: 0; }
   i {
     padding: 15%;
-    margin: 15%; } }
+    margin: 15%; }
+  .btn-call-to-action {
+    width: 90%;
+    position: absolute;
+    bottom: 8%; } }
 
 /*# sourceMappingURL=style.css.map */
