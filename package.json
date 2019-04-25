@@ -22,6 +22,7 @@
     "express-session": "^1.15.6",
     "global": "^4.3.2",
     "hbs": "^4.0.1",
+    "mjml": "^4.4.0-beta.1",
     "mongoose": "^5.2.10",
     "morgan": "^1.9.0",
     "netflix-unofficial-api": "^1.0.9",

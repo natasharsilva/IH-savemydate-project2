@@ -12,12 +12,6 @@
    </form>
     <br>
       <div id="map" style="width:100%;height:300px"></div>
-   
-
-    {{!-- <br><br>
-    Tell us your date details!<input type="datetime" name="datetime" id="datetime">
-    <br><br>
-    <a class="btn btn-outline-dark" href="/date-type">Continue planning my date!</a> --}}
 
 </div>
 
@@ -53,6 +47,10 @@
         document.querySelector("input[name=lng]").value = lng
         map.setCenter([lng, lat])
         map.setZoom(15)
+        var marker = new mapboxgl.Marker({color: 'red'}) // initialize a new marker
+        
+        .setLngLat([lng, lat]) // Marker [lng, lat] coordinates
+        .addTo(map);
 
         document.getElementById('get-user-location').innerText = "Get your location"
         document.getElementById('next-button').classList.remove('d-none')

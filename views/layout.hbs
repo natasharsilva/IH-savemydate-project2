@@ -20,14 +20,14 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-     <a class="navbar-brand" href="/">Save My Date</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    {{!-- <a class="navbar-brand" href="/"></a> --}}
+     <a href="/" id="nav-logo"  class="navbar-brand"> <img src="/images/Brand_White_Horizontal-04.svg" alt="brand-horizontal" height="100%"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
-    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
     {{#if isNotConnected}}
     <li class="nav-item"><a class="nav-link" href="/auth/login">Login</a></li>
     <li class="nav-item"><a class="nav-link" href="/auth/signup">Signup</a></li>
@@ -38,11 +38,8 @@
     {{/if}}
     <li class="nav-item"><a class="nav-link" href="/date-type">Date Type</a></li>
     <li class="nav-item"><a class="nav-link" href="/date-options">Date Options</a></li>
-    <li class="nav-item"><a class="nav-link" href="/current-location">Current Location</a></li>
     <li class="nav-item"><a class="nav-link" href="/price-range">Average Cost</a></li>
-    <li class="nav-item"><a class="nav-link" href="/confirm-date">Confirm Date</a></li>
     <li class="nav-item"><a class="nav-link" href="/location">Location</a></li>
-    <li class="nav-item"><a class="nav-link" href="/show-map">Show Map</a></li>
       </div>
 </ul>
   </nav>

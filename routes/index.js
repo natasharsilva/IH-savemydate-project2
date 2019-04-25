@@ -73,7 +73,7 @@ router.get("/date-type-netflix",(req, res, next) => {
 });
 
 router.get('/confirm-netflix/:movieId', (req,res,next) => {
-  req.flash.lastConfirmUrl = req.url
+  // req.flash.lastConfirmUrl = req.url
   Netflix.findById(req.params.movieId)
   .then (finalOption =>{
   console.log(finalOption)
@@ -386,7 +386,6 @@ router.get("/:dateId/delete", (req, res, next) => {
       res.redirect("/profile-page")
     })
 });
-
 //----------------------- NODEMAILER ----------------------
 
 router.post('/send-email', (req, res, next) => {
@@ -401,9 +400,9 @@ router.post('/send-email', (req, res, next) => {
     from: '"Date Saver 👻"',
     to: req.body.email, 
     subject: "You got a date!", 
-    text: "How you doin'?",
-    // html: templates.templateExample(message),
+    text: "how you doin'?",
   })
+
   .then(() => {
     res.redirect("/profile-page")
   })
