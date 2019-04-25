@@ -15,24 +15,24 @@ var filteredOptions = [];
 var finalOption = [];
 
 router.use((req,res,next)=> {
-  console.log("----------------")
-  console.log("TCL: result", result)
-  console.log("TCL: userLocation", userLocation)
-  console.log("TCL: filteredOptions", filteredOptions)
-  console.log("TCL: finalOption", finalOption)
-  console.log("----------------")
+  // console.log("----------------")
+  // console.log("TCL: result", result)
+  // console.log("TCL: userLocation", userLocation)
+  // console.log("TCL: filteredOptions", filteredOptions)
+  // console.log("TCL: finalOption", finalOption)
+  // console.log("----------------")
   next()
 })
 
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  let lastConfirmUrl = req.flash.lastConfirmUrl
-  if (req.user && lastConfirmUrl) {
-    req.flash.lastConfirmUrl = undefined
-    res.redirect(lastConfirmUrl)
-    return
-  }
+  // let lastConfirmUrl = req.flash.lastConfirmUrl
+  // if (req.user && lastConfirmUrl) {
+  //   req.flash.lastConfirmUrl = undefined
+  //   res.redirect(lastConfirmUrl)
+  //   return
+  // }
 
   
   userLocation = [];
@@ -94,7 +94,7 @@ router.get("/date-type-netflix",(req, res, next) => {
 });
 
 router.get('/confirm-netflix/:movieId', (req,res,next) => {
-  req.flash.lastConfirmUrl = req.url
+  // req.flash.lastConfirmUrl = req.url
   Netflix.findById(req.params.movieId)
   .then (finalOption =>{
   console.log(finalOption)
