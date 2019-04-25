@@ -15,7 +15,7 @@ let cinemas = require('./data/cinemas')
 const bcryptSalt = 10;
 
 mongoose
-  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
+  .connect('mongodb://localhost/savemydate', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
