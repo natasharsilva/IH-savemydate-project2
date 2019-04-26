@@ -10,12 +10,11 @@ const dateSchema = new Schema({
   address: {type: String, default: "cozyness of home",
   price_range: String,
   AvgCostforTwo: Number,
-  title: String,
+  // title: String,
   director: String,
+  website: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
   // name: { type: Schema.Types.String, ref: 'User' },
-
-  
 }, {
   timestamps: {
     createdAt: 'created_at',
