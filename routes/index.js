@@ -390,15 +390,13 @@ router.get("/confirm-date", (req, res, next) => {
    })
     .then(() => {
      res.redirect("profile-page")
-    //  console.log("DATE HEREEEEEEEEEE",createdDate.name)
-
    })
   })
 })
 
 router.get("/profile-page", checkRole("User"), (req, res, next) => {
   Date.find({ _user: req.user._id }).then(userDates => {
-    res.render("profile-page", { userDates: userDates, user: req.user });
+    res.render("profile-page", { message: req.query.msg, userDates: userDates, user: req.user });
   });
 });
 
@@ -460,11 +458,11 @@ body {background-color: #414042;
 </body>
 `
   })
+  res.redirect("/profile-page?msg=The email was sent!")
 })
-.then(() => {
-res.redirect("/profile-page")
-})
-
+// .then(() => {
+//   res.redirect("/profile-page?msg=The email was sent!")
+// })
 })
 // router.get("/secret", checkRole("User"), (req, res, next) => {
 //   Date.find({ _user: req.user._id })
