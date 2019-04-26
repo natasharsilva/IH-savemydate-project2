@@ -412,7 +412,7 @@ router.get("/:dateId/delete", (req, res, next) => {
 router.post('/send-email', (req, res, next) => {
   Promise.all([Date.findById(req.body.dateId),User.findById(req.user._id)])
   .then(responses => {
-    console.log("MY NAMEEEEEEEEEEEEE", responses[1].name)
+    // console.log("MY NAMEEEEEEEEEEEEE", responses[1].name)
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -421,18 +421,20 @@ router.post('/send-email', (req, res, next) => {
     }
 });  
   transporter.sendMail({
-    from: '"Date Saver 👻" ',
+    from: '"Date Saver 😎" <savemydate1@gmail.com>',
     to: req.body.email, 
     subject: "You got a date!", 
     text: 
-    ` ${responses[1].name} is inviting for a date!
+    `${responses[1].name} (${responses[1].email}) invited you for a date!
+
     Check the details below:
-    Location:  ${responses[0].date_location_name}
-    Address:  ${responses[0].address}
+    Location: ${responses[0].date_location_name}
+    Address: ${responses[0].address}
     Time: ${req.body.dateTime}
     
-    Have fun !
-    `,
+    Have fun 😉!
+
+    -- Save my Date team`,
   })
 })
 .then(() => {
