@@ -10,8 +10,9 @@ const dateSchema = new Schema({
   address: String,
   price_range: String,
   AvgCostforTwo: Number,
-  title: String,
+  // title: String,
   director: String,
+  website: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
   // name: { type: Schema.Types.String, ref: 'User' },
 }, {

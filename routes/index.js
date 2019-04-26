@@ -39,6 +39,7 @@ router.get("/date-type-movie", (req, res, next) => {
   let lat = req.query.lat;
   let lng = req.query.lng;
   Cinema.find().then(finalOptions => {
+		console.log("TCL: finalOptions", finalOptions)
     res.render("date-type-movie", { finalOptions, lat, lng });
   });
 });
@@ -48,6 +49,7 @@ router.get("/confirm-movie/:placeId", (req, res, next) => {
     Date.create({
       date_location_name: finalOption.name,
       address: finalOption.address,
+      website: finalOption.website,
       _user: req.user
     });
     res.render("confirm-movie", {
@@ -75,10 +77,10 @@ router.get("/confirm-netflix/:movieId", (req, res, next) => {
   Netflix.findById(req.params.movieId).then(finalOption => {
     console.log(finalOption);
     Date.create({
-      date_location_name: "The coziness of home",
-      title: finalOption.title,
+      date_location_name: finalOption.title,
+      address: "The coziness of home",
       director: finalOption.director,
-      rating: finalOption.rate,
+      //rating: finalOption.rate,
       _user: req.user
     });
     res.render("confirm-netflix", {
@@ -435,11 +437,11 @@ transporter.sendMail({
   <body>
   <div id="emailContainer" color="#C11F43">
   <h1>${responses[1].name} (${responses[1].email}) invited you for a date!</h1>
-  <img src="https://files.slack.com/files-pri/T02CQ4EN4-FJ7BLV5TP/cool_dog_roses.jpg" width="400px" height="400px"><br>
+  <img src="http://s1.1zoom.me/b5651/820/Dogs_Roses_Jack_Russell_terrier_Glasses_Smartphone_540443_3840x2160.jpg" width="550px" height="400px"><br>
   <h2>Check the details below:</h2>
-  <strong>Location:</strong> ${responses[0].date_location_name}<br>
-  <strong>Address:</strong> ${responses[0].address}<br>
-  <strong>Time:</strong> ${req.body.dateTime}<br>
+  <strong>What:</strong> ${responses[0].date_location_name}<br>
+  <strong>Where:</strong> ${responses[0].address}<br>
+  <strong>When:</strong> ${req.body.dateTime}<br>
   <br>
   Have fun 😉!
   -- Save my Date team
