@@ -418,21 +418,45 @@ router.post('/send-email', (req, res, next) => {
       pass: process.env.GMAIL_PASS,
     }
 });  
-  transporter.sendMail({
-    from: '"Date Saver 😎" <savemydate1@gmail.com>',
-    to: req.body.email, 
-    subject: "You got a date!", 
-    text: 
-    `${responses[1].name} (${responses[1].email}) invited you for a date!
+transporter.sendMail({
+  from: '"Date Saver 😎" <savemydate1@gmail.com>',
+  to: req.body.email, 
+  subject: "You got a date!", 
+  text: 
+  `${responses[1].name} (${responses[1].email}) invited you for a date!
+  Check the details below:
+  Location: ${responses[0].date_location_name}
+  Address: ${responses[0].address}
+  Time: ${req.body.dateTime}
+  
+  Have fun 😉!
+  -- Save my Date team`,
 
-    Check the details below:
-    Location: ${responses[0].date_location_name}
-    Address: ${responses[0].address}
-    Time: ${req.body.dateTime}
-    
-    Have fun 😉!
 
-    -- Save my Date team`,
+  html:  `
+  <body>
+  <div id="emailContainer" color="#C11F43">
+  <h1>${responses[1].name} (${responses[1].email}) invited you for a date!</h1>
+  <img src="https://files.slack.com/files-pri/T02CQ4EN4-FJ7BLV5TP/cool_dog_roses.jpg" width="400px" height="400px"><br>
+  <h2>Check the details below:</h2>
+  <strong>Location:</strong> ${responses[0].date_location_name}<br>
+  <strong>Address:</strong> ${responses[0].address}<br>
+  <strong>Time:</strong> ${req.body.dateTime}<br>
+  <br>
+  Have fun 😉!
+  -- Save my Date team
+</div>
+
+<style>
+body {background-color: #414042;
+      color: #C11F43;
+      }
+#emailContainer {
+  margin: 0 auto;
+}
+</style>
+</body>
+`
   })
   res.redirect("/profile-page?msg=The email was sent!")
 })
@@ -440,7 +464,6 @@ router.post('/send-email', (req, res, next) => {
 //   res.redirect("/profile-page?msg=The email was sent!")
 // })
 })
-
 // router.get("/secret", checkRole("User"), (req, res, next) => {
 //   Date.find({ _user: req.user._id })
 //   .then(userDates => {
