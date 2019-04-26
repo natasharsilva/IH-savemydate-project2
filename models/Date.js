@@ -15,6 +15,7 @@ const dateSchema = new Schema({
   title: String,
   director: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
+  // name: { type: Schema.Types.String, ref: 'User' },
 
   
 }, {

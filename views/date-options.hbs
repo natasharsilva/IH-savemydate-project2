@@ -6,7 +6,7 @@
 <h3 class="text-center">Let us know which one is your favorite!</h3>
 <br><br><br>
 
-  <a href="/location" class="btn btn-outline-warning btn-lg"><strong><p><i class="fas fa-arrow-left"></i>   Never mind</p></strong> <p>I want to try other options!</p></a>
+  <a href="/date-type?lat={{lat}}&lng={{lng}}" class="btn btn-outline-warning btn-lg"><strong><p><i class="fas fa-arrow-left"></i>   Never mind</p></strong> <p>I want to try other options!</p></a>
 
 <br><br>
 <div id="accordion">
@@ -23,7 +23,6 @@
     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body text-dark text-black-50 text">
         <ul>
-          
           <li>Your Date Location: {{this.name}}</li>
           <li>Average Cost for Two: {{this.average_cost_for_two}}€</li>
           <li>Cuisine: {{this.cuisines}}</li>
@@ -31,12 +30,10 @@
           <li>Rating: {{this.rating}}</li>
           <br>
           <a class="btn btn-primary text-center" href="/date-options/{{this.id}}"><i class="fas fa-heart"></i> My favorite Option</a>
-           
         </ul>
-       
       </div>
   </div>
-       {{/each }}
+  {{/each }}
       
 </div>
 </div>

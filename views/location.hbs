@@ -34,10 +34,6 @@
     zoom: 12
   });
 
-  map.addControl(new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl
-  }));
 
   document.getElementById("get-user-location").onclick = function (event) {
     event.preventDefault() // To don´t submit the form
