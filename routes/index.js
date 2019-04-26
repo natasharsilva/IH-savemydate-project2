@@ -416,6 +416,42 @@ router.post('/send-email', (req, res, next) => {
   })
 })
 
+// router.get("/secret", checkRole("User"), (req, res, next) => {
+//   Date.find({ _user: req.user._id })
+//   .then(userDates => {
+//     res.render("secret" ,{userDates: userDates, user: req.user})
+//   })
+// });
+// router.post('/send-email-TA', (req, res, next) => {
+//   Date.findById(req.body.dateId)
+//   .then((dateDetails) => {
+//   let transporter = nodemailer.createTransport({
+//     service: 'Gmail',
+//     auth: {
+//       user: process.env.GMAIL_USER,
+//       pass: process.env.GMAIL_PASS,
+//     }
+  
+// });
+//   transporter.sendMail({
+//     from: '"Date Saver 👻" ',
+//     to: req.body.email, 
+//     subject: "You got a date!", 
+//     text: 
+//     ` Check your date details below!
+//     Location:  ${dateDetails.date_location_name}
+//     Address:  ${dateDetails.address}
+//     Time: ${req.body.dateTime}
+    
+//     Have fun !
+//     `,
+//   })
+// })
+// .then(() => {
+//     res.redirect("/profile-page")
+//   })
+// })
+
 
 // router.get("/message", checkRole("User"), (req, res, next) => {
 //   Date.find({ _user: req.user._id })
