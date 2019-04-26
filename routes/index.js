@@ -112,8 +112,6 @@ router.get("/date-options", (req, res, next) => {
   });
 
   let defaultParams = {
-    entity_id: 82,
-    entity_type: "city",
     lat: lat,
     lon: lng,
     sort: "real_distance"

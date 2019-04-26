@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const dateSchema = new Schema({
-  entity_id: {type: Number, default: 82},
-  entity_type: {type: String, default: "city"},
   date_location_name: String,
   rating: Number,
   cuisines: String,
