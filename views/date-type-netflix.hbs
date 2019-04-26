@@ -1,20 +1,23 @@
+<div class="main-container-grey h-100 w-100 align-middle">
 <div class="general-container">
-  <br>
-<h1 class="text-center">These are the best options for your date</h1>
+  <br><br>
+<h2 class="text-center text-white">This is a movie option for your date</h2>
 <br>
-<br>
-<a href="/location" class="btn btn-outline-warning btn-block ">Never mind - I want to try other options!</a>
+<h3 class="font-italic text-white">(Is it really about the movie?)</h3>
+<br><br><br>
+<a href="/location" class="btn btn-outline-warning btn-lg"><strong><p><i class="fas fa-arrow-left"></i>   Never mind</p></strong> <p>I want to try other date options!</p></a>
 <br><br>
+
 <div id="accordion">
   
 
  <div class="card">
     <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
+      <h4 class="mb-0">
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           {{finalOptions.title}}
         </button>
-      </h5>
+      </h4>
     </div>
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
@@ -25,11 +28,12 @@
           <li>Duration: {{finalOptions.duration}}</li>
           <li>IMDB Rate: {{finalOptions.rate}}</li>
           <br>
-          <a class="btn btn-primary text-center" href="/confirm-netflix/{{finalOptions._id}}">My favorite Option</a>
+          <a class="btn btn-primary btn-lg text-center" href="/confirm-netflix/{{finalOptions._id}}"><i class="fas fa-heart"></i> My favorite Option</a>
         </ul> 
       </div>
   </div>
-  <a class="btn btn-primary" href="/date-type-netflix">Try Again for a different movie!</a>
+  <a class="btn btn-info btn-lg" href="/date-type-netflix"><i class="fas fa-random"></i> Try Again for a different movie!</a>
 </div>
 </div>
-
+</div>
+</div>
