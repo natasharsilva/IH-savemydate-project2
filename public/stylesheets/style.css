@@ -7035,8 +7035,11 @@ main {
 
 footer {
   background-color: #C11F43;
-  padding: 1vh;
-  min-height: 1.5vh; }
+  padding-top: 1vh;
+  min-height: 1vh; }
+
+#main-brand-index {
+  width: 90%; }
 
 .marker {
   background-image: url("mapbox-icon.png");
@@ -7092,13 +7095,14 @@ nav ul {
   body {
     padding: 0;
     font-size: 24px; }
+  #main-brand-index {
+    max-width: 40%; }
   .main-container-primary, .main-container-grey {
-    padding: 0;
     display: flex;
     justify-content: center; }
   .general-container {
     margin: 0 auto;
-    width: 40vw;
+    width: 50vw;
     padding: 0;
     min-height: 25vw; } }
 
