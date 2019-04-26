@@ -7,7 +7,7 @@ const dateSchema = new Schema({
   cuisines: String,
   latitude: Number,
   longitude: Number,
-  address: String,
+  address: {type: String, default: "cozyness of home",
   price_range: String,
   AvgCostforTwo: Number,
   title: String,
