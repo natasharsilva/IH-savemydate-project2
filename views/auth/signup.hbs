@@ -10,16 +10,20 @@
   <div class="card-body bg-primary">
 
 <form action="/auth/signup" method="POST" id="form-container">
-<div class="form-group text-white text-bold">
-  <label for="email">E-mail</label>
-  <input id="email" type="text" name="email" placeholder="Your e-mail here">
-  <small id="emailHelp" class="form-text text-white form-text">We'll never share your email with anyone else.</small>
-</div>
 
 <div class="form-group text-white text-bold">
   <label for="email">Name</label>
   <input id="name" type="text" name="name" placeholder="Your name here"  class="form-control" >
 </div>
+
+
+<div class="form-group text-white text-bold">
+  <label for="email">E-mail</label>
+  <input id="email" type="text" name="email" placeholder="Your e-mail here" class="form-control">
+  <small id="emailHelp" class="form-text text-white form-text">We'll never share your email with anyone else.</small>
+</div>
+
+
  
 <div class="form-group text-white text-bold">
   <label for="password">Password</label>
@@ -33,16 +37,16 @@
   {{/if}}
   <br>
 
-  <button class="btn btn-primary">Create account</button>
+  <button class="btn btn-primary btn-block btn-light btn-lg font-weight-bold">Create account</button>
 
 </div>
 </form>
 
 </div>
   <div class="card-footer text-muted bg-primary">
-   <p class="account-message text-white">
+   <p class="account-message text-white text-center ">
     <small>Do you already have an account?
-    <a href="/auth/login">Login</a></small>
+    <a href="/auth/login" class="badge badge-secondary">Login</a></small>
   </p>
   </div>
 </div>
