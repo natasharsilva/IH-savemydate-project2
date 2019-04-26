@@ -1,24 +1,27 @@
-<div class="general-container">
-  <br>
-<h1 class="text-center">These are the closest options for your date</h1>
+<div class="main-container-grey h-100 w-100 align-middle px-2 text-white">
+<div class="general-container px-2">
+  <br><br><br>
+<h2 class="text-center">These are the closest options for your date</h2>
 <br>
 <h3 class="text-center">Let us know which one is your favorite!</h3>
 <br><br><br>
-<a href="/location" class="btn btn-outline-warning btn-block ">Never mind - I want to try other options!</a>
+
+  <a href="/location" class="btn btn-outline-warning btn-lg"><strong><p><i class="fas fa-arrow-left"></i>   Never mind</p></strong> <p>I want to try other options!</p></a>
+
 <br><br>
 <div id="accordion">
   
  {{#each filteredOptions }}
  <div class="card">
     <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
+      <h4 class="mb-0">
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          {{this.name}}
+          <i class="fas fa-angle-double-down"></i> {{this.name}}
         </button>
-      </h5>
+      </h4>
     </div>
     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
+      <div class="card-body text-dark text-black-50 text">
         <ul>
           
           <li>Your Date Location: {{this.name}}</li>
@@ -27,7 +30,7 @@
           <li>Address: {{this.location.address}}</li>
           <li>Rating: {{this.rating}}</li>
           <br>
-          <a class="btn btn-primary text-center" href="/date-options/{{this.id}}">My favorite Option</a>
+          <a class="btn btn-primary text-center" href="/date-options/{{this.id}}"><i class="fas fa-heart"></i> My favorite Option</a>
            
         </ul>
        

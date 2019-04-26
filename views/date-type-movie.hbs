@@ -1,10 +1,11 @@
-<div class="general-container">
-  <br>
-<h1 class="text-center">These are the closest options for your date</h1>
+<div class="main-container-grey h-100 w-100 text-white align-middle">
+<div class="general-container px-2">
+  <br> <br><br>
+<h2 class="text-center text-white">These are the closest options for your date</h2>
 <br>
-<h2 class="text-center">Let us know which one is your favorite!</h2>
+<h3 class="text-center">Let us know which one is your favorite!</h3>
 <br><br><br>
-<a href="/location" class="btn btn-outline-warning btn-block ">Never mind - I want to try other options!</a>
+  <a href="/location" class="btn btn-outline-warning btn-lg"><strong><p><i class="fas fa-arrow-left"></i>   Never mind</p></strong> <p>I want to try other date options!</p></a>
 <br><br>
 <div id="accordion">
   
@@ -14,13 +15,13 @@
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          {{this.name}}
+          <i class="fas fa-angle-double-down"></i> {{this.name}}
         </button>
       </h5>
     </div>
     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
      
-      <div class="card-body">
+      <div class="card-body text-dark text-black-50 text">
 
         <ul>
           
@@ -34,7 +35,7 @@
       </div>
   </div>
        {{/each }}
-      
 </div>
 </div>
 
+</div></div>
