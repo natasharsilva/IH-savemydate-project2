@@ -439,11 +439,12 @@ transporter.sendMail({
   <body>
   <div id="emailContainer" color="#C11F43">
   <h1>${responses[1].name} (${responses[1].email}) invited you for a date!</h1>
+  <img src="https://files.slack.com/files-pri/T02CQ4EN4-FJ7BLV5TP/cool_dog_roses.jpg" width="400px" height="400px"><br>
   <h2>Check the details below:</h2>
   <strong>Location:</strong> ${responses[0].date_location_name}<br>
   <strong>Address:</strong> ${responses[0].address}<br>
   <strong>Time:</strong> ${req.body.dateTime}<br>
-  
+  <br>
   Have fun 😉!
   -- Save my Date team
 </div>
