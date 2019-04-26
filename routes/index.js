@@ -390,7 +390,7 @@ router.get("/confirm-date", (req, res, next) => {
    })
     .then(() => {
      res.redirect("profile-page")
-     console.log("DATE HEREEEEEEEEEE",createdDate.name)
+    //  console.log("DATE HEREEEEEEEEEE",createdDate.name)
 
    })
   })
@@ -412,7 +412,7 @@ router.get("/:dateId/delete", (req, res, next) => {
 router.post('/send-email', (req, res, next) => {
   Promise.all([Date.findById(req.body.dateId),User.findById(req.user._id)])
   .then(responses => {
-    console.log("MY NAMEEEEEEEEEEEEE", responses[1].name)
+    // console.log("MY NAMEEEEEEEEEEEEE", responses[1].name)
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -420,27 +420,51 @@ router.post('/send-email', (req, res, next) => {
       pass: process.env.GMAIL_PASS,
     }
 });  
-  transporter.sendMail({
-    from: '"Date Saver 👻" ',
-    to: req.body.email, 
-    subject: "You got a date!", 
-    text: 
-    ` ${responses[1].name} is inviting for a date!
-    Check the details below:
-    Location:  ${responses[0].date_location_name}
-    Address:  ${responses[0].address}
-    Time: ${req.body.dateTime}
-    
-    Have fun !
-    `,
+transporter.sendMail({
+  from: '"Date Saver 😎" <savemydate1@gmail.com>',
+  to: req.body.email, 
+  subject: "You got a date!", 
+  text: 
+  `${responses[1].name} (${responses[1].email}) invited you for a date!
+  Check the details below:
+  Location: ${responses[0].date_location_name}
+  Address: ${responses[0].address}
+  Time: ${req.body.dateTime}
+  
+  Have fun 😉!
+  -- Save my Date team`,
+
+
+  html:  `
+  <body>
+  <div id="emailContainer" color="#C11F43">
+  <h1>${responses[1].name} (${responses[1].email}) invited you for a date!</h1>
+  <h2>Check the details below:</h2>
+  <strong>Location:</strong> ${responses[0].date_location_name}<br>
+  <strong>Address:</strong> ${responses[0].address}<br>
+  <strong>Time:</strong> ${req.body.dateTime}<br>
+  
+  Have fun 😉!
+  -- Save my Date team
+</div>
+
+<style>
+body {background-color: #414042;
+      color: #C11F43;
+      }
+#emailContainer {
+  margin: 0 auto;
+}
+</style>
+</body>
+`
   })
 })
 .then(() => {
-  res.redirect("/profile-page")
+res.redirect("/profile-page")
 })
 
 })
-
 // router.get("/secret", checkRole("User"), (req, res, next) => {
 //   Date.find({ _user: req.user._id })
 //   .then(userDates => {
