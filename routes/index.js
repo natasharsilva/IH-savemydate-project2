@@ -359,7 +359,8 @@ router.get("/confirm-date", (req, res, next) => {
    price_range: finalOption.price_range,
    AvgCostforTwo: finalOption.average_cost_for_two,
    rating: finalOption.rating,
-   _user: req.user
+   _user: req.user,
+   name: req.user.name
   })
   .then(createdDate => {
    User.findByIdAndUpdate(req.user._id, {
@@ -367,6 +368,8 @@ router.get("/confirm-date", (req, res, next) => {
    })
     .then(() => {
      res.redirect("profile-page")
+     console.log("DATE HEREEEEEEEEEE",createdDate.name)
+
    })
   })
 })
@@ -387,24 +390,25 @@ router.get("/:dateId/delete", (req, res, next) => {
 //----------------------- NODEMAILER ----------------------
 
 router.post('/send-email', (req, res, next) => {
-  Date.findById(req.body.dateId)
-  .then((dateDetails) => {
+  Promise.all([Date.findById(req.body.dateId),User.findById(req.user._id)])
+  .then(responses => {
+    console.log("MY NAMEEEEEEEEEEEEE", responses[1].name)
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
       user: process.env.GMAIL_USER,
       pass: process.env.GMAIL_PASS,
     }
-  
-});
+});  
   transporter.sendMail({
     from: '"Date Saver 👻" ',
     to: req.body.email, 
     subject: "You got a date!", 
     text: 
-    ` Check your date details below!
-    Location:  ${dateDetails.date_location_name}
-    Address:  ${dateDetails.address}
+    ` ${responses[1].name} is inviting for a date!
+    Check the details below:
+    Location:  ${responses[0].date_location_name}
+    Address:  ${responses[0].address}
     Time: ${req.body.dateTime}
     
     Have fun !
@@ -412,8 +416,9 @@ router.post('/send-email', (req, res, next) => {
   })
 })
 .then(() => {
-    res.redirect("/profile-page")
-  })
+  res.redirect("/profile-page")
+})
+
 })
 
 // router.get("/secret", checkRole("User"), (req, res, next) => {

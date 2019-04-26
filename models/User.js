@@ -8,6 +8,7 @@ const userSchema = new Schema({
     unique: true,
     match: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   },
+    name: String,
     password: String,
     role: {
       type:String,
