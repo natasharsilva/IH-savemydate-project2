@@ -1,14 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
 //choose primary here
-$primary: #C11F43;
+$primary: #C11F43; //vermelho base
+$secondary: #414042; //cinzento escuro
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
-// Cinzento escuro: #414042
-// Cinzento claro: #E6E6E6
-// Vermelho: #C11F43
 
-//GENERAL STYLES-----------------------------------
+//-----------------GENERAL STYLES-----------------------------------
 body {
   padding: 0;
   font: 18px 'Work Sans', sans-serif;
@@ -29,28 +27,6 @@ footer {
   min-height:1.5vh;
 }
 
-.navbarNav{
-  width:100%;
-}
-
-.around-icons{
-width:100%;
-}
-
-
-
-.general-container{
-  margin:0 auto;
-  width:100%;
-  display:flex;
-  justify-content: center;
-  flex-flow:column;
-  align-content:center;
-  align-items: center;
-  padding:5%;
-  min-height:75vh;
-}
-
 .marker {
   background-image: url('mapbox-icon.png');
   background-size: cover;
@@ -60,13 +36,11 @@ width:100%;
   cursor: pointer;
 }
 
-.btn-call-to-action{
-  // width:30vw;
-  font-size:20px;
-}
+// ---------NAV BAR--------------
 #nav-logo{
   height:40px;
 }
+
 nav{
   font-size:20px;
   // height:7vh;
@@ -76,65 +50,73 @@ nav ul {
   width:100%;
 }
 
-.navbar-toggler{
-  color:white;
+.navbarNav{
+  width:100%;
 }
 
-@media (max-width: 750px) {
+.around-icons{
+width:100%;
+}
+
+// --------------NAV-BAR END---------------//
+
+//-------------CONTAINERS------------//
+
   .main-container-primary{
     background-color: $primary;
   }
   .main-container-grey{
-    background-color: #414042;
-    min-height:90vh;
-    padding:0;
+    background-color: $secondary;
   }
-  .main-container-primary,main-container-grey{
-    padding:15%;
+  .main-container-primary,.main-container-grey{
+    padding:2%;
+    padding-bottom:5%;
     margin:0;
+    min-height:90vh;
+    display:flex;
+    justify-content: center;
+    flex-flow:column;
+    align-content:center;
+    align-items: center;
   }
 
   .general-container {
-    // background-color: yellow;
     margin:0 auto;
-    width:100%;
+    width:80%;
     padding:0;
-    // background-color:yellow;
+    display:flex;
+    justify-content: center;
+    flex-flow:column;
+    align-content:center;
+    align-items: center;
   }
 
-  body {
-    padding:0;
-    font-size: 22px;
-  }
+  //-------------CONTAINER END------------------//
 
-}
+//--------for bigger screens > 751px width-----------//
 
 @media (min-width: 751px) {
-  .main-container-primary{
-    background-color: $primary;
-    padding:30%;
-    margin:0;
+  
+    body {
+      padding:0;
+      font-size: 24px;
+    }
+
+    .main-container-primary,.main-container-grey{
+      padding:0;
+      display:flex;
+      justify-content: center;
+    }
+
+    .general-container {
+      margin:0 auto;
+      width:40vw;
+      padding:0;
+      min-height:25vw;
+    }
+
   }
 
- 
-
-  .general-container {
-    // background-color: yellow;
-    margin:0 auto;
-    width:100%;
-    padding:0 20%;
-    // background-color:yellow;
-  }
 
 
-  .main-container-grey{
-    background-color: #414042;
-    // min-height:85vh;
-  }
 
-  body {
-    padding:0;
-    font-size: 24px;
-  }
-
-}
